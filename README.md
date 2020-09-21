@@ -11,3 +11,5 @@ This is the repository for the newly-envisioned mobile version of the original S
 - Setting VS Code with [Github](https://code.visualstudio.com/docs/editor/github)
 - Official Github [documentation](https://docs.github.com/en/github/getting-started-with-github/set-up-git#setting-up-git)
 - Setting up Github for Windows [WSL](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-git) and VSCode
+
+## First Commit
