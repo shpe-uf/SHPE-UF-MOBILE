@@ -36,10 +36,15 @@ Once you have Visual Studio Code (VS Code for short), you can integrate [Github 
 
 If you prefer watching a video, you can watch this short guide explaining how to use the [Github extension](https://code.visualstudio.com/docs/introvideos/versioncontrol) for VSCode.
 
+## Setting up the React Native workflow
+Before you can begin working with React Native, you will need to isntall the tools that Expo offers, and making sure that you can create a simple app and 
+run it in your mobile device.
+
+[React Native Official Documentation](https://reactnative.dev/) offers everythign you need to get started. Make sure that you always follow the Expo set up.
 
 
 
-## Resources (not final)
+<!-- ## Resources (not final)
 - Setting up workflow for [React Native](https://medium.com/react-native-training/how-i-set-up-my-react-native-projects-bd30284e4512)
 - CS50 Mobile App [Course](https://courses.edx.org/courses/course-v1:HarvardX+CS50M+Mobile/1fce05f1372540988dd5c24d1bf03a7e/)
 - React Official [Documentation](https://reactnative.dev/)
@@ -48,4 +53,4 @@ If you prefer watching a video, you can watch this short guide explaining how to
 **Github Documentation (choose one)**
 - Setting VS Code with [Github](https://code.visualstudio.com/docs/editor/github)
 - Official Github [documentation](https://docs.github.com/en/github/getting-started-with-github/set-up-git#setting-up-git)
-- Setting up Github for Windows [WSL](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-git) and VSCode
+- Setting up Github for Windows [WSL](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-git) and VSCode -->
