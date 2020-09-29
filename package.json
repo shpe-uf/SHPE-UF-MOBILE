@@ -1,0 +1,22 @@
+{
+  "name": "shpe-uf-mobile",
+  "version": "1.0.0",
+  "description": "The new mobile application for MemberSHPE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shpe-uf/SHPE-UF-MOBILE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shpe-uf/SHPE-UF-MOBILE/issues"
+  },
+  "homepage": "https://github.com/shpe-uf/SHPE-UF-MOBILE#readme",
+  "dependencies": {
+    "expo-cli": "^3.27.11"
+  }
+}
