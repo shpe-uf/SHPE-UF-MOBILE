@@ -1,22 +1,29 @@
 {
-  "name": "shpe-uf-mobile",
-  "version": "1.0.0",
-  "description": "The new mobile application for MemberSHPE",
-  "main": "index.js",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shpe-uf/SHPE-UF-MOBILE.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/shpe-uf/SHPE-UF-MOBILE/issues"
-  },
-  "homepage": "https://github.com/shpe-uf/SHPE-UF-MOBILE#readme",
   "dependencies": {
-    "expo-cli": "^3.27.11"
-  }
+    "@react-navigation/native": "^5.7.6",
+    "@react-navigation/stack": "^5.9.3",
+    "apollo-boost": "^0.4.9",
+    "expo": "~39.0.2",
+    "expo-status-bar": "~1.0.2",
+    "graphql": "^15.3.0",
+    "graphql-tag": "^2.11.0",
+    "react": "16.13.1",
+    "react-apollo": "^3.1.5",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
+    "react-native-web": "~0.13.12",
+    "react-navigation": "^4.4.2"
+  },
+  "devDependencies": {
+    "@babel/core": "~7.9.0"
+  },
+  "private": true
 }
