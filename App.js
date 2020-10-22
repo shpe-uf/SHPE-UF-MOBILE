@@ -27,7 +27,6 @@ export default function App() {
     var user = data.getUser;
   }
 
-
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
