@@ -1,22 +1,18 @@
 [
   {
-    "key": "",
-    "value": ""
-  },
-  {
-    "key": "Male",
+    "label": "Male",
     "value": "Male"
   },
   {
-    "key": "Female",
+    "label": "Female",
     "value": "Female"
   },
   {
-    "key": "Other",
+    "label": "Other",
     "value": "Other"
   },
   {
-    "key": "Prefer not to answer",
+    "label": "Prefer not to answer",
     "value": "Prefer not to answer"
   }
 ]

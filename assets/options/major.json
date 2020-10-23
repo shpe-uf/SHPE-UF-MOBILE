@@ -1,86 +1,86 @@
 [
   {
-    "key": "Aerospace Engineering",
+    "label": "Aerospace Engineering",
     "value": "Aerospace Engineering",
     "text": "Aerospace Engineering"
   },
   {
-    "key": "Agricultural & Biological Engineering",
+    "label": "Agricultural & Biological Engineering",
     "value": "Agricultural & Biological Engineering",
     "text": "Agricultural & Biological Engineering"
   },
   {
-    "key": "Biomedical Engineering",
+    "label": "Biomedical Engineering",
     "value": "Biomedical Engineering",
     "text": "Biomedical Engineering"
   },
   {
-    "key": "Chemical Engineering",
+    "label": "Chemical Engineering",
     "value": "Chemical Engineering",
     "text": "Chemical Engineering"
   },
   {
-    "key": "Civil Engineering",
+    "label": "Civil Engineering",
     "value": "Civil Engineering",
     "text": "Civil Engineering"
   },
   {
-    "key": "Coastal & Oceanographic Engineering",
+    "label": "Coastal & Oceanographic Engineering",
     "value": "Coastal & Oceanographic Engineering",
     "text": "Coastal & Oceanographic Engineering"
   },
   {
-    "key": "Computer Engineering",
+    "label": "Computer Engineering",
     "value": "Computer Engineering",
     "text": "Computer Engineering"
   },
   {
-    "key": "Computer Science",
+    "label": "Computer Science",
     "value": "Computer Science",
     "text": "Computer Science"
   },
   {
-    "key": "Digital Arts & Sciences",
+    "label": "Digital Arts & Sciences",
     "value": "Digital Arts & Sciences",
     "text": "Digital Arts & Sciences"
   },
   {
-    "key": "Electrical Engineering",
+    "label": "Electrical Engineering",
     "value": "Electrical Engineering",
     "text": "Electrical Engineering"
   },
   {
-    "key": "Environmental Engineering Sciences",
+    "label": "Environmental Engineering Sciences",
     "value": "Environmental Engineering Sciences",
     "text": "Environmental Engineering Sciences"
   },
   {
-    "key": "Human-Centered Computing",
+    "label": "Human-Centered Computing",
     "value": "Human-Centered Computing",
     "text": "Human-Centered Computing"
   },
   {
-    "key": "Industrial & Systems Engineering",
+    "label": "Industrial & Systems Engineering",
     "value": "Industrial & Systems Engineering",
     "text": "Industrial & Systems Engineering"
   },
   {
-    "key": "Materials Science & Engineering",
+    "label": "Materials Science & Engineering",
     "value": "Materials Science & Engineering",
     "text": "Materials Science & Engineering"
   },
   {
-    "key": "Mechanical Engineering",
+    "label": "Mechanical Engineering",
     "value": "Mechanical Engineering",
     "text": "Mechanical Engineering"
   },
   {
-    "key": "Nuclear Engineering",
+    "label": "Nuclear Engineering",
     "value": "Nuclear Engineering",
     "text": "Nuclear Engineering"
   },
   {
-    "key": "Other",
+    "label": "Other",
     "value": "Other",
     "text": "Other"
   }

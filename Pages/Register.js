@@ -15,7 +15,7 @@ import sexOptions from "../assets/options/sex.json";
 function Register() {
 
     function onSubmit(data){
-        console.log(data);
+        //console.log(data);
         addUser({
             variables: {
                 firstName: data.firstName,
@@ -33,8 +33,7 @@ function Register() {
                 listServ: "false"
             }
         }).catch((err) => {return err.graphQLErrors[0].extensions.exception.errors;}).then((errors) => {
-
-            if (errors){
+            if (errors && !errors.data){
                 var errorString = "";
                 
                 const errorArray = Object.values(errors);
@@ -48,6 +47,8 @@ function Register() {
                 })
 
                 Alert.alert(errorString);
+            } else {
+                Alert.alert("Thank you for registering " + data.firstName + "!");
             }
         })
     }
@@ -107,15 +108,15 @@ function Register() {
                         spellCheck={false}
                         autoCorrect={false}
                     />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Major'
-                        onChangeText={text => {
-                            setValue('major', text)
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Major',
+                            value: null,
+                            color: '#9EA0A4',
                         }}
-                        spellCheck={false}
-                        autoCorrect={false}
-                        onFocus={() => console.log("test")}
+                        style={{inputIOS: styles.input}}
+                        onValueChange={(value) => setValue('major', value)}
+                        items={majorOptions}
                     />
                     <RNPickerSelect
                         placeholder={{
@@ -127,41 +128,45 @@ function Register() {
                         onValueChange={(value) => setValue('year', value)}
                         items={yearOptions}
                     />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Graduating this year?'
-                        onChangeText={text => {
-                            setValue('graduating', text)
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Graduating this year?',
+                            value: null,
+                            color: '#9EA0A4',
                         }}
-                        spellCheck={false}
-                        autoCorrect={false}
+                        style={{inputIOS: styles.input}}
+                        onValueChange={(value) => setValue('graduating', value)}
+                        items={graduatingOptions}
                     />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Country of Origin'
-                        onChangeText={text => {
-                            setValue('country', text)
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Country of Origin',
+                            value: null,
+                            color: '#9EA0A4',
                         }}
-                        spellCheck={false}
-                        autoCorrect={false}
+                        style={{inputIOS: styles.input}}
+                        onValueChange={(value) => setValue('country', value)}
+                        items={countryOptions}
                     />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Ethnicity'
-                        onChangeText={text => {
-                            setValue('ethnicity', text)
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Ethnicity',
+                            value: null,
+                            color: '#9EA0A4',
                         }}
-                        spellCheck={false}
-                        autoCorrect={false}
+                        style={{inputIOS: styles.input}}
+                        onValueChange={(value) => setValue('ethnicity', value)}
+                        items={ethnicityOptions}
                     />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Sex'
-                        onChangeText={text => {
-                            setValue('sex', text)
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Sex',
+                            value: null,
+                            color: '#9EA0A4',
                         }}
-                        spellCheck={false}
-                        autoCorrect={false}
+                        style={{inputIOS: styles.input}}
+                        onValueChange={(value) => setValue('sex', value)}
+                        items={sexOptions}
                     />
                     <TextInput 
                         style={styles.input}
@@ -171,6 +176,7 @@ function Register() {
                         }}
                         spellCheck={false}
                         autoCorrect={false}
+                        autoCapitalize='none'
                     />
                     <TextInput 
                         style={styles.input}
@@ -180,6 +186,7 @@ function Register() {
                         }}
                         spellCheck={false}
                         autoCorrect={false}
+                        autoCapitalize='none'
                     />
                     <TextInput 
                         style={styles.input}
@@ -190,6 +197,7 @@ function Register() {
                         spellCheck={false}
                         autoCorrect={false}
                         secureTextEntry={true}
+                        autoCapitalize='none'
                     />
                     <TextInput 
                         style={styles.input}
@@ -200,6 +208,7 @@ function Register() {
                         spellCheck={false}
                         autoCorrect={false}
                         secureTextEntry={true}
+                        autoCapitalize='none'
                     />
 
                     <View>
