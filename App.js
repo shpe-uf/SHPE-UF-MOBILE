@@ -10,7 +10,7 @@ import Register from "./Pages/Register";
 const Stack = createStackNavigator();
 
 const client = new ApolloClient({
-  uri: 'http://10.0.0.53:5000',
+  uri: 'http://10.152.177.212:5000',  
   cache: new InMemoryCache(),
 });
 
@@ -19,10 +19,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen 
-            name="Register"
-            component={Register}
-          />
+          <Stack.Screen name="Register" component={Register}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

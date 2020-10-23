@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, gql } from "@apollo/client";
+import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { View, TouchableWithoutFeedback, Text, TextInput, StyleSheet, ScrollView, SafeAreaView, KeyboardAvoidingView, Keyboard, Button, Alert } from 'react-native';
+import { View, TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
+import RNPickerSelect from 'react-native-picker-select';
+
+import majorOptions from "../assets/options/major.json";
+import yearOptions from "../assets/options/year.json";
+import graduatingOptions from "../assets/options/graduating.json";
+import countryOptions from "../assets/options/country.json";
+import ethnicityOptions from "../assets/options/ethnicity.json";
+import sexOptions from "../assets/options/sex.json";
 
 function Register() {
-    const [errors, setErrors] = useState({});
 
-    const onSubmit = data => {
+    function onSubmit(data){
+        console.log(data);
         addUser({
             variables: {
                 firstName: data.firstName,
@@ -24,32 +32,56 @@ function Register() {
                 confirmPassword: data.confirmPassword,
                 listServ: "false"
             }
-        })
+        }).catch((err) => {return err.graphQLErrors[0].extensions.exception.errors;}).then((errors) => {
 
+            if (errors){
+                var errorString = "";
+                
+                const errorArray = Object.values(errors);
+
+                errorArray.map(error => {
+                    errorString += (error);
+
+                    if (error != errorArray[errorArray.length - 1]){
+                        errorString += "\n";
+                    }
+                })
+
+                Alert.alert(errorString);
+            }
+        })
     }
 
     const { register, handleSubmit, setValue } = useForm();
 
     useEffect(() => {
         register('firstName');
+        setValue('firstName', "");
         register('lastName');
+        setValue('lastName', "");
         register('major');
+        setValue('major', "");
         register('year');
+        setValue('year', "");
         register('graduating');
+        setValue('graduating', "");
         register('country');
+        setValue('country', "");
         register('ethnicity');
+        setValue('ethnicity', "");
         register('sex');
+        setValue('sex', "");
         register('username');
+        setValue('username', "");
         register('email');
+        setValue('email', "");
         register('password');
+        setValue('password', "");
         register('confirmPassword');
+        setValue('confirmPassword', "");
     }, [register]);
 
-    const [addUser, { loading }] = useMutation(REGISTER_USER, {
-        onError(err) {
-            console.warn(err);
-        }
-    });
+    const [addUser, { loading }] = useMutation(REGISTER_USER);
 
     return (
         <SafeAreaView 
@@ -83,15 +115,17 @@ function Register() {
                         }}
                         spellCheck={false}
                         autoCorrect={false}
+                        onFocus={() => console.log("test")}
                     />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Year'
-                        onChangeText={text => {
-                            setValue('year', text)
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Year',
+                            value: null,
+                            color: '#9EA0A4',
                         }}
-                        spellCheck={false}
-                        autoCorrect={false}
+                        style={{inputIOS: styles.input}}
+                        onValueChange={(value) => setValue('year', value)}
+                        items={yearOptions}
                     />
                     <TextInput 
                         style={styles.input}
@@ -155,6 +189,7 @@ function Register() {
                         }}
                         spellCheck={false}
                         autoCorrect={false}
+                        secureTextEntry={true}
                     />
                     <TextInput 
                         style={styles.input}
@@ -164,6 +199,7 @@ function Register() {
                         }}
                         spellCheck={false}
                         autoCorrect={false}
+                        secureTextEntry={true}
                     />
 
                     <View>
@@ -198,6 +234,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#42A5F5',
       }
   });
+
+const pickerStyles = StyleSheet.create({
+    inputIOS: {
+        width: 350,
+        height: 55,
+        backgroundColor: 'white',
+        margin: 10,
+        padding: 8,
+        color: 'black',
+        borderRadius: 14,
+        fontSize: 18,
+        fontWeight: '500',
+    },
+    inputAndroid: {
+        color: 'white'
+    }
+});
 
 const REGISTER_USER = gql`
   mutation register(
@@ -239,4 +292,5 @@ const REGISTER_USER = gql`
     }
   }
 `;
+
 export default Register;
