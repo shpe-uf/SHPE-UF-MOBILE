@@ -54,3 +54,31 @@ run it in your mobile device.
 - Setting VS Code with [Github](https://code.visualstudio.com/docs/editor/github)
 - Official Github [documentation](https://docs.github.com/en/github/getting-started-with-github/set-up-git#setting-up-git)
 - Setting up Github for Windows [WSL](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-git) and VSCode -->
+
+## Starting the Project
+To being working on the project, first you will need to install all the dependencies. On your terminal, run:
+```
+npm install
+```
+
+(OPTINONAL) If you want to use the Expo CLI (Command Line Interface), you will need to install it. On your terminal run:
+```
+npm install -g expo-cli
+```
+
+### Running the Poject
+Using NodeJS:
+```
+npm expo start
+```
+
+Using ExpoCLI:
+```
+expo start
+```
+
+### Running Expo on your phone
+If you want to use your phone to debug instead of the user interface:
+1. Install the Expo App on your phone
+2. Sign-in to Expo on the CLI (instructions for this appear on your terminal everytime you run expo)
+
