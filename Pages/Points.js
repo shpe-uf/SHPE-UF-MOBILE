@@ -1,17 +1,14 @@
 import React, { useContext, useState } from "react";
-import { Text } from 'react-native';
+import { View, Text } from "react-native";
 
-const Points = ( {user} ) => {
+const Points = ({ user }) => {
   return (
-    <Text>
-      Fall Points: {user ? user.fallPoints : "0"}
-      {user ? user.fallPercentile : "0"} percentile
-      Spring Points: {user ? user.springPoints : "0"}
-      {user ? user.springPercentile : "0"} percentile
-      Summer Points: {user ? user.summerPoints : "0"}
-      {user ? user.summerPercentile : "0"} percentile
-    </Text>
+    <View>
+      <Text>Fall Points: {user ? user.fallPoints : "0"}</Text>
+      <Text>Spring Points: {user ? user.springPoints : "0"}</Text>
+      <Text>Summer Points: {user ? user.summerPoints : "0"}</Text>
+    </View>
   );
-}
+};
 
 export default Points;

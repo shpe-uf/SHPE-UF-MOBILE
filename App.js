@@ -12,9 +12,9 @@ import Points from "./Pages/Points";
 export default function App() {
 
 let user = {
-  "points": 0,
-  "fallPoints": 0,
-  "springPoints": 0,
+  "points": 3,
+  "fallPoints": 2,
+  "springPoints": 1,
   "summerPoints": 0,
 }
 
