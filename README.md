@@ -55,7 +55,9 @@ run it in your mobile device.
 - Official Github [documentation](https://docs.github.com/en/github/getting-started-with-github/set-up-git#setting-up-git)
 - Setting up Github for Windows [WSL](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-git) and VSCode -->
 
-## Starting the Project
+# How to Contribute
+
+## Set up the Project
 To being working on the project, first you will need to install all the dependencies. On your terminal, run:
 ```
 npm install
