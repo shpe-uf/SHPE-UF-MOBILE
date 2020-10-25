@@ -4,13 +4,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { settings } from 'config'
 
 import Register from "./Pages/Register";
 
 const Stack = createStackNavigator();
 
 const client = new ApolloClient({
-  uri: 'http://10.152.177.212:5000',  
+  uri: `http://${settings.internalIP}:5000`,  
   cache: new InMemoryCache(),
 });
 
