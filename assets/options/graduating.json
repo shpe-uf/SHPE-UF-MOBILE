@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Not Graduating",
+    "value": "Not Graduating"
+  },
+  {
+    "label": "Fall Semester",
+    "value": "Fall Semester"
+  },
+  {
+    "label": "Spring Semester",
+    "value": "Spring Semester"
+  },
+  {
+    "label": "Summer Semester",
+    "value": "Summer Semester"
+  }
+]
