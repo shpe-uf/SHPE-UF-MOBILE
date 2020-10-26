@@ -1,0 +1,87 @@
+[
+  {
+    "label": "Aerospace Engineering",
+    "value": "Aerospace Engineering",
+    "text": "Aerospace Engineering"
+  },
+  {
+    "label": "Agricultural & Biological Engineering",
+    "value": "Agricultural & Biological Engineering",
+    "text": "Agricultural & Biological Engineering"
+  },
+  {
+    "label": "Biomedical Engineering",
+    "value": "Biomedical Engineering",
+    "text": "Biomedical Engineering"
+  },
+  {
+    "label": "Chemical Engineering",
+    "value": "Chemical Engineering",
+    "text": "Chemical Engineering"
+  },
+  {
+    "label": "Civil Engineering",
+    "value": "Civil Engineering",
+    "text": "Civil Engineering"
+  },
+  {
+    "label": "Coastal & Oceanographic Engineering",
+    "value": "Coastal & Oceanographic Engineering",
+    "text": "Coastal & Oceanographic Engineering"
+  },
+  {
+    "label": "Computer Engineering",
+    "value": "Computer Engineering",
+    "text": "Computer Engineering"
+  },
+  {
+    "label": "Computer Science",
+    "value": "Computer Science",
+    "text": "Computer Science"
+  },
+  {
+    "label": "Digital Arts & Sciences",
+    "value": "Digital Arts & Sciences",
+    "text": "Digital Arts & Sciences"
+  },
+  {
+    "label": "Electrical Engineering",
+    "value": "Electrical Engineering",
+    "text": "Electrical Engineering"
+  },
+  {
+    "label": "Environmental Engineering Sciences",
+    "value": "Environmental Engineering Sciences",
+    "text": "Environmental Engineering Sciences"
+  },
+  {
+    "label": "Human-Centered Computing",
+    "value": "Human-Centered Computing",
+    "text": "Human-Centered Computing"
+  },
+  {
+    "label": "Industrial & Systems Engineering",
+    "value": "Industrial & Systems Engineering",
+    "text": "Industrial & Systems Engineering"
+  },
+  {
+    "label": "Materials Science & Engineering",
+    "value": "Materials Science & Engineering",
+    "text": "Materials Science & Engineering"
+  },
+  {
+    "label": "Mechanical Engineering",
+    "value": "Mechanical Engineering",
+    "text": "Mechanical Engineering"
+  },
+  {
+    "label": "Nuclear Engineering",
+    "value": "Nuclear Engineering",
+    "text": "Nuclear Engineering"
+  },
+  {
+    "label": "Other",
+    "value": "Other",
+    "text": "Other"
+  }
+]
