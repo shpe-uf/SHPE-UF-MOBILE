@@ -21,8 +21,8 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Button" component={Button} />
+          <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
