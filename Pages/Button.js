@@ -29,6 +29,9 @@ function Button() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [value, onChangeText] = React.useState("Enter a code here...");
+  const onSubmit = () => {
+    setModalVisible(!modalVisible);
+  }
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -51,12 +54,11 @@ function Button() {
 
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#004D73" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
+              onPress={onSubmit}
             >
               <Text style={styles.textStyle}>Submit</Text>
             </TouchableHighlight>
+
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "gray" }}
               onPress={() => {
@@ -69,6 +71,8 @@ function Button() {
         </View>
       </Modal>
 
+      <Text style={{ ...styles.textStyle, color: "black" }}>This is what you submitted last time:</Text>
+      <Text style={{ ...styles.textStyle, color: "black" }}>{user.fallPoints}</Text>
       <TouchableHighlight
         style={styles.openButton}
         onPress={() => {
