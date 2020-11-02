@@ -5,9 +5,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { settings } from "./config";
+import gql from "graphql-tag";
 
 import Register from "./Pages/Register";
-import Button from "./Pages/Button";
+import CodeButton from "./Pages/CodeButton";
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Button" component={Button} />
+          <Stack.Screen name="CodeButton" component={CodeButton} />
           <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
       </NavigationContainer>
