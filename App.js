@@ -16,6 +16,10 @@ let user = {
   "fallPoints": 2,
   "springPoints": 1,
   "summerPoints": 0,
+  "fallPercentile": '99%',
+  "springPercentile": '99%',
+  "summerPercentile": '99%',
+
 }
 
   return (
