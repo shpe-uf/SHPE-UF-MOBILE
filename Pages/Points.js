@@ -1,30 +1,22 @@
 import React, { useContext, useState } from "react";
 import { Alert, Button, View, Text, StyleSheet } from "react-native";
 
+import PointsBar from ".././components/PointsBar";
+
 const Points = ({ user }) => {
   return (
     <View style={styles.container}>
-    <Button
-      style={styles.button}
-      title="Redeem Code"
-      onPress={() => Alert.alert('Redeem Code button pressed.')}
-      />
-    <View style={styles.pointsBar}>
-      <View style={styles.pointsBox}>
-        <Text>FALL POINTS</Text>
-        <Text>{user ? user.fallPoints : "0"}</Text>
-        <Text>{user ? user.fallPercentile : "0"} percentile</Text>
+      <View style={styles.button}>
+        <Button
+          accessibilityLabel="Button to redeem code."
+          title="Redeem Code"
+          color="#1395b9"
+          onPress={() => Alert.alert("Redeem Code button pressed.")}
+        />
       </View>
-      <View style={styles.pointsBox}>
-        <Text>SPRING POINTS</Text>
-        <Text>{user ? user.springPoints : "0"}</Text>
-        <Text>{user ? user.springPercentile : "0"} percentile</Text>
-      </View>
-      <View style={styles.pointsBox}>
-        <Text>SUMMER POINTS</Text>
-        <Text>{user ? user.summerPoints : "0"}</Text>
-        <Text>{user ? user.summerPercentile : "0"}</Text>
-      </View>
+      <PointsBar user={user}/>
+      <View styles={styles.events}>
+        <Text>EVENTS</Text>
       </View>
     </View>
   );
@@ -32,26 +24,31 @@ const Points = ({ user }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    width: '100%',
+    alignItems: 'flex-end',
+    backgroundColor: "#fff",
+    width: "80%"
   },
   button: {
-    width: '30%',
+    width: "30%",
+    marginBottom: '10px',
   },
   pointsBar: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%"
   },
   pointsBox: {
-    backgroundColor: 'powderblue',
-    borderColor: 'gray',
-    textAlign: 'center',
-    width: '80%',
-    padding: '10px',
-    margin: '10px',
+    backgroundColor: "powderblue",
+    borderColor: "gray",
+    textAlign: "center",
+    width: "100%",
+    padding: "10px",
+    margin: "10px"
   },
+  events: {
+    alignItems: 'flex-start'
+  }
 });
 
 export default Points;
