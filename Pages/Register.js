@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { View, TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
@@ -12,7 +12,15 @@ import countryOptions from "../assets/options/country.json";
 import ethnicityOptions from "../assets/options/ethnicity.json";
 import sexOptions from "../assets/options/sex.json";
 
-function Register() {
+import reducer from "../util/reducers";
+import { AuthContext } from "../../context/auth";
+import {createStore} from "redux";
+
+const initialState = {user: null}
+const store = createStore(reducer, initialState)
+
+function Register({navigation}) {
+    const context = useContext(AuthContext)
 
     function onSubmit(data){
         //console.log(data);
@@ -82,7 +90,13 @@ function Register() {
         setValue('confirmPassword', "");
     }, [register]);
 
-    const [addUser, { loading }] = useMutation(REGISTER_USER);
+    const [addUser, { loading }] = useMutation(REGISTER_USER,{
+        update(_, { data: { login: userData} }) {
+            context.login(userData)
+            navigation.navigate('Home')
+        }
+    }
+    );
 
     return (
         <SafeAreaView 
