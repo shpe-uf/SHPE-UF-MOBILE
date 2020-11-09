@@ -13,7 +13,7 @@ import ethnicityOptions from "../assets/options/ethnicity.json";
 import sexOptions from "../assets/options/sex.json";
 
 
-function Register() {
+function Register({navigation}) {
     const { onChange, onSubmit, values } = useForm(addUser, {
         firstName: "",
         lastName: "",
@@ -33,6 +33,11 @@ function Register() {
     const [addUser, { loading }] = useMutation(REGISTER_USER, {
         onError(err) {
             getErrors(err);
+        },
+
+        onCompleted(data) {
+            Alert.alert("Registration Successful!");
+            navigation.navigate('Login');
         },
 
         variables: values
@@ -169,6 +174,10 @@ function Register() {
                         <Button 
                             title="Submit"
                             onPress={() => addUser()}
+                        />
+                        <Button 
+                            title="Already Registered?"
+                            onPress={() => navigation.navigate('Login')}
                         />
                     </View>
                     <View style={{ flex : 1 }} />

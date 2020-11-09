@@ -1,9 +1,10 @@
 import  React, {useState} from 'react';
-import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native';
+import { View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
-function Login() {
+function Login({navigation}) {
     const { onChange, onSubmit, values } = useForm(loginUser, {
         username: "",
         password: "",
@@ -15,12 +16,20 @@ function Login() {
         getErrors(err);
       },
 
+      onCompleted(data) {
+        Alert.alert("Login Successful!");
+      },
+
       variables: values
     });
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.wording}>Enter Username:</Text>            
+      <SafeAreaView 
+            style={styles.container}
+        >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <KeyboardAwareScrollView>
+          <Text style={styles.wording}>Enter Username:</Text>            
             <TextInput 
                 style={styles.input}
                 placeholder='USERNAME'
@@ -44,7 +53,13 @@ function Login() {
                 title="Login"
                 onPress={() => loginUser()}
             /> 
-        </View>
+            <Button 
+                title="Register"
+                onPress={() => navigation.navigate('Register')}
+            />             
+          </KeyboardAwareScrollView>
+        </TouchableWithoutFeedback>
+      </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
