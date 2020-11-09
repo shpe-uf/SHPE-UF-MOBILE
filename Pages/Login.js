@@ -30,33 +30,33 @@ function Login({navigation}) {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <KeyboardAwareScrollView>
           <Text style={styles.wording}>Enter Username:</Text>            
-            <TextInput 
-                style={styles.input}
-                placeholder='USERNAME'
-                onChangeText={(value) => values.username = value}
-                spellCheck= {false}
-                autoCorrect={false}
-                autoCapitalize='none'
-            />
-            <Text style={styles.wording}>Enter Password:</Text>
-            <TextInput
-                style={styles.input}
-                placeholder='PASSWORD'
-                onChangeText={(value) => values.password = value}
-                spellCheck= {false}
-                autoCorrect={false}
-                secureTextEntry={true}
-                autoCapitalize='none'
-            />
-            <Button 
-                color='black'
-                title="Login"
-                onPress={() => loginUser()}
-            /> 
-            <Button 
-                title="Register"
-                onPress={() => navigation.navigate('Register')}
-            />             
+          <TextInput 
+              style={styles.input}
+              placeholder='USERNAME'
+              onChangeText={(value) => values.username = value}
+              spellCheck= {false}
+              autoCorrect={false}
+              autoCapitalize='none'
+          />
+          <Text style={styles.wording}>Enter Password:</Text>
+          <TextInput
+              style={styles.input}
+              placeholder='PASSWORD'
+              onChangeText={(value) => values.password = value}
+              spellCheck= {false}
+              autoCorrect={false}
+              secureTextEntry={true}
+              autoCapitalize='none'
+          />
+          <Button 
+              color='black'
+              title="Login"
+              onPress={() => loginUser()}
+          /> 
+          <Button 
+              title="Register"
+              onPress={() => navigation.navigate('Register')}
+          />             
           </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
       </SafeAreaView>
