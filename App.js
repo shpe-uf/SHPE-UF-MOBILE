@@ -8,6 +8,7 @@ import { settings } from './config'
 
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import Login from "./Pages/Login";
 
 const Stack = createStackNavigator();
 
