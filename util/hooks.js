@@ -33,7 +33,7 @@ export const getErrors = (err) => {
       if (error != errorArray[errorArray.length - 1]) {
         errorString += "\n";
       }
-  })
+    })
 
     Alert.alert(errorString);
   }
