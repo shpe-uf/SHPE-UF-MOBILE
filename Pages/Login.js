@@ -1,10 +1,9 @@
 import  React, {useState} from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native';
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { useMutation, gql } from "@apollo/react-hooks";
 import { useForm } from "../util/hooks";
 
-function LoginScreen() {
+function Login() {
     const { onChange, onSubmit, values } = useForm(loginUserCallback, {
         username: "",
         password: "",
@@ -82,4 +81,4 @@ const LOGIN_USER = gql`
       }
     }
     `;
-export default LoginScreen;
+export default Login;
