@@ -62,6 +62,7 @@ function Login({navigation}) {
       </SafeAreaView>
     )
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
         color: 'black',
     },
 });
+
 const LOGIN_USER = gql`
   mutation login($username: String!, $password: String!, $remember: String!) {
     login(username: $username, password: $password, remember: $remember) {
