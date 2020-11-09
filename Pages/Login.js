@@ -1,23 +1,22 @@
 import  React, {useState} from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native';
-import { useMutation, gql } from "@apollo/react-hooks";
-import { useForm } from "../util/hooks";
+import { useMutation, gql } from "@apollo/client";
+import { useForm, getErrors } from "../util/hooks";
 
 function Login() {
-    const { onChange, onSubmit, values } = useForm(loginUserCallback, {
+    const { onChange, onSubmit, values } = useForm(loginUser, {
         username: "",
         password: "",
         remember: "false"
       });
-      function loginUserCallback() {
-        loginUser();
-      }
-      const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-        onError(err) {
-          setErrors(err.graphQLErrors[0].extensions.exception.errors);
-        },
-        variables: values
-      });
+
+    const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+      onError(err) {
+        getErrors(err);
+      },
+
+      variables: values
+    });
 
     return (
         <View style={styles.container}>
@@ -34,15 +33,16 @@ function Login() {
             <TextInput
                 style={styles.input}
                 placeholder='PASSWORD'
-                onChangeText={(value) => values.password =value}
+                onChangeText={(value) => values.password = value}
                 spellCheck= {false}
                 autoCorrect={false}
+                secureTextEntry={true}
                 autoCapitalize='none'
             />
             <Button 
                 color='black'
                 title="Login"
-                onPress={loginUserCallback}
+                onPress={() => loginUser()}
             /> 
         </View>
     )
@@ -71,14 +71,14 @@ const styles = StyleSheet.create({
     },
 });
 const LOGIN_USER = gql`
-    mutation login($username: String!, $password: String!) {
-      login(username: $username, password: $password) {
-        id
-        email
-        username
-        createdAt
-        token
-      }
+  mutation login($username: String!, $password: String!, $remember: String!) {
+    login(username: $username, password: $password, remember: $remember) {
+      id
+      email
+      username
+      createdAt
+      token
     }
-    `;
+  }
+`;
 export default Login;
