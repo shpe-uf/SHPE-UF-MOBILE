@@ -23,20 +23,18 @@ export const useForm = (callback, initialState = {}) => {
 export const getErrors = (err) => {
   errors = err.graphQLErrors[0].extensions.exception.errors;     
   if (errors && !errors.data){
-      var errorString = "";
-      
-      const errorArray = Object.values(errors);
+    var errorString = "";
+    
+    const errorArray = Object.values(errors);
 
-      errorArray.map(error => {
-          errorString += (error);
+    errorArray.map(error => {
+      errorString += (error);
 
-          if (error != errorArray[errorArray.length - 1]){
-              errorString += "\n";
-          }
-      })
+      if (error != errorArray[errorArray.length - 1]) {
+        errorString += "\n";
+      }
+    })
 
-      Alert.alert(errorString);
-  } else {
-      Alert.alert("Thank you for registering " + data.firstName + "!");
+    Alert.alert(errorString);
   }
 };

@@ -6,7 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { settings } from './config'
 
+import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import ResetPassword from "./Pages/ResetPassword"
 
 const Stack = createStackNavigator();
 
@@ -20,7 +22,9 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Register" component={Register}/>
+          <Stack.Screen name="ResetPassword" component={ResetPassword}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
