@@ -11,7 +11,7 @@ function Login({navigation}) {
         remember: "false"
       });
 
-    const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+    const [loginUser] = useMutation(LOGIN_USER, {
       onError(err) {
         getErrors(err);
       },
@@ -57,6 +57,10 @@ function Login({navigation}) {
               title="Register"
               onPress={() => navigation.navigate('Register')}
           />             
+          <Button 
+              title="ResetPassword"
+              onPress={() => navigation.navigate('ResetPassword')}
+          />
           </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
       </SafeAreaView>
