@@ -1,0 +1,34 @@
+[
+  {
+    "label": "American Indian or Alaska Native",
+    "value": "American Indian or Alaska Native"
+  },
+  {
+    "label": "Asian",
+    "value": "Asian"
+  },
+  {
+    "label": "Black or African American",
+    "value": "Black or African American"
+  },
+  {
+    "label": "Hispanic/Latino",
+    "value": "Hispanic/Latino"
+  },
+  {
+    "label": "Native Hawaiian or Other Pacific Islander",
+    "value": "Native Hawaiian or Other Pacific Islander"
+  },
+  {
+    "label": "White",
+    "value": "White"
+  },
+  {
+    "label": "Two or more ethnicities",
+    "value": "Two or more ethnicities"
+  },
+  {
+    "label": "Prefer not to answer",
+    "value": "Prefer not to answer"
+  }
+]

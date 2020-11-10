@@ -1,0 +1,30 @@
+[
+  {
+    "label": "1st Year",
+    "value": "1st Year"
+  },
+  {
+    "label": "2nd Year",
+    "value": "2nd Year"
+  },
+  {
+    "label": "3rd Year",
+    "value": "3rd Year"
+  },
+  {
+    "label": "4th Year",
+    "value": "4th Year"
+  },
+  {
+    "label": "5th Year or Higher",
+    "value": "5th Year or Higher"
+  },
+  {
+    "label": "Graduate",
+    "value": "Graduate"
+  },
+  {
+    "label": "Ph.D.",
+    "value": "Ph.D."
+  }
+]
