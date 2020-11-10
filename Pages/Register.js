@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery, gql } from "@apollo/client";
+import React from 'react';
+import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 import { View, TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
@@ -14,7 +14,7 @@ import sexOptions from "../assets/options/sex.json";
 
 
 function Register({navigation}) {
-    const { onChange, onSubmit, values } = useForm(addUser, {
+    const { values } = useForm(addUser, {
         firstName: "",
         lastName: "",
         major: "",
@@ -30,12 +30,12 @@ function Register({navigation}) {
         listServ: "false"
     });
 
-    const [addUser, { loading }] = useMutation(REGISTER_USER, {
+    const [addUser] = useMutation(REGISTER_USER, {
         onError(err) {
             getErrors(err);
         },
 
-        onCompleted(data) {
+        onCompleted() {
             Alert.alert("Registration Successful!");
             navigation.navigate('Login');
         },

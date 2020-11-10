@@ -1,11 +1,11 @@
-import  React, {useState} from 'react';
-import { View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
+import  React from 'react';
+import { TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function Login({navigation}) {
-    const { onChange, onSubmit, values } = useForm(loginUser, {
+    const { values } = useForm(loginUser, {
         username: "",
         password: "",
         remember: "false"
@@ -16,7 +16,7 @@ function Login({navigation}) {
         getErrors(err);
       },
 
-      onCompleted(data) {
+      onCompleted() {
         Alert.alert("Login Successful!");
       },
 
