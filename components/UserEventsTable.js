@@ -1,52 +1,39 @@
-import React from "react";
-import { Table, Segment, Header, Grid } from "semantic-ui-react";
+import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
+import { Table, Row, Rows, Cell } from "react-native-table-component";
 
 import moment from "moment";
 
-function UserEventsTable({ user }) {
+let tableHead: ["Event", "Category", "Date", "Points"];
+
+const UserEventsTable = ({ user }) => {
   return (
-    <Grid.Row>
-      <h1>Events</h1>
+    <View>
       {user === undefined || user.events.length === 0 ? (
         <div style={{ paddingBottom: 16 }}>
-          <Segment placeholder>
-            <Header icon>
-              <i className="far fa-frown"></i>
-              <p>No events on record.</p>
-            </Header>
-          </Segment>
+          <i className="far fa-frown"></i>
+          <p>No events on record.</p>
         </div>
       ) : (
-        <div className="table-responsive">
-          <Table striped selectable unstackable>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Event</Table.HeaderCell>
-                <Table.HeaderCell>Category</Table.HeaderCell>
-                <Table.HeaderCell>Date</Table.HeaderCell>
-                <Table.HeaderCell textAlign="center">Points</Table.HeaderCell>
+        <Table>
+          <Row data={state.tableHead} />
+          {user &&
+            user.events.map(event => (
+              <Table.Row key={event.name}>
+                <Table.Cell>{event.name}</Table.Cell>
+                <Table.Cell>{event.category}</Table.Cell>
+                <Table.Cell>
+                  {moment(event.createdAt)
+                    .local()
+                    .format("MM/DD/YYYY")}
+                </Table.Cell>
+                <Table.Cell textAlign="center">{event.points}</Table.Cell>
               </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {user &&
-                user.events.map(event => (
-                  <Table.Row key={event.name}>
-                    <Table.Cell>{event.name}</Table.Cell>
-                    <Table.Cell>{event.category}</Table.Cell>
-                    <Table.Cell>
-                      {moment(event.createdAt)
-                        .local()
-                        .format("MM/DD/YYYY")}
-                    </Table.Cell>
-                    <Table.Cell textAlign="center">{event.points}</Table.Cell>
-                  </Table.Row>
-                ))}
-            </Table.Body>
-          </Table>
-        </div>
-      )}
-    </Grid.Row>
+            ))}
+        </Table>
+      )};
+    </View>
   );
-}
+};
 
 export default UserEventsTable;
