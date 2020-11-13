@@ -4,9 +4,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
-
 import Points from "./Pages/Points";
 
 export default function App() {
