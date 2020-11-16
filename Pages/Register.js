@@ -11,13 +11,7 @@ import graduatingOptions from "../assets/options/graduating.json";
 import countryOptions from "../assets/options/country.json";
 import ethnicityOptions from "../assets/options/ethnicity.json";
 import sexOptions from "../assets/options/sex.json";
-
-import reducer from "../util/reducers";
-import { AuthContext } from "../../context/auth";
-import {createStore} from "redux";
-
-const initialState = {user: null}
-const store = createStore(reducer, initialState)
+import { AuthContext } from "../context/auth";
 
 function Register({navigation}) {
     const context = useContext(AuthContext)

@@ -8,12 +8,9 @@ import { settings } from './config'
 import {AuthProvider} from "./context/auth"
 
 import Register from "./Pages/Register";
-import Login from "./Pages/Login"
+import Home from "./Pages/Home";
 
 const Stack = createStackNavigator();
-
-const initialState = {user: null}
-const store = createStore(reducer, initialState)
 
 const client = new ApolloClient({
   uri: `http://${settings.internalIP}:5000`,  
@@ -27,7 +24,6 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Register" component={Register}/>
-          <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
