@@ -1,3 +1,3 @@
 export const settings = {
-  internalIP: "67.7.88.191",
+  internalIP: "172.31.99.10",
 };
