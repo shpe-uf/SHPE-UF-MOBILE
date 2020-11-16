@@ -10,47 +10,57 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { useMutation, useQuery, gql } from "@apollo/client";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, getErrors } from "../util/hooks";
 import Constants from "expo-constants";
 
 function CodeButton() {
-  //const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
-  let {data, refetch} = useQuery(FETCH_USER_QUERY, {
+  let { data, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
-      userId: "5f90e4d4920bab09f6df0106",
-    }
+      userId: "5fb2faa33945aa36700adfd0", //to be changed to id later
+    },
   });
-  if(data){
+  if (data) {
     let user = data.getUser;
     console.log(user);
   }
 
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    control,
-    reset,
-    errors,
-  } = useForm();
-
-  const onSubmit = (data) => {
-    console.log(data);
-    setModalVisible(!modalVisible);
-    /*in here, we have the code. What we need is to use the use the Mutation
-    and put data as the code*/
-  };
-
-  const onChange = (arg) => {
-    return {
-      value: arg.nativeEvent.text,
-    };
-  };
-
-  console.log(errors);
-
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { values, onChange, onSubmit } = useForm(redeemPointsCallback, {
+    code: "",
+    username: "letmein", //to be changed to username later
+  });
+
+  function redeemPointsCallback() {
+    redeemPoints();
+  }
+
+  const [redeemPoints] = useMutation(REDEEM_POINTS_MUTATION, {
+    update(_, { data: { redeemPoints: userData } }) {
+      values.code = "";
+      setErrors(false);
+      setModalVisible(false);
+      updateGetUser(userData);
+    },
+
+    onError(err) {
+        //getErrors(err);
+        console.log(err);
+    },
+
+    variables: values,
+  });
+
+  function updateGetUser(userData) {
+    user.fallPoints = userData.fallPoints;
+    user.springPoints = userData.springPoints;
+    user.summerPoints = userData.summerPoints;
+    user.events = userData.events;
+    user.tasks = userData.tasks;
+    user.message = userData.message;
+  }
 
   return (
     <View style={styles.container}>
@@ -59,32 +69,23 @@ function CodeButton() {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalVisible(false);
           Alert.alert("Modal has been closed.");
         }}
       >
         <View style={styles.modalView}>
           <Text style={styles.header}>Redeem Points</Text>
           <Text style={styles.label}>Enter code:</Text>
-          <Controller
-            control={control}
-            render={({ onChange, onBlur, value }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-              />
-            )}
-            name="code"
-            rules={{ required: true }}
-            defaultValue = ""
+          <TextInput
+            style={styles.input}
+            placeholder="Code..."
+            onChange={onChange}
+            spellCheck={false}
+            autoCorrect={false}
           />
-          {errors.firstName && <Text>No code was provided.</Text>}
-
           <TouchableHighlight
             style={styles.button}
-            onPress={handleSubmit(onSubmit)}
+            onPress={() => redeemPointsCallback()}
           >
             <Text style={styles.textStyle}>Submit</Text>
           </TouchableHighlight>
@@ -93,9 +94,6 @@ function CodeButton() {
             style={styles.button}
             onPress={() => {
               setModalVisible(!modalVisible);
-              reset({
-                code: "",
-              });
             }}
           >
             <Text style={styles.textStyle}>Cancel</Text>
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: "#c8c8c8"
+    borderColor: "#c8c8c8",
   },
   textStyle: {
     padding: 8,

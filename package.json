@@ -23,12 +23,8 @@
     "expo-status-bar": "~1.0.2",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
-<<<<<<< HEAD
-    "nodemon": "^2.0.6",
-=======
     "jwt-decode": "^3.1.2",
     "pod-install": "^0.1.12",
->>>>>>> develop
     "react": "16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "16.13.1",
