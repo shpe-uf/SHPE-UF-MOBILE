@@ -43,9 +43,6 @@ function UserEventsTable({ user }) {
 
 const styles = StyleSheet.create({
   table: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     width: "100%"
   }
 });
