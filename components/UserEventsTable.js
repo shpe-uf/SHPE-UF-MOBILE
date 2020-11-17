@@ -1,39 +1,48 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, Button, View, Text, StyleSheet } from "react-native";
 import { Table, Row, Rows, Cell } from "react-native-table-component";
 
 import moment from "moment";
 
-let tableHead: ["Event", "Category", "Date", "Points"];
+function UserEventsTable({ user }) {
+  if (user && user.events) {
+    let tableHead = ["Event", "Category", "Date", "Points"];
+    let tableContents = [];
+    for (let i = 0; i < user.events.length(); i++) {
+      let row = [
+        event.name,
+        event.category,
+        moment(event.createdAt)
+          .local()
+          .format("MM/DD/YYYY"),
+        event.points
+      ];
+      tableContents.push(row);
+    }
+  }
 
-const UserEventsTable = ({ user }) => {
   return (
     <View>
+      <Text>Events</Text>
       {user === undefined || user.events.length === 0 ? (
-        <div style={{ paddingBottom: 16 }}>
-          <i className="far fa-frown"></i>
-          <p>No events on record.</p>
-        </div>
+        <View style={{ paddingBottom: 16 }}>
+          <Text>No events on record.</Text>
+        </View>
       ) : (
-        <Table>
-          <Row data={state.tableHead} />
-          {user &&
-            user.events.map(event => (
-              <Table.Row key={event.name}>
-                <Table.Cell>{event.name}</Table.Cell>
-                <Table.Cell>{event.category}</Table.Cell>
-                <Table.Cell>
-                  {moment(event.createdAt)
-                    .local()
-                    .format("MM/DD/YYYY")}
-                </Table.Cell>
-                <Table.Cell textAlign="center">{event.points}</Table.Cell>
-              </Table.Row>
-            ))}
-        </Table>
-      )};
+        <View className="table-responsive">
+          <Table>
+            <Row data={tableHead} style={styles.head} />
+            <Rows data={tableContents} style={styles.text} />
+          </Table>
+        </View>
+      )}
     </View>
   );
-};
+}
+
+const styles = StyleSheet.create({
+  head: { height: 40, backgroundColor: "#f1f8ff" },
+  text: { margin: 6 }
+});
 
 export default UserEventsTable;
