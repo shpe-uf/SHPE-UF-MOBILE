@@ -35,11 +35,8 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     textAlign: "center",
     width: "100%",
-    padding: "10px",
-    margin: "10px"
-  },
-  events: {
-    alignItems: "flex-start"
+    padding: "2%",
+    margin: "2%"
   }
 });
 

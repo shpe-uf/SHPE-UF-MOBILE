@@ -1,7 +1,14 @@
 import React, { useContext, useState } from "react";
-import { Alert, Button, View, Text, StyleSheet } from "react-native";
+import {
+  Alert,
+  Button,
+  View,
+  Text,
+  ScrollView,
+  StyleSheet
+} from "react-native";
 
-import { useQuery, useMutation, gql } from "@apollo/client"
+import { useQuery, useMutation, gql } from "@apollo/client";
 
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
@@ -30,64 +37,61 @@ let user = {
   ]
 };
 
-// 5e2e021a9e14e7034c4188a3
-
 const Points = () => {
-  var {data, refetch} = useQuery(FETCH_USER_QUERY, {
+  /*
+  var { data, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
       userId: "5e2e021a9e14e7034c4188a3"
     }
   });
 
-  if(data){
+  if (data) {
     var user = data.getUser;
   }
+  console.log(user);
+  */
+
 
   return (
-    <View style={styles.container}>
-      <View style={styles.button}>
-        <Button
-          accessibilityLabel="Button to redeem code."
-          title="Redeem Code"
-          color="#1395b9"
-          onPress={() => Alert.alert("Redeem Code button pressed.")}
-        />
+    <ScrollView style={styles.container}>
+      <View style={styles.content}>
+        <View style={styles.button}>
+          <Button
+            accessibilityLabel="Button to redeem code."
+            title="Redeem Code"
+            color="#fff"
+            onPress={() => Alert.alert("Redeem Code button pressed.")}
+          />
+        </View>
+        <PointsBar user={user} />
+        <View style={styles.events}>
+          <UserEventsTable user={user} />
+        </View>
       </View>
-      <PointsBar user={user} />
-      <View styles={styles.events}>
-        <Text>EVENTS</Text>
-        <UserEventsTable user={user} />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'flex-end',
     backgroundColor: "#fff",
+    width: "100%",
+    height: "100%"
+  },
+  content: {
+    alignSelf: "center",
+    alignItems: "center",
     width: "80%"
   },
   button: {
+    backgroundColor: "#1395b9",
+    color: "#fff",
     width: "30%",
-    marginBottom: '10px',
-  },
-  pointsBar: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%"
-  },
-  pointsBox: {
-    backgroundColor: "powderblue",
-    borderColor: "gray",
-    textAlign: "center",
-    width: "100%",
-    padding: "10px",
-    margin: "10px"
+    margin: "2%"
   },
   events: {
-    alignItems: 'flex-start'
+    alignItems: "flex-start",
+    width: "100%"
   }
 });
 
@@ -118,6 +122,5 @@ const FETCH_USER_QUERY = gql`
     }
   }
 `;
-
 
 export default Points;

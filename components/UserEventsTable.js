@@ -5,10 +5,11 @@ import { Table, Row, Rows, Cell } from "react-native-table-component";
 import moment from "moment";
 
 function UserEventsTable({ user }) {
+  const tableHead = ["Event", "Category", "Date", "Points"];
+  let tableContents = [];
   if (user && user.events) {
-    let tableHead = ["Event", "Category", "Date", "Points"];
-    let tableContents = [];
-    for (let i = 0; i < user.events.length(); i++) {
+    for (let i = 0; i < user.events.length; i++) {
+      const event = user.events[i];
       let row = [
         event.name,
         event.category,
@@ -22,7 +23,7 @@ function UserEventsTable({ user }) {
   }
 
   return (
-    <View>
+    <View style={styles.table}>
       <Text>Events</Text>
       {user === undefined || user.events.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
@@ -31,8 +32,8 @@ function UserEventsTable({ user }) {
       ) : (
         <View className="table-responsive">
           <Table>
-            <Row data={tableHead} style={styles.head} />
-            <Rows data={tableContents} style={styles.text} />
+            <Row data={tableHead} />
+            <Rows data={tableContents}/>
           </Table>
         </View>
       )}
@@ -41,8 +42,13 @@ function UserEventsTable({ user }) {
 }
 
 const styles = StyleSheet.create({
-  head: { height: 40, backgroundColor: "#f1f8ff" },
-  text: { margin: 6 }
+  table: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%"
+  }
 });
+
 
 export default UserEventsTable;
