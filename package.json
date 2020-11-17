@@ -8,14 +8,6 @@
     "eject": "expo eject"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@react-native-community/masked-view": "^0.1.10",
-    "@react-navigation/native": "^5.7.6",
-    "@react-navigation/stack": "^5.9.3",
-    "apollo-boost": "^0.4.9",
-    "expo": "^39.0.3",
-    "expo-cli": "^3.28.1",
-=======
     "@apollo/client": "^3.2.5",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/picker": "^1.8.1",
@@ -27,24 +19,16 @@
     "apollo-link-http": "^1.5.15",
     "dotenv": "^8.2.0",
     "expo": "~39.0.2",
->>>>>>> develop
     "expo-status-bar": "~1.0.2",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
+    "moment": "^2.29.1",
     "react": "16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.9.5",
     "react-hook-form-resolvers": "0.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
-<<<<<<< HEAD
-    "react-native-gesture-handler": "^1.8.0",
-    "react-native-reanimated": "^1.13.1",
-    "react-native-safe-area-context": "^3.1.4",
-    "react-native-screens": "^2.14.0",
-    "react-native-web": "~0.13.12",
-    "react-navigation": "^4.4.3"
-=======
     "react-native-dotenv": "^2.4.2",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-keyboard-aware-scrollview": "^2.1.0",
@@ -54,7 +38,6 @@
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.2",
     "util": "^0.12.3"
->>>>>>> develop
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

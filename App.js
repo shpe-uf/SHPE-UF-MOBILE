@@ -13,7 +13,7 @@ import ResetPassword from "./Pages/ResetPassword"
 const Stack = createStackNavigator();
 
 const client = new ApolloClient({
-  uri: `http://${settings.internalIP}:5000`,  
+  uri: `http://${settings.internalIP}:5000`,
   cache: new InMemoryCache(),
 });
 
@@ -22,7 +22,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Points">
           <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Register" component={Register}/>
           <Stack.Screen name="ResetPassword" component={ResetPassword}/>
