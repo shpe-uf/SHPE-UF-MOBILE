@@ -28,7 +28,7 @@ function CodeButton() {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { values, onChange, onSubmit } = useForm(redeemPointsCallback, {
+  const { values } = useForm(redeemPointsCallback, {
     code: "",
     username: "letmein", //to be changed to username later
   });
@@ -46,8 +46,7 @@ function CodeButton() {
     },
 
     onError(err) {
-        //getErrors(err);
-        console.log(err);
+        getErrors(err);
     },
 
     variables: values,
@@ -79,7 +78,7 @@ function CodeButton() {
           <TextInput
             style={styles.input}
             placeholder="Code..."
-            onChange={onChange}
+            onChangeText={(value) => values.code = value}
             spellCheck={false}
             autoCorrect={false}
           />
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 30,
-    //alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
