@@ -1,36 +1,22 @@
 import  React, {useState} from 'react';
-import { TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
+import { TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
-function Login({navigation}) {
-
-    const { values } = useForm(resetPassword, {
-        email: ""
-    });
-
-    const [resetPassword] = useMutation(FORGOT_PASSWORD, {
-      onError(err) {
-        getErrors(err);
-      },
-
-      onCompleted() {
-        Alert.alert("Check your email!");
-        navigation.navigate('Login');
-      },
-
-      variables: values
-    });
+function ViewTasks() {
 
 
 
-      let { data } = useQuery(FETCH_USER_QUERY, {
+      let { data, error } = useQuery(FETCH_USER_QUERY, {
         variables: {
-          username: "5f90e4d4920bab09f6df0106", // dummy user for now
+          userId: "5f90e4d4920bab09f6df0106", // dummy user for now
         },
       });
+      console.log("This is an error", error)
+      console.log(data)
       if(data){
+        console.log("I am logging data ", data)
         let user = data.getUser;
         console.log(user);
       }
@@ -42,8 +28,8 @@ function Login({navigation}) {
         <SafeAreaView style ={styles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <KeyboardAwareScrollView>
-                    <Text style = {styles.baseText}>
-                    <Text  style = {styles.titleText}>
+                    <Text style={styles.baseText}>
+                    <Text style={styles.titleText}>
                     {titleText}
                     {"\n"}
                     {"\n"}
@@ -80,18 +66,6 @@ const styles = StyleSheet.create({
     },
 });
 
-const FORGOT_PASSWORD = gql`
-  mutation forgotPassword($email: String!) {
-    forgotPassword(email: $email) {
-      id
-      email
-      username
-      createdAt
-      token
-    }
-  }
-`;
-
 const FETCH_USER_QUERY = gql`
   query getUser($userId: ID!) {
     getUser(userId: $userId) {
@@ -120,4 +94,4 @@ const FETCH_USER_QUERY = gql`
   }
 `;
 
-export default Login;
+export default ViewTasks;
