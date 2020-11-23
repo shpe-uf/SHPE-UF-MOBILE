@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var settings = {\n  'internalIP': '192.168.0.107'\n};","map":{"version":3,"sources":["/Users/julia/SHPE-UF-MOBILE/config.js"],"names":["settings"],"mappings":"AAAA,OAAO,IAAMA,QAAQ,GAAG;AACpB,gBAAc;AADM,CAAjB","sourcesContent":["export const settings = {\n    'internalIP': '192.168.0.107'\n}\n"]},"metadata":{},"sourceType":"module"}

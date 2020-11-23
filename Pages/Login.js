@@ -24,13 +24,13 @@ function Login({navigation}) {
     });
 
     return (
-      <SafeAreaView 
+      <SafeAreaView
             style={styles.container}
         >
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <KeyboardAwareScrollView>
-          <Text style={styles.wording}>Enter Username:</Text>            
-          <TextInput 
+          <Text style={styles.wording}>Enter Username:</Text>
+          <TextInput
               style={styles.input}
               placeholder='USERNAME'
               onChangeText={(value) => values.username = value}
@@ -48,18 +48,22 @@ function Login({navigation}) {
               secureTextEntry={true}
               autoCapitalize='none'
           />
-          <Button 
+          <Button
               color='black'
               title="Login"
               onPress={() => loginUser()}
-          /> 
-          <Button 
+          />
+          <Button
               title="Register"
               onPress={() => navigation.navigate('Register')}
-          />             
-          <Button 
+          />
+          <Button
               title="ResetPassword"
               onPress={() => navigation.navigate('ResetPassword')}
+          />
+          <Button
+              title="ViewTasks"
+              onPress={() => navigation.navigate('ViewTasks')}
           />
           </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
@@ -69,7 +73,7 @@ function Login({navigation}) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, 
+        flex: 1,
         backgroundColor: '#42A5F5',
         alignItems: 'center',
         justifyContent: 'center',
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
         padding: 8,
         margin: 10,
         width: 350,
-        height: 55, 
+        height: 55,
         fontSize: 18,
     },
     wording: {
