@@ -33,7 +33,7 @@ function UserEventsTable({ user }) {
         <View className="table-responsive">
           <Table borderStyle={styles.table}>
             <Row data={tableHead} textStyle={styles.header}/>
-            <Rows data={tableContents}/>
+            <Rows data={tableContents} style={styles.table} textStyle={styles.text}/>
           </Table>
         </View>
       )}
@@ -48,17 +48,20 @@ const styles = StyleSheet.create({
   title: {
     alignSelf: "center",
     margin: 6,
-    fontSize: 33
-  },
-  table: {
-    borderWidth: 1,
-    borderColor: "#000"
+    fontSize: 23
   },
   header: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  table: {
+    width: "100%",
+    backgroundColor: "powderblue",
+    marginBottom: "2%",
+    padding: "1.5%"
   },
   text: {
-    padding: 2
+    textAlign: "center"
   }
 });
 

@@ -17,7 +17,7 @@ const PointsBar = ({ user }) => {
       <View style={styles.pointsBox}>
         <Text style={styles.bold}>SUMMER POINTS</Text>
         <Text style={styles.center}>{user ? user.summerPoints : "0"}</Text>
-        <Text style={styles.center}>{user ? user.summerPercentile : "0"}</Text>
+        <Text style={styles.center}>{user ? user.summerPercentile : "0"} percentile</Text>
       </View>
     </View>
   );
