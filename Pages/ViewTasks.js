@@ -22,6 +22,16 @@ function Login({navigation}) {
       variables: values
     });
 
+    let { data } = useQuery(FETCH_USER_QUERY, {
+      variables: {
+        userId: "5fb2faa33945aa36700adfd0", // dummy user for now
+      },
+    });
+    if(data){
+      let user = data.getUser;
+      console.log(user);
+    }
+
     return (
         <SafeAreaView style ={styles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

@@ -1,7 +1,7 @@
 import  React from 'react';
 import { TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import { useMutation, gql } from "@apollo/client";
+import { useMutation, gql, useQuery } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function Login({navigation}) {
