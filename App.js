@@ -8,12 +8,14 @@ import { settings } from './config'
 
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import ResetPassword from "./Pages/ResetPassword"
+import ResetPassword from "./Pages/ResetPassword";
+import CodeButton from "./Pages/CodeButton";
+import TaskButton from "./Pages/TaskButton";
 
 const Stack = createStackNavigator();
 
 const client = new ApolloClient({
-  uri: `http://${settings.internalIP}:5000`,  
+  uri: `http://${settings.internalIP}:5000`,
   cache: new InMemoryCache(),
 });
 
@@ -25,6 +27,8 @@ export default function App() {
           <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Register" component={Register}/>
           <Stack.Screen name="ResetPassword" component={ResetPassword}/>
+          <Stack.Screen name="CodeButton" component={CodeButton}/>
+          <Stack.Screen name="TaskButton" component={TaskButton}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
