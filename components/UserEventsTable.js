@@ -5,7 +5,7 @@ import { Table, Row, Rows, Cell } from "react-native-table-component";
 import moment from "moment";
 
 function UserEventsTable({ user }) {
-  const tableHead = ["Event", "Category", "Date", "Points"];
+  const tableHead = ["Name", "Category", "Date", "Points"];
   let tableContents = [];
   if (user && user.events) {
     for (let i = 0; i < user.events.length; i++) {
@@ -15,7 +15,7 @@ function UserEventsTable({ user }) {
         event.category,
         moment(event.createdAt)
           .local()
-          .format("MM/DD/YYYY"),
+          .format("MM/DD/YY"),
         event.points
       ];
       tableContents.push(row);
@@ -23,16 +23,16 @@ function UserEventsTable({ user }) {
   }
 
   return (
-    <View style={styles.table}>
-      <Text>Events</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Events</Text>
       {user === undefined || user.events.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
           <Text>No events on record.</Text>
         </View>
       ) : (
         <View className="table-responsive">
-          <Table>
-            <Row data={tableHead} />
+          <Table borderStyle={styles.table}>
+            <Row data={tableHead} textStyle={styles.header}/>
             <Rows data={tableContents}/>
           </Table>
         </View>
@@ -42,8 +42,23 @@ function UserEventsTable({ user }) {
 }
 
 const styles = StyleSheet.create({
-  table: {
+  container: {
     width: "100%"
+  },
+  title: {
+    alignSelf: "center",
+    margin: 6,
+    fontSize: 33
+  },
+  table: {
+    borderWidth: 1,
+    borderColor: "#000"
+  },
+  header: {
+    fontWeight: "bold"
+  },
+  text: {
+    padding: 2
   }
 });
 

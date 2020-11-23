@@ -5,19 +5,19 @@ const PointsBar = ({ user }) => {
   return (
     <View style={styles.pointsBar}>
       <View style={styles.pointsBox}>
-        <Text>FALL POINTS</Text>
-        <Text>{user ? user.fallPoints : "0"}</Text>
-        <Text>{user ? user.fallPercentile : "0"} percentile</Text>
+        <Text style={styles.bold}>FALL POINTS</Text>
+        <Text style={styles.center}>{user ? user.fallPoints : "0"}</Text>
+        <Text style={styles.center}>{user ? user.fallPercentile : "0"} percentile</Text>
       </View>
       <View style={styles.pointsBox}>
-        <Text>SPRING POINTS</Text>
-        <Text>{user ? user.springPoints : "0"}</Text>
-        <Text>{user ? user.springPercentile : "0"} percentile</Text>
+        <Text style={styles.bold}>SPRING POINTS</Text>
+        <Text style={styles.center}>{user ? user.springPoints : "0"}</Text>
+        <Text style={styles.center}>{user ? user.springPercentile : "0"} percentile</Text>
       </View>
       <View style={styles.pointsBox}>
-        <Text>SUMMER POINTS</Text>
-        <Text>{user ? user.summerPoints : "0"}</Text>
-        <Text>{user ? user.summerPercentile : "0"}</Text>
+        <Text style={styles.bold}>SUMMER POINTS</Text>
+        <Text style={styles.center}>{user ? user.summerPoints : "0"}</Text>
+        <Text style={styles.center}>{user ? user.summerPercentile : "0"}</Text>
       </View>
     </View>
   );
@@ -31,12 +31,21 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   pointsBox: {
+    alignSelf: "center",
     backgroundColor: "powderblue",
     borderColor: "gray",
     textAlign: "center",
     width: "100%",
-    padding: "2%",
+    paddingTop: "2%",
+    paddingBottom: "2%",
     margin: "2%"
+  },
+  bold: {
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  center: {
+    textAlign: "center"
   }
 });
 
