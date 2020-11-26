@@ -30,7 +30,6 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
     "react-native-dotenv": "^2.4.2",
     "react-native-gesture-handler": "^1.8.0",
-    "react-native-ionicons": "^4.6.5",
     "react-native-keyboard-aware-scrollview": "^2.1.0",
     "react-native-picker-select": "^8.0.2",
     "react-native-screens": "^2.11.0",
