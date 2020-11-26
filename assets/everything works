@@ -1,0 +1,227 @@
+everything works
+
+import React, {useState} from 'react';
+import { StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, Dimensions} from 'react-native';
+import TestButton from './TestButton';
+import { useForm, getErrors } from "../util/hooks";
+import { useQuery, gql } from "@apollo/client";
+
+
+const numColumns = 3;
+
+function UserProfile(){   
+  const [user, setUser] = useState({})
+  const {data} = useQuery(FETCH_USER_QUERY, {
+      onError(err){
+          console.log(err);
+      },
+      variables: {
+          userId: "5f90e4d4920bab09f6df0106"
+      }
+  });
+  console.log(data);
+
+  if(data && data.getUser != user){
+    console.log(data.getUser.firstName);
+    setUser(data.getUser);
+  }
+
+  console.log("Outputting to console test");
+
+  
+    return (
+      <ScrollView>
+        <ImageBackground source ={require('./images/profileBackground.png')} style= {styles.otherContainer}>
+            <Text style={styles.title}>MY PROFILE</Text>
+            <View style={styles.container}>
+                <Text style={styles.otherInfo}>     
+                    {"\n"}   
+                    INSERT PROFILE PICTURE HERE{"\n\n\n"}
+                    <Text style={styles.box1}>Name: </Text>
+                    <Text style={styles.box1_2}>John Appleseed</Text>
+                    {"\n"}
+                    <Text style={styles.box2}>Username: </Text>
+                    <Text style={styles.box2_2}>Jappleseed</Text>
+                    {"\n"}
+                    Name: {user.firstName + " "+  user.lastName + "\n"}
+                    Username: { user.username + "\n" }
+                    Email: {user.email + "\n" }
+                    Major: {user.major + "\n" }
+                    Country: {user.country + "\n"}
+                    Ethnicity: {user.ethnicity  + "\n" }
+                    Sex: {user.sex  + "\n" }
+                    Member since: {user.createdAt  + "\n" }
+                </Text>
+
+
+            </View>
+        </ImageBackground>
+        <TestButton text='Edit Profile' />
+      </ScrollView>
+  )
+}
+const styles = StyleSheet.create({
+  title:{
+    textAlignVertical: 'top',
+    paddingVertical: 30,
+    borderColor: "#20232a",
+    borderRadius: 6,
+    color: '#ff8700',
+    textAlign: "center",
+    fontSize: 35,
+    fontWeight: "bold",
+    hashTag: {
+      fontStyle: 'italic',
+    },
+  },
+  otherInfo: {
+    flexDirection: 'row',
+    //margin: 24,
+    color: '#4a4c4d',
+    fontSize: 23,
+    //fontWeight: 'bold',
+    textAlign: 'left',
+    lineHeight: 23,
+    justifyContent: 'space-between',
+  },
+  container: {
+    backgroundColor: "#b8e5ff",
+    //paddingVertical: 5,
+    //marginTop: 5,
+    alignItems: 'center',
+  },
+  testing: {
+    margin: 0,
+    color: 'gray',
+    fontSize: 23,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    lineHeight: 40,
+    backgroundColor: '#ffffff',
+  },
+  testing: {
+    margin: 0,
+    color: 'ffffff',
+    fontSize: 23,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    lineHeight: 40,
+    backgroundColor: 'gray',
+  },
+  box1:{
+    flexDirection: 'row',
+    color: 'black',
+    fontSize: 23,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    lineHeight: 30,
+    backgroundColor:'white',
+    flex: 1, 
+    flexWrap: 'wrap',
+
+  },
+  box1_2:{
+    flexDirection: 'row',
+    color: 'black',
+    fontSize: 23,
+    textAlign: 'right',
+    lineHeight: 30,
+    backgroundColor:'white',
+    justifyContent: '',
+    flex: 1, 
+    flexWrap: 'wrap',
+  },
+  box2:{
+    flexDirection: 'row',
+    color: 'black',
+    fontSize: 23,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    lineHeight: 30,
+    backgroundColor:'#e3e8e8',
+    flex: 1, 
+    flexWrap: 'wrap'
+  },
+  box2_2:{
+    flexDirection: 'row',
+    color: 'black',
+    fontSize: 23,
+    textAlign: 'right',
+    lineHeight: 30,
+    backgroundColor:'#e3e8e8',
+    flex: 1, 
+    flexWrap: 'wrap',
+  }
+  
+
+})
+
+const FETCH_USER_QUERY = gql`
+  query getUser($userId: ID!) {
+    getUser(userId: $userId) {
+      firstName
+      lastName
+      photo
+      username
+      email
+      major
+      year
+      graduating
+      country
+      ethnicity
+      sex
+      createdAt
+      permission
+      classes
+      internships
+      socialMedia
+    }
+  }
+`;
+
+export default UserProfile;
+
+
+
+
+//
+
+<ImageBackground source ={require('./images/profileBackground.png')} style= {styles.container}>
+            <Text style={styles.title}>MY PROFILE</Text>
+            {/*
+            <View style={styles.container}>
+                <Text style={styles.otherInfo}>     
+                    {"\n"}   
+                    PROFILE PICTURE{"\n\n\n"}
+                    <Text style={styles.box1}>Name: </Text>
+                    <Text style={styles.box1_2}>John Appleseed</Text>
+                    {"\n"}
+                    <Text style={styles.box2}>Username: </Text>
+                    <Text style={styles.box2_2}>Jappleseed</Text>
+                    {"\n"}
+                    Name: {user.firstName + " "+  user.lastName + "\n"}
+                    Username: { user.username + "\n" }
+                    Email: {user.email + "\n" }
+                    Major: {user.major + "\n" }
+                    Country: {user.country + "\n"}
+                    Ethnicity: {user.ethnicity  + "\n" }
+                    Sex: {user.sex  + "\n" }
+                    Member since: {user.createdAt  + "\n" }
+                </Text>
+            </View> */}
+            <Text>user.photo</Text>
+            <View style={styles.container}>
+              <Text style={styles.otherInfo}>
+              {"\n\n\n"}PROFILE PICTURE{"\n\n\n"}
+              </Text>
+            </View>
+            <View >
+              <FlatList
+                data={dataList}
+                renderItem={_renderItem}
+                keyExtractor={(item, index) => index.toString()}
+                numColumns={numColumns}
+              />
+            </View>
+        </ImageBackground>
+        <TestButton text='Edit Profile' />

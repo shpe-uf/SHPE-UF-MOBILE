@@ -8,6 +8,7 @@ import { settings } from './config'
 
 import Register from "./Pages/Register";
 import UserProfile from "./assets/UserProfile";
+import UserProfile2 from "./assets/UserProfile2";
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="UserProfile" component={UserProfile}/>
+          <Stack.Screen name="UserProfile" component={UserProfile2}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
