@@ -8,12 +8,8 @@ import { settings } from './config'
 
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-<<<<<<< HEAD
-import UserProfile from "./assets/UserProfile";
 import UserProfile2 from "./assets/UserProfile2";
-=======
 import ResetPassword from "./Pages/ResetPassword"
->>>>>>> develop
 
 const Stack = createStackNavigator();
 
