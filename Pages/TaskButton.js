@@ -14,24 +14,36 @@ import { useForm, getErrors } from "../util/hooks";
 import Constants from "expo-constants";
 
 function TaskButton() {
-  let { data, refetch } = useQuery(FETCH_USER_QUERY, {
+  //take in name of task and user id. This is a component
+  const { taskData } = useQuery(FETCH_TASKS_QUERY);
+  let { data } = useQuery(FETCH_USER_QUERY, {
     variables: {
       userId: "5fb2faa33945aa36700adfd0", //to be changed to id later
     },
   });
   if (data) {
     let user = data.getUser;
+    console.log(user);
   }
 
+  const [redeemTasksPoints] = useMutation(REDEEM_TASK_POINTS_MUTATION, {
+    update(_, { data: { redeemTasksPoints: userData } }) {},
+
+    onError(err) {
+      getErrors(err);
+    },
+  });
   return (
     <View style={styles.container}>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          console.log(user);
+          redeemTasksPoints({
+            variables: { name: task.name, username: username },
+          });
         }}
       >
-        <Text style={styles.textStyle}>Testing</Text>
+        <Text style={styles.textStyle}>Request</Text>
       </TouchableHighlight>
     </View>
   );
@@ -50,20 +62,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     margin: 10,
     marginLeft: 0,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 30,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   button: {
     marginTop: 10,
@@ -125,6 +123,37 @@ const FETCH_USER_QUERY = gql`
   }
 `;
 
+const FETCH_TASKS_QUERY = gql`
+  {
+    getTasks {
+      id
+      name
+      startDate
+      endDate
+      description
+      points
+      attendance
+      semester
+      createdAt
+      users {
+        firstName
+        lastName
+        username
+        email
+      }
+    }
+  }
+`;
 
+const REDEEM_TASK_POINTS_MUTATION = gql`
+  mutation redeemTasksPoints($name: String!, $username: String!) {
+    redeemTasksPoints(
+      redeemTasksPointsInput: { name: $name, username: $username }
+    ) {
+      firstName
+      lastName
+    }
+  }
+`;
 
 export default TaskButton;
