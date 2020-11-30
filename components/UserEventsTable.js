@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
   },
   header: {
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    paddingBottom: "3%"
   },
   table: {
     width: "100%",

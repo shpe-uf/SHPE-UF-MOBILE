@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   pointsBox: {
-    alignSelf: "center",
     backgroundColor: "powderblue",
     borderColor: "gray",
     textAlign: "center",

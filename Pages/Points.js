@@ -27,7 +27,7 @@ function Points() {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.content}>
+      <View style={styles.page}>
         <View style={styles.button}>
           <Button
             accessibilityLabel="Button to redeem code."
@@ -41,7 +41,7 @@ function Points() {
             <Text>Loading...</Text>
           </View>
         ) : user ? (
-          <View>
+          <View style={styles.content}>
             <PointsBar user={user} />
             <View style={styles.events}>
               <UserEventsTable user={user} />
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   },
-  content: {
+  page: {
     alignSelf: "center",
     alignItems: "center",
     width: "80%"
@@ -74,9 +74,11 @@ const styles = StyleSheet.create({
     width: "60%",
     margin: "2%"
   },
+  content: {
+    width: "100%"
+  },
   events: {
     alignItems: "flex-start",
-    width: "100%"
   }
 });
 
