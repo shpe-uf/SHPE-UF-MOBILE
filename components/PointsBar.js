@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Alert, Button, View, Text, StyleSheet } from "react-native";
+import { Alert, Button, Dimensions, View, Text, StyleSheet } from "react-native";
 
 const PointsBar = ({ user }) => {
   return (

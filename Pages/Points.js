@@ -13,44 +13,17 @@ import { useQuery, useMutation, gql } from "@apollo/client";
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
 
-let user = {
-  points: 3,
-  fallPoints: 2,
-  springPoints: 1,
-  summerPoints: 0,
-  fallPercentile: "99",
-  springPercentile: "99",
-  summerPercentile: "99",
-  events: [
-    {
-      name: "1st GBM Fall 2020",
-      category: "General Body Meeting",
-      createdAt: "2020-09-09T21:51:32.519Z",
-      points: 1
-    },
-    {
-      name: "2nd GBM Fall 2020",
-      category: "General Body Meeting",
-      createdAt: "2020-09-30T22:17:39.859Z",
-      points: 1
-    }
-  ]
-};
-
-const Points = () => {
-  /*
-  var { data, refetch } = useQuery(FETCH_USER_QUERY, {
+function Points() {
+  let { data, refetch, error, loading } = useQuery(FETCH_USER_QUERY, {
     variables: {
-      userId: "5e2e021a9e14e7034c4188a3"
+      userId: "5fb2faa33945aa36700adfd0"
     }
   });
+  let user = null;
 
   if (data) {
-    var user = data.getUser;
+    user = data.getUser;
   }
-  console.log(user);
-  */
-
 
   return (
     <ScrollView style={styles.container}>
@@ -63,14 +36,26 @@ const Points = () => {
             onPress={() => Alert.alert("Redeem Code button pressed.")}
           />
         </View>
-        <PointsBar user={user} />
-        <View style={styles.events}>
-          <UserEventsTable user={user} />
-        </View>
+        {loading ? (
+          <View>
+            <Text>Loading...</Text>
+          </View>
+        ) : user ? (
+          <View>
+            <PointsBar user={user} />
+            <View style={styles.events}>
+              <UserEventsTable user={user} />
+            </View>
+          </View>
+        ) : (
+          <View>
+            <Text>User not found</Text>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
