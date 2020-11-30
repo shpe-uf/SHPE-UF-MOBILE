@@ -15,7 +15,11 @@ import Constants from "expo-constants";
 
 function TaskButton() {
   //take in name of task and user id. This is a component
-  const { taskData } = useQuery(FETCH_TASKS_QUERY);
+  let { taskData } = useQuery(FETCH_TASKS_QUERY);
+  if (taskData) {
+    let task = taskData.getTasks;
+    console.log(task);
+  }
   let { data } = useQuery(FETCH_USER_QUERY, {
     variables: {
       userId: "5fb2faa33945aa36700adfd0", //to be changed to id later
@@ -33,6 +37,7 @@ function TaskButton() {
       getErrors(err);
     },
   });
+
   return (
     <View style={styles.container}>
       <TouchableHighlight
