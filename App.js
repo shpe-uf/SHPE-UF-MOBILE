@@ -23,10 +23,10 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="CodeButton" component={CodeButton} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
-          <Stack.Screen name="CodeButton" component={CodeButton} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

@@ -13,12 +13,14 @@ import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 import Constants from "expo-constants";
 
+//not passing user right now but it will once it's integrated with the points page
 function CodeButton() {
   const [errors, setErrors] = useState({});
 
-  let { data, refetch } = useQuery(FETCH_USER_QUERY, {
+  let { data } = useQuery(FETCH_USER_QUERY, {
     variables: {
-      userId: "5fb2faa33945aa36700adfd0", //to be changed to id later
+      //userId: id,
+      userId: "5fb2faa33945aa36700adfd0",
     },
   });
   if (data) {
@@ -30,7 +32,8 @@ function CodeButton() {
 
   const { values } = useForm(redeemPointsCallback, {
     code: "",
-    username: "letmein", //to be changed to username later
+    //username: username,
+    username: "letmein",
   });
 
   function redeemPointsCallback() {
