@@ -9,31 +9,19 @@ import {
   Modal,
   TouchableHighlight,
 } from "react-native";
-import { useMutation, useQuery, gql } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 import Constants from "expo-constants";
 
-//not passing user right now but it will once it's integrated with the points page
-function CodeButton() {
+function CodeButton(props) {
   const [errors, setErrors] = useState({});
-
-  let { data } = useQuery(FETCH_USER_QUERY, {
-    variables: {
-      //userId: id,
-      userId: "5fb2faa33945aa36700adfd0",
-    },
-  });
-  if (data) {
-    let user = data.getUser;
-    console.log(user);
-  }
-
   const [modalVisible, setModalVisible] = useState(false);
+
+  let user = props.user;
 
   const { values } = useForm(redeemPointsCallback, {
     code: "",
-    //username: username,
-    username: "letmein",
+    username: user.username,
   });
 
   function redeemPointsCallback() {
@@ -49,7 +37,7 @@ function CodeButton() {
     },
 
     onError(err) {
-        getErrors(err);
+      getErrors(err);
     },
 
     variables: values,
@@ -81,7 +69,7 @@ function CodeButton() {
           <TextInput
             style={styles.input}
             placeholder="Code..."
-            onChangeText={(value) => values.code = value}
+            onChangeText={(value) => (values.code = value)}
             spellCheck={false}
             autoCorrect={false}
           />
@@ -174,34 +162,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-const FETCH_USER_QUERY = gql`
-  query getUser($userId: ID!) {
-    getUser(userId: $userId) {
-      firstName
-      lastName
-      points
-      fallPoints
-      springPoints
-      summerPoints
-      fallPercentile
-      springPercentile
-      summerPercentile
-      events {
-        name
-        category
-        createdAt
-        points
-      }
-      tasks {
-        name
-        points
-        startDate
-      }
-      bookmarkedTasks
-    }
-  }
-`;
 
 const REDEEM_POINTS_MUTATION = gql`
   mutation redeemPoints($code: String!, $username: String!) {
