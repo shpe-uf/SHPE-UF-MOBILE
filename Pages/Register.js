@@ -44,12 +44,12 @@ function Register({navigation}) {
     });
 
     return (
-        <SafeAreaView 
+        <SafeAreaView
             style={styles.container}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <KeyboardAwareScrollView>
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='First Name'
                         onChangeText={text => {
@@ -58,7 +58,7 @@ function Register({navigation}) {
                         spellCheck={false}
                         autoCorrect={false}
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Last Name'
                         onChangeText={text => {
@@ -127,7 +127,7 @@ function Register({navigation}) {
                         onValueChange={(value) => values.sex = value}
                         items={sexOptions}
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Username'
                         onChangeText={text => {
@@ -137,7 +137,7 @@ function Register({navigation}) {
                         autoCorrect={false}
                         autoCapitalize='none'
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='UF/SF Email'
                         onChangeText={text => {
@@ -147,7 +147,7 @@ function Register({navigation}) {
                         autoCorrect={false}
                         autoCapitalize='none'
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Password'
                         onChangeText={text => {
@@ -158,7 +158,7 @@ function Register({navigation}) {
                         secureTextEntry={true}
                         autoCapitalize='none'
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Confirm Password'
                         onChangeText={text => {
@@ -171,11 +171,11 @@ function Register({navigation}) {
                     />
 
                     <View>
-                        <Button 
+                        <Button
                             title="Submit"
                             onPress={() => addUser()}
                         />
-                        <Button 
+                        <Button
                             title="Already Registered?"
                             onPress={() => navigation.navigate('Login')}
                         />
