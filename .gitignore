@@ -106,9 +106,5 @@ dist
 # Config File
 config.js
 
-<<<<<<< HEAD
-.expo
-=======
 #.expo files
 .expo/
->>>>>>> develop
