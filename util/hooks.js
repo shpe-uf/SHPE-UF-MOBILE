@@ -21,7 +21,7 @@ export const useForm = (callback, initialState = {}) => {
 };
 
 export const getErrors = (err) => {
-  errors = err.graphQLErrors[0].extensions.exception.errors;     
+  const errors = err.graphQLErrors[0].extensions.exception.errors;     
   if (errors && !errors.data){
     var errorString = "";
     
