@@ -12,7 +12,7 @@ export const useForm = (callback, initialState = {}) => {
     event.preventDefault();
     callback();
   };
-  
+
   return {
     onChange,
     onSubmit,
@@ -21,10 +21,10 @@ export const useForm = (callback, initialState = {}) => {
 };
 
 export const getErrors = (err) => {
-  errors = err.graphQLErrors[0].extensions.exception.errors;     
+  const errors = err.graphQLErrors[0].extensions.exception.errors;     
   if (errors && !errors.data){
     var errorString = "";
-    
+
     const errorArray = Object.values(errors);
 
     errorArray.map(error => {
