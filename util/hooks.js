@@ -21,7 +21,11 @@ export const useForm = (callback, initialState = {}) => {
 };
 
 export const getErrors = (err) => {
+<<<<<<< HEAD
   const errors = err.graphQLErrors[0].extensions.exception.errors;     
+=======
+  errors = err.graphQLErrors[0].extensions.exception.errors;     
+>>>>>>> viewProfile
   if (errors && !errors.data){
     var errorString = "";
     
@@ -37,4 +41,8 @@ export const getErrors = (err) => {
 
     Alert.alert(errorString);
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> viewProfile

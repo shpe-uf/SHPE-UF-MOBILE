@@ -8,6 +8,10 @@ import { settings } from './config'
 
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+<<<<<<< HEAD
+=======
+import UserProfile2 from "./assets/UserProfile2";
+>>>>>>> viewProfile
 import ResetPassword from "./Pages/ResetPassword"
 
 const Stack = createStackNavigator();
@@ -22,6 +26,10 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
+<<<<<<< HEAD
+=======
+          <Stack.Screen name="UserProfile" component={UserProfile2}/>
+>>>>>>> viewProfile
           <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Register" component={Register}/>
           <Stack.Screen name="ResetPassword" component={ResetPassword}/>
