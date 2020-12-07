@@ -2,19 +2,19 @@ import React, { useContext, useState } from "react";
 import {
   Alert,
   Button,
-  View,
-  Text,
   ScrollView,
-  StyleSheet
+  StyleSheet,
+  Text,
+  View
 } from "react-native";
 
-import { useQuery, useMutation, gql } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
 
 function Points() {
-  let { data, refetch, error, loading } = useQuery(FETCH_USER_QUERY, {
+  let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
       userId: "5fb2faa33945aa36700adfd0"
     }
@@ -60,25 +60,25 @@ function Points() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    width: "100%",
-    height: "100%"
+    height: "100%",
+    width: "100%"
   },
   page: {
-    alignSelf: "center",
     alignItems: "center",
+    alignSelf: "center",
     width: "80%"
   },
   button: {
     backgroundColor: "#1395b9",
     color: "#fff",
-    width: "60%",
-    margin: "2%"
+    margin: "2%",
+    width: "60%"
   },
   content: {
     width: "100%"
   },
   events: {
-    alignItems: "flex-start",
+    alignItems: "flex-start"
   }
 });
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Alert, Button, View, Text, StyleSheet } from "react-native";
-import { Table, Row, Rows, Cell } from "react-native-table-component";
+import { StyleSheet, Text, View } from "react-native";
+import { Row, Rows, Table } from "react-native-table-component";
 
 import moment from "moment";
 
@@ -47,19 +47,19 @@ const styles = StyleSheet.create({
   },
   title: {
     alignSelf: "center",
-    margin: 6,
-    fontSize: 23
+    fontSize: 23,
+    margin: 6
   },
   header: {
     fontWeight: "bold",
-    textAlign: "center",
-    paddingBottom: "3%"
+    paddingBottom: "3%",
+    textAlign: "center"
   },
   table: {
-    width: "100%",
     backgroundColor: "powderblue",
     marginBottom: "2%",
-    padding: "1.5%"
+    padding: "1.5%",
+    width: "100%"
   },
   text: {
     textAlign: "center"
