@@ -3,17 +3,14 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { settings } from "./config";
 
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import ResetPassword from "./Pages/ResetPassword";
 import TaskButton from "./Pages/TaskButton";
+import CodeButton from "./Pages/CodeButton";
 
 const Stack = createStackNavigator();
 
