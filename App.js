@@ -9,7 +9,7 @@ import { settings } from './config'
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import UserProfile2 from "./Pages/UserProfile2";
-//import ResetPassword from "./Pages/ResetPassword";
+import ResetPassword from "./Pages/ResetPassword"
 
 const Stack = createStackNavigator();
 
@@ -24,12 +24,9 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="UserProfile" component={UserProfile2}/>
-          {/*
           <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Register" component={Register}/>
-          */}
-          
-          
+          <Stack.Screen name="ResetPassword" component={ResetPassword}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

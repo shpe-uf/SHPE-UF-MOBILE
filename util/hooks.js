@@ -21,6 +21,7 @@ export const useForm = (callback, initialState = {}) => {
 };
 
 export const getErrors = (err) => {
+  const errors = err.graphQLErrors[0].extensions.exception.errors;     
   errors = err.graphQLErrors[0].extensions.exception.errors;     
   if (errors && !errors.data){
     var errorString = "";
@@ -38,3 +39,5 @@ export const getErrors = (err) => {
     Alert.alert(errorString);
   }
 };
+
+
