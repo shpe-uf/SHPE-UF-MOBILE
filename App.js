@@ -1,14 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { settings } from './config'
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { settings } from "./config";
 import Points from "./Pages/Points";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import ResetPassword from "./Pages/ResetPassword"
+import ResetPassword from "./Pages/ResetPassword";
+import TaskButton from "./Pages/TaskButton";
+import CodeButton from "./Pages/CodeButton";
 
 const Stack = createStackNavigator();
 
@@ -31,3 +33,12 @@ export default function App() {
     </ApolloProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
