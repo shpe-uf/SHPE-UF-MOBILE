@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState } from "react";
 import { Alert } from "react-native"
 
@@ -54,7 +53,7 @@ export const useForm = (callback, initialState = {}) => {
     event.preventDefault();
     callback();
   };
-  
+
   return {
     onChange,
     onSubmit,
@@ -63,10 +62,10 @@ export const useForm = (callback, initialState = {}) => {
 };
 
 export const getErrors = (err) => {
-  const errors = err.graphQLErrors[0].extensions.exception.errors;     
+  const errors = err.graphQLErrors[0].extensions.exception.errors;
   if (errors && !errors.data){
     var errorString = "";
-    
+
     const errorArray = Object.values(errors);
 
     errorArray.map(error => {
@@ -80,4 +79,3 @@ export const getErrors = (err) => {
     Alert.alert(errorString);
   }
 };
->>>>>>> develop
