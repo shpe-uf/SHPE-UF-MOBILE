@@ -50,7 +50,7 @@ function UserProfile(){
 
         <View style={styles.container}>
               {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
-              <Image source ={require('./images/SHPE_UF_LOGO.jpg')} style={styles.profilePic}/>
+              <Image source ={require('../assets/images/SHPE_UF_LOGO.jpg')} style={styles.profilePic}/>
         </View>
         {/*  Add functionality to change profile picture   */}
         <View style={styles.container}>
@@ -185,8 +185,6 @@ const FETCH_USER_QUERY = gql`
 `;
 
 export default UserProfile;
-
-//test2
 
 
 
