@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Row, Rows, Table } from "react-native-table-component";
 
-import moment from "moment";
-
 function UserEventsTable({ user }) {
   const tableHead = ["Name", "Category", "Date", "Points"];
   let tableContents = [];
   if (user && user.events) {
     for (let i = 0; i < user.events.length; i++) {
       const event = user.events[i];
+      const date = event.createdAt.substring(5, 7) + "/"
+        + event.createdAt.substring(8, 10) + "/"
+        + event.createdAt.substring(0, 4);
+
       let row = [
         event.name,
         event.category,
-        moment(event.createdAt)
-          .local()
-          .format("MM/DD/YY"),
+        date,
         event.points
       ];
       tableContents.push(row);
