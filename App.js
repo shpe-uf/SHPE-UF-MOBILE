@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from "react";
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -18,11 +18,10 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Points">
+        <Stack.Navigator>
           <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Register" component={Register}/>
           <Stack.Screen name="ResetPassword" component={ResetPassword}/>
