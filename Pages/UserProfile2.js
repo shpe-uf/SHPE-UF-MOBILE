@@ -13,14 +13,12 @@ function UserProfile(){
           userId: "5f90e4d4920bab09f6df0106"
       }
   });
-  console.log(data);
 
   if(data && data.getUser != user){
     console.log(data.getUser.firstName);
     setUser(data.getUser);
   }
 
-  console.log("Outputting to console test");
   const dataList = [
     {key: 'Name '}, {key: user.firstName + " "+  user.lastName},
     {key: 'Username'}, {key: user.username},
@@ -65,11 +63,6 @@ function UserProfile(){
 };
 
   const getFooter = () => {
-      /*
-      if (this.state.loading) {
-          return null;
-      }
-      */
       return <View style= {styles.view}>
               <View style={styles.line} ></View>
               <View style={styles.container, {alignItems: 'flex-start'}}>
