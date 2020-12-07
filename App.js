@@ -9,6 +9,7 @@ import { settings } from "./config";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import ResetPassword from "./Pages/ResetPassword";
+import TaskButton from "./Pages/TaskButton";
 import CodeButton from "./Pages/CodeButton";
 
 const Stack = createStackNavigator();
