@@ -19,21 +19,10 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-  //hard-coded user that will be passed by points page
-  let user = {
-    username: "letmein",
-    firstName: "Test",
-    lastName: "testtest",
-    fallPoints: 1,
-  };
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="CodeButton"
-            component={() => <CodeButton user={user} />}
-          />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />

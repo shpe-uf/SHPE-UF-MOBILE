@@ -7,7 +7,6 @@ import {
   Button,
   Alert,
   Modal,
-  TouchableHighlight,
 } from "react-native";
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
@@ -19,14 +18,10 @@ function CodeButton(props) {
 
   let user = props.user;
 
-  const { values } = useForm(redeemPointsCallback, {
+  const { values } = useForm(redeemPoints, {
     code: "",
     username: user.username,
   });
-
-  function redeemPointsCallback() {
-    redeemPoints();
-  }
 
   const [redeemPoints] = useMutation(REDEEM_POINTS_MUTATION, {
     update(_, { data: { redeemPoints: userData } }) {
@@ -42,15 +37,6 @@ function CodeButton(props) {
 
     variables: values,
   });
-
-  function updateGetUser(userData) {
-    user.fallPoints = userData.fallPoints;
-    user.springPoints = userData.springPoints;
-    user.summerPoints = userData.summerPoints;
-    user.events = userData.events;
-    user.tasks = userData.tasks;
-    user.message = userData.message;
-  }
 
   return (
     <View style={styles.container}>
@@ -73,32 +59,33 @@ function CodeButton(props) {
             spellCheck={false}
             autoCorrect={false}
           />
-          <TouchableHighlight
-            style={styles.button}
-            onPress={() => redeemPointsCallback()}
-          >
-            <Text style={styles.textStyle}>Submit</Text>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            style={styles.button}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <Text style={styles.textStyle}>Cancel</Text>
-          </TouchableHighlight>
+          <View style={styles.button}>
+            <Button
+              onPress={() => redeemPoints()}
+              title="Submit"
+              accessibilityLabel="Button to submit code request"
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              onPress={() => {
+                setModalVisible(false);
+              }}
+              title="Cancel"
+              accessibilityLabel="Button to cancel redeeming of code"
+            />
+          </View>
         </View>
       </Modal>
-
-      <TouchableHighlight
-        style={styles.button}
-        onPress={() => {
-          setModalVisible(true);
-        }}
-      >
-        <Text style={styles.textStyle}>Redeem Code</Text>
-      </TouchableHighlight>
+      <View style={styles.button}>
+        <Button
+          onPress={() => {
+            setModalVisible(true);
+          }}
+          title="Redeem code"
+          accessibilityLabel="Button to redeem code"
+        />
+      </View>
     </View>
   );
 }
@@ -129,16 +116,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
   },
   button: {
-    marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    color: "white",
-    height: 40,
+    marginTop: "9%",
     backgroundColor: "#42A5F5",
-    borderRadius: 20,
+    borderRadius: 50,
+    marginLeft: "15%",
+    width: "70%",
   },
   container: {
     flex: 1,
