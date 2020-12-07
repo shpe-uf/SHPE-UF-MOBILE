@@ -1,12 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Button,
-  Alert,
-  TouchableHighlight,
-} from "react-native";
+import { Text, View, StyleSheet, Button, Alert } from "react-native";
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 import Constants from "expo-constants";
@@ -25,29 +18,28 @@ function TaskButton(props) {
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight
-        style={styles.button}
-        onPress={() => {
-          redeemTasksPoints({
-            variables: { name: taskName, username: user.username },
-          });
-        }}
-      >
-        <Text style={styles.textStyle}>Request</Text>
-      </TouchableHighlight>
+      <View style={styles.button}>
+        <Button
+          onPress={() => {
+            redeemTasksPoints({
+              variables: { name: taskName, username: user.username },
+            });
+          }}
+          title="Request"
+          accessibilityLabel="Button to request task points"
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    color: "white",
-    height: 40,
+    marginTop: "9%",
     backgroundColor: "#42A5F5",
-    borderRadius: 20,
+    borderRadius: 50,
+    marginLeft: "15%",
+    width: "70%",
   },
   container: {
     flex: 1,

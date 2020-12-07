@@ -23,23 +23,10 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-  //hard-coded user and task that will be passed by task cards
-  let user = {
-    firstName: "Test",
-    lastName: "testtest",
-    username: "letmein",
-  };
-  let task = {
-    name: "Papaya Webinar",
-  };
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="TaskButton"
-            component={() => <TaskButton task={task.name} user={user} />}
-          />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
