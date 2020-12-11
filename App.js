@@ -11,6 +11,7 @@ import Register from "./Pages/Register";
 import ResetPassword from "./Pages/ResetPassword";
 import TaskButton from "./Pages/TaskButton";
 import CodeButton from "./Pages/CodeButton";
+import ViewTasks from "./Pages/ViewTasks"
 
 const Stack = createStackNavigator();
 
@@ -24,9 +25,10 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={Login}/>
-          <Stack.Screen name="Register" component={Register}/>
-          <Stack.Screen name="ResetPassword" component={ResetPassword}/>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="ResetPassword" component={ResetPassword} />
+          <Stack.Screen name="ViewTasks" component={ViewTasks}/>
           <Stack.Screen name="Points" component={Points}/>
         </Stack.Navigator>
       </NavigationContainer>
