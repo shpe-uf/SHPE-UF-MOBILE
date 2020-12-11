@@ -24,7 +24,7 @@ export const getErrors = (err) => {
   const errors = err.graphQLErrors[0].extensions.exception.errors;
   if (errors && !errors.data){
     var errorString = "";
-    
+
     const errorArray = Object.values(errors);
 
     errorArray.map(error => {
