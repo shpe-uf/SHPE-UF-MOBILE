@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var settings = {\n  'internalIP': '10.0.0.237'\n};","map":{"version":3,"sources":["/mnt/c/Users/covie/Desktop/SHPE_Mobile/SHPE-UF-MOBILE/config.js"],"names":["settings"],"mappings":"AAAA,OAAO,IAAMA,QAAQ,GAAG;AACpB,gBAAc;AADM,CAAjB","sourcesContent":["export const settings = {\r\n    'internalIP': '10.0.0.237'\r\n}"]},"metadata":{},"sourceType":"module"}

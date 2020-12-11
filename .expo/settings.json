@@ -1,10 +1,8 @@
 {
-  "scheme": null,
   "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "nn-5b4",
-  "https": false,
-  "scheme": null
+  "urlRandomness": null,
+  "https": false
 }
