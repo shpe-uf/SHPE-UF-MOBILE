@@ -21,8 +21,9 @@
     "dotenv": "^8.2.0",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
-    "graphql": "^15.3.0",
+    "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
+    "moment": "^2.29.1",
     "jwt-decode": "^3.1.2",
     "pod-install": "^0.1.12",
     "react": "16.13.1",
@@ -44,7 +45,8 @@
     "util": "^0.12.3"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "react-native-table-component": "^1.2.1"
   },
   "private": true
 }
