@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Row, Rows, Table } from "react-native-table-component";
+// import { Row, Rows, Table } from "react-native-table-component";
 
 function UserEventsTable({ user }) {
   const tableHead = ["Name", "Category", "Date", "Points"];
@@ -31,10 +31,10 @@ function UserEventsTable({ user }) {
         </View>
       ) : (
         <View className="table-responsive">
-          <Table borderStyle={styles.table}>
+          {/* <Table borderStyle={styles.table}>
             <Row data={tableHead} textStyle={styles.header}/>
             <Rows data={tableContents} style={styles.table} textStyle={styles.text}/>
-          </Table>
+          </Table> */}
         </View>
       )}
     </View>

@@ -8,9 +8,10 @@ import { settings } from "./config";
 import Points from "./Pages/Points";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import UserProfile from "./Pages/UserProfile";
 import ResetPassword from "./Pages/ResetPassword";
 import TaskButton from "./Pages/TaskButton";
-import CodeButton from "./Pages/CodeButton";
+import CodeButton from "./components/CodeButton";
 import ViewTasks from "./Pages/ViewTasks"
 
 const Stack = createStackNavigator();
@@ -30,6 +31,7 @@ export default function App() {
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="ViewTasks" component={ViewTasks}/>
           <Stack.Screen name="Points" component={Points}/>
+          <Stack.Screen name="UserProfile" component={UserProfile}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
