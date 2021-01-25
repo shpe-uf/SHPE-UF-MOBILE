@@ -12,7 +12,8 @@ import UserProfile from "./Pages/UserProfile";
 import ResetPassword from "./Pages/ResetPassword";
 import TaskButton from "./Pages/TaskButton";
 import CodeButton from "./components/CodeButton";
-import ViewTasks from "./Pages/ViewTasks"
+import ViewTasks from "./Pages/ViewTasks";
+import EditProfile from "./Pages/EditProfile";
 
 const Stack = createStackNavigator();
 
@@ -26,12 +27,13 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={Login} />
+          {/*<Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="ViewTasks" component={ViewTasks}/>
-          <Stack.Screen name="Points" component={Points}/>
+          <Stack.Screen name="Points" component={Points}/>*/}
           <Stack.Screen name="UserProfile" component={UserProfile}/>
+          <Stack.Screen name="EditProfile" component={EditProfile}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import { StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, Dimensions, FlatList, Image} from 'react-native';
+import { Alert, StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, Dimensions, FlatList, Image} from 'react-native';
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
 
-function UserProfile(){   
+import EditProfile from "./EditProfile";
+
+function UserProfile({navigation}){
   const [user, setUser] = useState({})
-  const {data} = useQuery(FETCH_USER_QUERY, {
+  const {data, refetch} = useQuery(FETCH_USER_QUERY, {
       onError(err){
           console.log(err);
       },
@@ -14,8 +16,11 @@ function UserProfile(){
       }
   });
 
+  navigation.addListener('focus', () => {
+    refetch();
+  });
+
   if(data && data.getUser != user){
-    console.log(data.getUser.firstName);
     setUser(data.getUser);
   }
 
@@ -67,7 +72,7 @@ function UserProfile(){
               <View style={styles.line} ></View>
               <View style={styles.container, {alignItems: 'flex-start'}}>
                 <TouchableOpacity>
-                  <Text style={styles.opacityBtn2}>
+                  <Text style={styles.opacityBtn2} onPress={() => navigation.navigate('EditProfile')}>
                     {"\n\n\n"}Edit Profile{"\n\n\n"}
                   </Text>
                 </TouchableOpacity>
@@ -75,8 +80,9 @@ function UserProfile(){
             </View>;
   };
   
-  const numColumns=2
-    return (      
+  const numColumns = 2;
+    return (    
+      <>  
         <FlatList
           data={dataList}
           renderItem={_renderItem}
@@ -85,6 +91,7 @@ function UserProfile(){
           ListHeaderComponent={getHeader}
           ListFooterComponent={getFooter}
        />
+      </>
   )
 }
 const styles = StyleSheet.create({

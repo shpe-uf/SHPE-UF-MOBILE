@@ -18,6 +18,7 @@ function Login({navigation}) {
 
       onCompleted() {
         Alert.alert("Login Successful!");
+        navigation.navigate('UserProfile')
       },
 
       variables: values
