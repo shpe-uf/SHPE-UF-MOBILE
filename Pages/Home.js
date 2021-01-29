@@ -10,6 +10,9 @@ import {
 
 import { gql, useMutation, useQuery } from "@apollo/client";
 
+import PointsBox from ".././components/PointsBox";
+
+
 function Home() {
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
@@ -22,6 +25,12 @@ function Home() {
     user = data.getUser;
   }
 
+  const monthOptions = require("../../json/month.json");
+
+  const month = new Date().getMonth();
+  const semester = monthOptions[month].value;
+
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.page}>
@@ -32,6 +41,8 @@ function Home() {
         ) : user ? (
           <View style={styles.content}>
             // points box
+            <PointsBox user={user} semester=semester />
+
             // upcoming tasks
             // upcoming events
             // menu
@@ -56,12 +67,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     width: "80%"
-  },
-  button: {
-    backgroundColor: "#1395b9",
-    color: "#fff",
-    margin: "2%",
-    width: "60%"
   },
   content: {
     width: "100%"
@@ -99,4 +104,4 @@ const FETCH_USER_QUERY = gql`
   }
 `;
 
-export default Points;
+export default Home;

@@ -42,9 +42,12 @@ function Points() {
           </View>
         ) : user ? (
           <View style={styles.content}>
-            <PointsBar user={user} />
+            <PointsBox user={user} />
             <View style={styles.events}>
-              <UserEventsTable user={user} />
+              <TasksTable user={user} />
+            </View>
+            <View style={styles.events}>
+              <EventsTable user={user} />
             </View>
           </View>
         ) : (

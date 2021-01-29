@@ -1,34 +1,25 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import PointsBox from "../components/PointsBox";
-
-const PointsBar = ({user}) => {
+const PointsBox = ({user}, semester) => {
   return (
-    <PointsBox user={user} semester={"Fall Semester"} />
-
-    /*
-    <PointsBox user={user} semester="Spring Semester" />
-    <PointsBox user={user} semester="Summer Semester" />
-    
-    <View style={styles.pointsBar}>
-      <View style={styles.pointsBox}>
+    <View style={styles.pointsBox}>
+      (semester=="Fall Semester" ? (
         <Text style={styles.bold}>FALL POINTS</Text>
         <Text style={styles.center}>{user ? user.fallPoints : "0"}</Text>
         <Text style={styles.center}>{user ? user.fallPercentile : "0"} percentile</Text>
-      </View>
-      <View style={styles.pointsBox}>
+      ) : semester=="Spring Semester" ? (
         <Text style={styles.bold}>SPRING POINTS</Text>
         <Text style={styles.center}>{user ? user.springPoints : "0"}</Text>
         <Text style={styles.center}>{user ? user.springPercentile : "0"} percentile</Text>
-      </View>
-      <View style={styles.pointsBox}>
+      ) : semester == "Summer Semester" ? (
         <Text style={styles.bold}>SUMMER POINTS</Text>
         <Text style={styles.center}>{user ? user.summerPoints : "0"}</Text>
         <Text style={styles.center}>{user ? user.summerPercentile : "0"} percentile</Text>
-      </View>
+      ) : (
+        <Text>Invalid semester</Text>
+      ))
     </View>
-    */
   );
 };
 
