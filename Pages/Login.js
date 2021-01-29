@@ -61,6 +61,10 @@ function Login({navigation}) {
               title="ResetPassword"
               onPress={() => navigation.navigate('ResetPassword')}
           />
+          <Button
+              title="ViewTasks"
+              onPress={() => navigation.navigate('ViewTasks')}
+          />
           </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
       </SafeAreaView>
