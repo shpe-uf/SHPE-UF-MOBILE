@@ -1,30 +1,38 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 // import { Row, Rows, Table } from "react-native-table-component";
+import { useQuery, gql } from "@apollo/client";
+import { FETCH_TASKS_QUERY } from ".././util/graphql";
 
-function TasksTable({ user }) {
-  let tasks = useQuery(FETCH_TASKS_QUERY).data.getTasks;
-  const maxTasks = min(tasks.length, 5);
+function TasksTable() {
+  let { data, loading } = useQuery(FETCH_TASKS_QUERY);
+  let tasks = null;
 
-  const tableHead = ["Name", "End Date", "Points"];
-  let tableContents = [];
-  if (tasks) {
-    for (let i = 0; i < maxTasks; i++) {
-      const task = tasks[i];
+  if (data) {
+    tasks = data.getTasks;
 
-      const row = [
-        task.name,
-        task.endDate,
-        task.points
-      ];
-      tableContents.push(row);
+    const maxTasks = Math.min(tasks.length, 5);
+
+    const tableHead = ["Name", "End Date", "Points"];
+    let tableContents = [];
+    if (tasks) {
+      for (let i = 0; i < maxTasks; i++) {
+        const task = tasks[i];
+
+        const row = [task.name, task.endDate, task.points];
+        tableContents.push(row);
+      }
     }
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tasks</Text>
-      {tasks.length === 0 ? (
+      {loading ? (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      ) : tasks && tasks.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
           <Text>No tasks on record.</Text>
         </View>
@@ -65,6 +73,5 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
 
 export default TasksTable;

@@ -5,13 +5,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { settings } from "./config";
-import Points from "./Pages/Points";
+import CodeButton from "./components/CodeButton";
+import Home from "./Pages/Home";
 import Login from "./Pages/Login";
+import Points from "./Pages/Points";
 import Register from "./Pages/Register";
-import UserProfile from "./Pages/UserProfile";
 import ResetPassword from "./Pages/ResetPassword";
 import TaskButton from "./Pages/TaskButton";
-import CodeButton from "./components/CodeButton";
+import UserProfile from "./Pages/UserProfile";
 import ViewTasks from "./Pages/ViewTasks"
 
 const Stack = createStackNavigator();
@@ -26,6 +27,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />

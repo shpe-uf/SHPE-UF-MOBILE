@@ -1,30 +1,39 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 // import { Row, Rows, Table } from "react-native-table-component";
+import { useQuery, gql } from "@apollo/client";
+import { FETCH_EVENTS_QUERY } from ".././util/graphql";
 
-function EventsTable({ user }) {
-  let events = useQuery(FETCH_EVENTS_QUERY).data.getEvents;
-  const maxEvents = min(events.length, 5);
+function EventsTable() {
+  let { data, loading } = useQuery(FETCH_EVENTS_QUERY);
+  let events = null;
 
-  const tableHead = ["Name", "End Date", "Points"];
-  let tableContents = [];
+  if (data) {
+    events = data.getTasks;
+  }
   if (events) {
-    for (let i = 0; i < maxEvents; i++) {
-      const event = events[i];
+    const maxEvents = Math.min(events.length, 5);
 
-      const row = [
-        event.name,
-        event.endDate,
-        event.points
-      ];
-      tableContents.push(row);
+    const tableHead = ["Name", "End Date", "Points"];
+    let tableContents = [];
+    if (events) {
+      for (let i = 0; i < maxEvents; i++) {
+        const event = events[i];
+
+        const row = [event.name, event.endDate, event.points];
+        tableContents.push(row);
+      }
     }
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Events</Text>
-      {events.length === 0 ? (
+      {loading ? (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      ) : events && events.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
           <Text>No events on record.</Text>
         </View>
@@ -65,6 +74,5 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
 
 export default EventsTable;

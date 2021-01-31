@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import PointsBox from "../components/PointsBox";
+import PointsBox from "./PointsBox";
 
 const PointsBar = ({user}) => {
   return (
-    <PointsBox user={user} semester={"Fall Semester"} />
+    <PointsBox user={user} semester={{text: "Fall Semester"}} />
 
     /*
     <PointsBox user={user} semester="Spring Semester" />
     <PointsBox user={user} semester="Summer Semester" />
-    
+
     <View style={styles.pointsBar}>
       <View style={styles.pointsBox}>
         <Text style={styles.bold}>FALL POINTS</Text>

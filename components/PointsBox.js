@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const PointsBox = ({user}, semester) => {
+const PointsBox = ({user}, {semester}) => {
+  console.log("semester", semester);
   return (
     <View style={styles.pointsBox}>
       (semester=="Fall Semester" ? (
@@ -24,12 +25,6 @@ const PointsBox = ({user}, semester) => {
 };
 
 const styles = StyleSheet.create({
-  pointsBar: {
-    alignItems: "center",
-    flex: 1,
-    justifyContent: "center",
-    width: "100%"
-  },
   pointsBox: {
     backgroundColor: "powderblue",
     borderColor: "gray",
@@ -48,4 +43,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PointsBar;
+export default PointsBox;

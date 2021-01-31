@@ -11,7 +11,8 @@ import {
 import { gql, useMutation, useQuery } from "@apollo/client";
 
 import PointsBox from ".././components/PointsBox";
-
+import TasksTable from ".././components/TasksTable";
+import EventsTable from ".././components/EventsTable";
 
 function Home() {
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
@@ -25,11 +26,9 @@ function Home() {
     user = data.getUser;
   }
 
-  const monthOptions = require("../../json/month.json");
-
+  const monthOptions = require("./../assets/options/month.json");
   const month = new Date().getMonth();
   const semester = monthOptions[month].value;
-
 
   return (
     <ScrollView style={styles.container}>
@@ -40,12 +39,9 @@ function Home() {
           </View>
         ) : user ? (
           <View style={styles.content}>
-            // points box
-            <PointsBox user={user} semester=semester />
-
-            // upcoming tasks
-            // upcoming events
-            // menu
+            <PointsBox user={user} semester={semester} />
+            <TasksTable/>
+            <EventsTable/>
           </View>
         ) : (
           <View>
