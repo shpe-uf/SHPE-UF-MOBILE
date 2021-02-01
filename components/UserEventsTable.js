@@ -31,6 +31,7 @@ function UserEventsTable({ user }) {
         </View>
       ) : (
         <View className="table-responsive">
+        <Text>Insert user event table here</Text>
           {/* <Table borderStyle={styles.table}>
             <Row data={tableHead} textStyle={styles.header}/>
             <Rows data={tableContents} style={styles.table} textStyle={styles.text}/>

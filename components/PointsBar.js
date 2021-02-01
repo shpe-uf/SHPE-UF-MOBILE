@@ -3,32 +3,17 @@ import { StyleSheet, Text, View } from "react-native";
 
 import PointsBox from "./PointsBox";
 
-const PointsBar = ({user}) => {
+const PointsBar = ({ user }) => {
+  const fallProps = { user: user, semester: "Fall Semester" };
+  const springProps = { user: user, semester: "Spring Semester" };
+  const summerProps = { user: user, semester: "Summer Semester" };
+
   return (
-    <PointsBox user={user} semester={{text: "Fall Semester"}} />
-
-    /*
-    <PointsBox user={user} semester="Spring Semester" />
-    <PointsBox user={user} semester="Summer Semester" />
-
-    <View style={styles.pointsBar}>
-      <View style={styles.pointsBox}>
-        <Text style={styles.bold}>FALL POINTS</Text>
-        <Text style={styles.center}>{user ? user.fallPoints : "0"}</Text>
-        <Text style={styles.center}>{user ? user.fallPercentile : "0"} percentile</Text>
-      </View>
-      <View style={styles.pointsBox}>
-        <Text style={styles.bold}>SPRING POINTS</Text>
-        <Text style={styles.center}>{user ? user.springPoints : "0"}</Text>
-        <Text style={styles.center}>{user ? user.springPercentile : "0"} percentile</Text>
-      </View>
-      <View style={styles.pointsBox}>
-        <Text style={styles.bold}>SUMMER POINTS</Text>
-        <Text style={styles.center}>{user ? user.summerPoints : "0"}</Text>
-        <Text style={styles.center}>{user ? user.summerPercentile : "0"} percentile</Text>
-      </View>
+    <View>
+      <PointsBox props={fallProps} />
+      <PointsBox props={springProps} />
+      <PointsBox props={summerProps} />
     </View>
-    */
   );
 };
 

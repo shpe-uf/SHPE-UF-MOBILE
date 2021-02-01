@@ -29,6 +29,7 @@ function Home() {
   const monthOptions = require("./../assets/options/month.json");
   const month = new Date().getMonth();
   const semester = monthOptions[month].value;
+  const props = {user: user, semester: monthOptions[month].value};
 
   return (
     <ScrollView style={styles.container}>
@@ -39,7 +40,7 @@ function Home() {
           </View>
         ) : user ? (
           <View style={styles.content}>
-            <PointsBox user={user} semester={semester} />
+            <PointsBox props={props} />
             <TasksTable/>
             <EventsTable/>
           </View>

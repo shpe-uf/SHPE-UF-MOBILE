@@ -1,25 +1,43 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const PointsBox = ({user}, {semester}) => {
+const PointsBox = ({ props }) => {
+  const user = props.user;
+  const semester = props.semester;
   console.log("semester", semester);
+  console.log("equality", semester === "Spring Semester");
+
   return (
-    <View style={styles.pointsBox}>
-      (semester=="Fall Semester" ? (
-        <Text style={styles.bold}>FALL POINTS</Text>
-        <Text style={styles.center}>{user ? user.fallPoints : "0"}</Text>
-        <Text style={styles.center}>{user ? user.fallPercentile : "0"} percentile</Text>
-      ) : semester=="Spring Semester" ? (
-        <Text style={styles.bold}>SPRING POINTS</Text>
-        <Text style={styles.center}>{user ? user.springPoints : "0"}</Text>
-        <Text style={styles.center}>{user ? user.springPercentile : "0"} percentile</Text>
-      ) : semester == "Summer Semester" ? (
-        <Text style={styles.bold}>SUMMER POINTS</Text>
-        <Text style={styles.center}>{user ? user.summerPoints : "0"}</Text>
-        <Text style={styles.center}>{user ? user.summerPercentile : "0"} percentile</Text>
+    <View>
+      {semester === "Fall Semester" ? (
+        <View style={styles.pointsBox}>
+          <Text style={styles.bold}>FALL POINTS</Text>
+          <Text style={styles.center}>{user ? user.fallPoints : "0"}</Text>
+          <Text style={styles.center}>
+            {user ? user.fallPercentile : "0"} percentile
+          </Text>
+        </View>
+      ) : semester === "Spring Semester" ? (
+        <View style={styles.pointsBox}>
+          <Text style={styles.bold}>SPRING POINTS</Text>
+          <Text style={styles.center}>{user ? user.springPoints : "0"}</Text>
+          <Text style={styles.center}>
+            {user ? user.springPercentile : "0"} percentile
+          </Text>
+        </View>
+      ) : semester === "Summer Semester" ? (
+        <View style={styles.pointsBox}>
+          <Text style={styles.bold}>SUMMER POINTS</Text>
+          <Text style={styles.center}>{user ? user.summerPoints : "0"}</Text>
+          <Text style={styles.center}>
+            {user ? user.summerPercentile : "0"} percentile
+          </Text>
+        </View>
       ) : (
-        <Text>Invalid semester</Text>
-      ))
+        <View>
+          <Text>Invalid semester</Text>
+        </View>
+      )}
     </View>
   );
 };
