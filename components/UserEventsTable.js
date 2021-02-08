@@ -18,7 +18,7 @@ function UserEventsTable({ user }) {
         <DataTable.Row>
           <DataTable.Cell>{event.name}</DataTable.Cell>
           <DataTable.Cell>{event.category}</DataTable.Cell>
-          <DataTable.Cell>date</DataTable.Cell>
+          <DataTable.Cell>{date}</DataTable.Cell>
           <DataTable.Cell numeric>{event.points}</DataTable.Cell>
         </DataTable.Row>
       ];

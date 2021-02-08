@@ -8,12 +8,11 @@ import { FETCH_EVENTS_QUERY } from ".././util/graphql";
 function EventsTable() {
   let { data, loading } = useQuery(FETCH_EVENTS_QUERY);
   let events = null;
+  let tableContents = [];
 
   if (data) {
     events = data.getEvents;
-  }
-  let tableContents = [];
-  if (events) {
+
     const maxEvents = Math.min(events.length, 5);
 
     for (let i = 0; i < maxEvents; i++) {
@@ -21,9 +20,10 @@ function EventsTable() {
       if (event.semester == semester) {
         let row = [
           <DataTable.Row>
-          <DataTable.Cell>{event.name}</DataTable.Cell>
-          <DataTable.Cell>{event.category}</DataTable.Cell>
-          <DataTable.Cell numeric>{event.points}</DataTable.Cell>
+            <DataTable.Cell>{event.name}</DataTable.Cell>
+            <DataTable.Cell>{event.category}</DataTable.Cell>
+            <DataTable.Cell>{date}</DataTable.Cell>
+            <DataTable.Cell numeric>{event.points}</DataTable.Cell>
           </DataTable.Row>
         ];
         tableContents.push(row);
@@ -52,6 +52,7 @@ function EventsTable() {
             <DataTable.Header>
               <DataTable.Title>Name</DataTable.Title>
               <DataTable.Title>Category</DataTable.Title>
+              <DataTable.Title>Date</DataTable.Title>
               <DataTable.Title numeric>Points</DataTable.Title>
             </DataTable.Header>
             {tableContents}

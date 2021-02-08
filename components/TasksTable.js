@@ -12,7 +12,8 @@ function TasksTable() {
   let tableContents = [];
 
   const monthOptions = require("./../assets/options/month.json");
-  const month = new Date().getMonth();
+  const now = new Date();
+  const month = now.getMonth();
   const semester = monthOptions[month].value;
 
   if (data) {
@@ -21,7 +22,7 @@ function TasksTable() {
     const maxTasks = Math.min(tasks.length, 5);
     for (let i = 0; i < maxTasks; i++) {
       const task = tasks[i];
-      if (task.semester == semester) {
+      if (now < Date.parse(task.endDate)) {
         let row = [
           <DataTable.Row>
             <DataTable.Cell>{task.name}</DataTable.Cell>
@@ -43,7 +44,7 @@ function TasksTable() {
         </View>
       ) : tasks && (tasks.length === 0 || tableContents.length === 0) ? (
         <View style={{ paddingBottom: 16 }}>
-          <Text>No tasks on record for this semester.</Text>
+          <Text>There are no upcoming tasks for this semester.</Text>
         </View>
       ) : (
         <View className="table-responsive">
