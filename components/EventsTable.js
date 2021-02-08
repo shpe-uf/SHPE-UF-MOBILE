@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-// import { Row, Rows, Table } from "react-native-table-component";
+import { DataTable } from "react-native-paper";
+
 import { useQuery, gql } from "@apollo/client";
 import { FETCH_EVENTS_QUERY } from ".././util/graphql";
 
@@ -9,22 +10,15 @@ function EventsTable() {
   let events = null;
 
   if (data) {
-    events = data.getTasks;
+    events = data.getEvents;
   }
   if (events) {
     const maxEvents = Math.min(events.length, 5);
-
-    const tableHead = ["Name", "End Date", "Points"];
-    let tableContents = [];
-    if (events) {
-      for (let i = 0; i < maxEvents; i++) {
-        const event = events[i];
-
-        const row = [event.name, event.endDate, event.points];
-        tableContents.push(row);
-      }
-    }
   }
+
+  const monthOptions = require("./../assets/options/month.json");
+  const month = new Date().getMonth();
+  const semester = monthOptions[month].value;
 
   return (
     <View style={styles.container}>
@@ -39,11 +33,22 @@ function EventsTable() {
         </View>
       ) : (
         <View className="table-responsive">
-          <Text>Insert events table here.</Text>
-          {/* <Table borderStyle={styles.table}>
-            <Row data={tableHead} textStyle={styles.header}/>
-            <Rows data={tableContents} style={styles.table} textStyle={styles.text}/>
-          </Table> */}
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title>Name</DataTable.Title>
+              <DataTable.Title>Category</DataTable.Title>
+              <DataTable.Title numeric>Points</DataTable.Title>
+            </DataTable.Header>
+            {events.map((event, index) => {
+              <View>
+                <DataTable.Row>
+                  <DataTable.Cell>{event.name}</DataTable.Cell>
+                  <DataTable.Cell>{event.category}</DataTable.Cell>
+                  <DataTable.Cell numeric>{event.points}</DataTable.Cell>
+                </DataTable.Row>
+              </View>
+            })}
+          </DataTable>
         </View>
       )}
     </View>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-// import { Row, Rows, Table } from "react-native-table-component";
+import { DataTable } from 'react-native-paper';
+
 import { useQuery, gql } from "@apollo/client";
 import { FETCH_TASKS_QUERY } from ".././util/graphql";
 
@@ -12,17 +13,6 @@ function TasksTable() {
     tasks = data.getTasks;
 
     const maxTasks = Math.min(tasks.length, 5);
-
-    const tableHead = ["Name", "End Date", "Points"];
-    let tableContents = [];
-    if (tasks) {
-      for (let i = 0; i < maxTasks; i++) {
-        const task = tasks[i];
-
-        const row = [task.name, task.endDate, task.points];
-        tableContents.push(row);
-      }
-    }
   }
 
   return (
@@ -38,11 +28,22 @@ function TasksTable() {
         </View>
       ) : (
         <View className="table-responsive">
-          <Text>Insert tasks table here.</Text>
-          {/* <Table borderStyle={styles.table}>
-            <Row data={tableHead} textStyle={styles.header}/>
-            <Rows data={tableContents} style={styles.table} textStyle={styles.text}/>
-          </Table> */}
+        <DataTable>
+          <DataTable.Header>
+            <DataTable.Title>Name</DataTable.Title>
+            <DataTable.Title>End Date</DataTable.Title>
+            <DataTable.Title numeric>Points</DataTable.Title>
+          </DataTable.Header>
+          {tasks.map((task, index) => {
+            <View>
+              <DataTable.Row>
+                <DataTable.Cell>{task.name}</DataTable.Cell>
+                <DataTable.Cell>{task.endDate}</DataTable.Cell>
+                <DataTable.Cell numeric>{task.points}</DataTable.Cell>
+              </DataTable.Row>
+            </View>
+          })}
+        </DataTable>
         </View>
       )}
     </View>

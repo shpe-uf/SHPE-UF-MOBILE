@@ -4,8 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 const PointsBox = ({ props }) => {
   const user = props.user;
   const semester = props.semester;
-  console.log("semester", semester);
-  console.log("equality", semester === "Spring Semester");
 
   return (
     <View>

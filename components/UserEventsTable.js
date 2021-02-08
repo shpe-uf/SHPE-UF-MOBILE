@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-// import { Row, Rows, Table } from "react-native-table-component";
+import { DataTable } from 'react-native-paper';
 
 function UserEventsTable({ user }) {
   const tableHead = ["Name", "Category", "Date", "Points"];
