@@ -12,8 +12,23 @@ function EventsTable() {
   if (data) {
     events = data.getEvents;
   }
+  let tableContents = [];
   if (events) {
     const maxEvents = Math.min(events.length, 5);
+
+    for (let i = 0; i < maxEvents; i++) {
+      const event = events[i];
+      if (event.semester == semester) {
+        let row = [
+          <DataTable.Row>
+          <DataTable.Cell>{event.name}</DataTable.Cell>
+          <DataTable.Cell>{event.category}</DataTable.Cell>
+          <DataTable.Cell numeric>{event.points}</DataTable.Cell>
+          </DataTable.Row>
+        ];
+        tableContents.push(row);
+      }
+    }
   }
 
   const monthOptions = require("./../assets/options/month.json");
@@ -27,9 +42,9 @@ function EventsTable() {
         <View>
           <Text>Loading...</Text>
         </View>
-      ) : events && events.length === 0 ? (
+      ) : events && (events.length === 0 || tableContents.length === 0) ? (
         <View style={{ paddingBottom: 16 }}>
-          <Text>No events on record.</Text>
+          <Text>No events on record for this semester.</Text>
         </View>
       ) : (
         <View className="table-responsive">
@@ -39,15 +54,7 @@ function EventsTable() {
               <DataTable.Title>Category</DataTable.Title>
               <DataTable.Title numeric>Points</DataTable.Title>
             </DataTable.Header>
-            {events.map((event, index) => {
-              <View>
-                <DataTable.Row>
-                  <DataTable.Cell>{event.name}</DataTable.Cell>
-                  <DataTable.Cell>{event.category}</DataTable.Cell>
-                  <DataTable.Cell numeric>{event.points}</DataTable.Cell>
-                </DataTable.Row>
-              </View>
-            })}
+            {tableContents}
           </DataTable>
         </View>
       )}

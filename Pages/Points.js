@@ -32,7 +32,6 @@ function Points() {
           <Button
             accessibilityLabel="Button to redeem code."
             title="Redeem Code"
-            color="#fff"
             onPress={() => Alert.alert("Redeem Code button pressed.")}
           />
         </View>

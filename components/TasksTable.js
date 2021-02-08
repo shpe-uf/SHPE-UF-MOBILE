@@ -1,18 +1,37 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { DataTable } from 'react-native-paper';
+import { DataTable } from "react-native-paper";
 
 import { useQuery, gql } from "@apollo/client";
 import { FETCH_TASKS_QUERY } from ".././util/graphql";
 
 function TasksTable() {
   let { data, loading } = useQuery(FETCH_TASKS_QUERY);
+
   let tasks = null;
+  let tableContents = [];
+
+  const monthOptions = require("./../assets/options/month.json");
+  const month = new Date().getMonth();
+  const semester = monthOptions[month].value;
 
   if (data) {
     tasks = data.getTasks;
 
     const maxTasks = Math.min(tasks.length, 5);
+    for (let i = 0; i < maxTasks; i++) {
+      const task = tasks[i];
+      if (task.semester == semester) {
+        let row = [
+          <DataTable.Row>
+            <DataTable.Cell>{task.name}</DataTable.Cell>
+            <DataTable.Cell>{task.endDate}</DataTable.Cell>
+            <DataTable.Cell numeric>{task.points}</DataTable.Cell>
+          </DataTable.Row>
+        ];
+        tableContents.push(row);
+      }
+    }
   }
 
   return (
@@ -22,28 +41,20 @@ function TasksTable() {
         <View>
           <Text>Loading...</Text>
         </View>
-      ) : tasks && tasks.length === 0 ? (
+      ) : tasks && (tasks.length === 0 || tableContents.length === 0) ? (
         <View style={{ paddingBottom: 16 }}>
-          <Text>No tasks on record.</Text>
+          <Text>No tasks on record for this semester.</Text>
         </View>
       ) : (
         <View className="table-responsive">
-        <DataTable>
-          <DataTable.Header>
-            <DataTable.Title>Name</DataTable.Title>
-            <DataTable.Title>End Date</DataTable.Title>
-            <DataTable.Title numeric>Points</DataTable.Title>
-          </DataTable.Header>
-          {tasks.map((task, index) => {
-            <View>
-              <DataTable.Row>
-                <DataTable.Cell>{task.name}</DataTable.Cell>
-                <DataTable.Cell>{task.endDate}</DataTable.Cell>
-                <DataTable.Cell numeric>{task.points}</DataTable.Cell>
-              </DataTable.Row>
-            </View>
-          })}
-        </DataTable>
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title>Name</DataTable.Title>
+              <DataTable.Title>End Date</DataTable.Title>
+              <DataTable.Title numeric>Points</DataTable.Title>
+            </DataTable.Header>
+            {tableContents}
+          </DataTable>
         </View>
       )}
     </View>
