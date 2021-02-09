@@ -7,12 +7,8 @@ function UserEventsTable({ user }) {
   if (user && user.events) {
     for (let i = 0; i < user.events.length; i++) {
       const event = user.events[i];
-      const date =
-        event.createdAt.substring(5, 7) +
-        "/" +
-        event.createdAt.substring(8, 10) +
-        "/" +
-        event.createdAt.substring(0, 4);
+      const createdAt = new Date(event.createdAt);
+      const date = createdAt.getMonth() +"/" + createdAt.getDate() + "/" + createdAt.getFullYear();
 
       let row = [
         <DataTable.Row>

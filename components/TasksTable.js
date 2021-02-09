@@ -44,7 +44,7 @@ function TasksTable() {
         </View>
       ) : tasks && (tasks.length === 0 || tableContents.length === 0) ? (
         <View style={{ paddingBottom: 16 }}>
-          <Text>There are no upcoming tasks for this semester.</Text>
+          <Text>No upcoming tasks for this semester.</Text>
         </View>
       ) : (
         <View className="table-responsive">

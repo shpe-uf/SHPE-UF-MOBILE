@@ -15,9 +15,14 @@ function EventsTable() {
 
     const maxEvents = Math.min(events.length, 5);
 
+    const monthOptions = require("./../assets/options/month.json");
+    const month = new Date().getMonth();
+    const semester = monthOptions[month].value;
+
     for (let i = 0; i < maxEvents; i++) {
       const event = events[i];
       if (event.semester == semester) {
+      const date = event.expiration.substring(0, 15);
         let row = [
           <DataTable.Row>
             <DataTable.Cell>{event.name}</DataTable.Cell>
@@ -31,9 +36,6 @@ function EventsTable() {
     }
   }
 
-  const monthOptions = require("./../assets/options/month.json");
-  const month = new Date().getMonth();
-  const semester = monthOptions[month].value;
 
   return (
     <View style={styles.container}>
