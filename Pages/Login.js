@@ -7,7 +7,6 @@ import {
   StyleSheet,
   SafeAreaView,
   Keyboard,
-  Button,
   Alert,
   Image,
   TouchableOpacity,
@@ -47,8 +46,8 @@ function Login({ navigation }) {
             source={require("../assets/images/SHPE_UF_LOGO_APP.png")}
             style={styles.image}
           />
-          <View style={{ marginTop: hp("3%"),
-                marginBottom: hp("2%") }}
+          <View
+            style={{ marginTop: hp("3%"), marginBottom: hp("2%"), flex: 1 }}
           >
             <TextInput
               style={styles.input}
@@ -90,11 +89,13 @@ function Login({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.registerView}>
-            <Text style={{ fontSize: hp("2.5%") }}>New to SHPE UF?</Text>
-            <Button
-              title="Register here"
-              onPress={() => navigation.navigate("Register")}
-            />
+            <Text style={{ fontSize: hp("2.3%") }}>New to SHPE UF?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+              <Text style={{ fontSize: hp("2.3%"), color: "rgb(0,122,255)" }}>
+                {" "}
+                Register here
+              </Text>
+            </TouchableOpacity>
           </View>
         </KeyboardAwareScrollView>
       </TouchableWithoutFeedback>
@@ -120,10 +121,6 @@ const styles = StyleSheet.create({
     fontSize: hp("2.5%"),
     alignSelf: "center",
   },
-  wording: {
-    fontSize: hp("2.5%"),
-    color: "black",
-  },
   image: {
     width: wp("50%"),
     height: hp("40%"),
@@ -140,13 +137,15 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: "#001f5b",
     borderRadius: 6,
-    paddingVertical: hp("3.1%"),
-    marginHorizontal: wp("1.8%"),
+    justifyContent: "center",
+    alignSelf: "center",
     margin: hp("1%"),
+    width: wp("75%"),
+    height: hp("8.5%"),
   },
   buttonText: {
     color: "#fff",
-    alignSelf: "center",
+    textAlign: "center",
     fontSize: hp("2.5%"),
   },
 });
