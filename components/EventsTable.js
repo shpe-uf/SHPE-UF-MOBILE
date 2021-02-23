@@ -24,7 +24,7 @@ function EventsTable() {
       if (event.semester == semester) {
       const date = event.expiration.substring(0, 15);
         let row = [
-          <DataTable.Row>
+          <DataTable.Row key={event.name}>
             <DataTable.Cell>{event.name}</DataTable.Cell>
             <DataTable.Cell>{event.category}</DataTable.Cell>
             <DataTable.Cell>{date}</DataTable.Cell>
@@ -40,16 +40,12 @@ function EventsTable() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Events</Text>
-      {loading ? (
-        <View>
-          <Text>Loading...</Text>
-        </View>
-      ) : events && (events.length === 0 || tableContents.length === 0) ? (
+      {!events || events.length === 0 || tableContents.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
           <Text>No events on record for this semester.</Text>
         </View>
       ) : (
-        <View className="table-responsive">
+        <View>
           <DataTable>
             <DataTable.Header>
               <DataTable.Title>Name</DataTable.Title>

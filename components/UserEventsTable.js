@@ -11,7 +11,7 @@ function UserEventsTable({ user }) {
       const date = createdAt.getMonth() +"/" + createdAt.getDate() + "/" + createdAt.getFullYear();
 
       let row = [
-        <DataTable.Row>
+        <DataTable.Row key={event.name}>
           <DataTable.Cell>{event.name}</DataTable.Cell>
           <DataTable.Cell>{event.category}</DataTable.Cell>
           <DataTable.Cell>{date}</DataTable.Cell>

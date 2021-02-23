@@ -15,38 +15,39 @@ import TasksTable from ".././components/TasksTable";
 import EventsTable from ".././components/EventsTable";
 
 function Home() {
-  let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
+  const [user, setUser] = useState({});
+  const { data } = useQuery(FETCH_USER_QUERY, {
+    onError(err) {
+      console.log(err);
+    },
     variables: {
-      userId: "5fb2faa33945aa36700adfd0"
+      userId: "5f90e4d4920bab09f6df0106"
     }
   });
-  let user = null;
 
-  if (data) {
-    user = data.getUser;
+  if (data && data.getUser != user) {
+    setUser(data.getUser);
   }
 
   const monthOptions = require("./../assets/options/month.json");
   const month = new Date().getMonth();
   const semester = monthOptions[month].value;
-  const props = {user: user, semester: monthOptions[month].value};
+  const props = { user: user, semester: monthOptions[month].value };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.page}>
-        {loading ? (
-          <View>
-            <Text>Loading...</Text>
-          </View>
-        ) : user ? (
+        {user ? (
           <View style={styles.content}>
             <PointsBox props={props} />
-            <TasksTable/>
-            <EventsTable/>
+            <TasksTable />
+            <EventsTable />
           </View>
         ) : (
-          <View>
+          <View style={styles.content}>
             <Text>User not found</Text>
+            <TasksTable />
+            <EventsTable />
           </View>
         )}
       </View>

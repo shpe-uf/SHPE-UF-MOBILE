@@ -24,7 +24,7 @@ function TasksTable() {
       const task = tasks[i];
       if (now < Date.parse(task.endDate)) {
         let row = [
-          <DataTable.Row>
+          <DataTable.Row key={task.name}>
             <DataTable.Cell>{task.name}</DataTable.Cell>
             <DataTable.Cell>{task.endDate}</DataTable.Cell>
             <DataTable.Cell numeric>{task.points}</DataTable.Cell>
@@ -38,16 +38,12 @@ function TasksTable() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tasks</Text>
-      {loading ? (
-        <View>
-          <Text>Loading...</Text>
-        </View>
-      ) : tasks && (tasks.length === 0 || tableContents.length === 0) ? (
+      {!tasks || tasks.length === 0 || tableContents.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
           <Text>No upcoming tasks for this semester.</Text>
         </View>
       ) : (
-        <View className="table-responsive">
+        <View>
           <DataTable>
             <DataTable.Header>
               <DataTable.Title>Name</DataTable.Title>
