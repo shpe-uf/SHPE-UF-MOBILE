@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-// import { Row, Rows, Table } from "react-native-table-component";
+import { DataTable } from "react-native-paper";
 
 function UserEventsTable({ user }) {
-  const tableHead = ["Name", "Category", "Date", "Points"];
   let tableContents = [];
   if (user && user.events) {
     for (let i = 0; i < user.events.length; i++) {
       const event = user.events[i];
-      const date = event.createdAt.substring(5, 7) + "/"
-        + event.createdAt.substring(8, 10) + "/"
-        + event.createdAt.substring(0, 4);
+      const createdAt = new Date(event.createdAt);
+      const date = createdAt.getMonth() +"/" + createdAt.getDate() + "/" + createdAt.getFullYear();
 
       let row = [
-        event.name,
-        event.category,
-        date,
-        event.points
+        <DataTable.Row key={event.name}>
+          <DataTable.Cell>{event.name}</DataTable.Cell>
+          <DataTable.Cell>{event.category}</DataTable.Cell>
+          <DataTable.Cell>{date}</DataTable.Cell>
+          <DataTable.Cell numeric>{event.points}</DataTable.Cell>
+        </DataTable.Row>
       ];
       tableContents.push(row);
     }
@@ -31,10 +31,15 @@ function UserEventsTable({ user }) {
         </View>
       ) : (
         <View className="table-responsive">
-          {/* <Table borderStyle={styles.table}>
-            <Row data={tableHead} textStyle={styles.header}/>
-            <Rows data={tableContents} style={styles.table} textStyle={styles.text}/>
-          </Table> */}
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title>Name</DataTable.Title>
+              <DataTable.Title>Category</DataTable.Title>
+              <DataTable.Title>Date</DataTable.Title>
+              <DataTable.Title numeric>Points</DataTable.Title>
+            </DataTable.Header>
+            {tableContents}
+          </DataTable>
         </View>
       )}
     </View>
@@ -65,6 +70,5 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
 
 export default UserEventsTable;
