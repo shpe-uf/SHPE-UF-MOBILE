@@ -27,7 +27,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
+          {/* <Stack.Screen name="Home" component={Home} /> */}
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Points" component={Points} />
           <Stack.Screen name="Register" component={Register} />
