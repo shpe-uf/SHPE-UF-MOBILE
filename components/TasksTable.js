@@ -5,11 +5,19 @@ import { DataTable } from "react-native-paper";
 import { useQuery, gql } from "@apollo/client";
 import { FETCH_TASKS_QUERY } from ".././util/graphql";
 
+import Pagination from "./Pagination";
+
+
 function TasksTable() {
   let { data, loading } = useQuery(FETCH_TASKS_QUERY);
 
   let tasks = null;
   let tableContents = [];
+
+  const itemsPerPage = 5;
+  const [page, setPage] = React.useState(0);
+  const from = page * itemsPerPage;
+  const to = (page + 1) * itemsPerPage;
 
   const monthOptions = require("./../assets/options/month.json");
   const now = new Date();
@@ -19,8 +27,7 @@ function TasksTable() {
   if (data) {
     tasks = data.getTasks;
 
-    const maxTasks = Math.min(tasks.length, 5);
-    for (let i = 0; i < maxTasks; i++) {
+    for (let i = 0; i < tasks.length; i++) {
       const task = tasks[i];
       if (now < Date.parse(task.endDate)) {
         let row = [
@@ -51,6 +58,21 @@ function TasksTable() {
               <DataTable.Title numeric>Points</DataTable.Title>
             </DataTable.Header>
             {tableContents}
+            {tableContents.length > itemsPerPage ? (
+              <Pagination items={tableContents} />
+              /*
+              <View>
+                <DataTable.Pagination
+                  page={page}
+                  numberOfPages={Math.floor(tableContents.length / itemsPerPage)}
+                  onPageChange={page => setPage(page)}
+                  label={`${from + 1}-${to} of ${tableContents.length}`}
+                />
+              </View>
+              */
+            ) : (
+              <View></View>
+            )}
           </DataTable>
         </View>
       )}
