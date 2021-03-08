@@ -8,6 +8,10 @@ import { settings } from './config'
 
 import Register from "./Pages/Register";
 
+//Component
+import BottomTabNavigation from "./Pages/BottomTabNavigation";
+
+
 const Stack = createStackNavigator();
 
 const client = new ApolloClient({
@@ -17,13 +21,7 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Register" component={Register}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ApolloProvider>
+    <BottomTabNavigation />
   );
 }
 

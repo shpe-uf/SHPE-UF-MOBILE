@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://nn-5b4.anonymous.shpe-uf-mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.nn-5b4.anonymous.shpe-uf-mobile.exp.direct",
+  "ngrokPid": 2556,
   "webpackServerPort": null
 }
