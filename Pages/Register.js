@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery, gql } from "@apollo/client";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import { useMutation, gql } from "@apollo/client";
+import { useForm, getErrors } from "../util/hooks";
 import { View, TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import RNPickerSelect from 'react-native-picker-select';
@@ -12,98 +12,57 @@ import countryOptions from "../assets/options/country.json";
 import ethnicityOptions from "../assets/options/ethnicity.json";
 import sexOptions from "../assets/options/sex.json";
 
-function Register() {
 
-    function onSubmit(data){
-        //console.log(data);
-        addUser({
-            variables: {
-                firstName: data.firstName,
-                lastName: data.lastName,
-                major: data.major,
-                ethnicity: data.ethnicity,
-                graduating: data.graduating,
-                country: data.country,
-                year: data.year,
-                sex: data.sex,
-                username: data.username,
-                email: data.email,
-                password: data.password,
-                confirmPassword: data.confirmPassword,
-                listServ: "false"
-            }
-        }).catch((err) => {return err.graphQLErrors[0].extensions.exception.errors;}).then((errors) => {
-            if (errors && !errors.data){
-                var errorString = "";
-                
-                const errorArray = Object.values(errors);
+function Register({navigation}) {
+    const { values } = useForm(addUser, {
+        firstName: "",
+        lastName: "",
+        major: "",
+        ethnicity: "",
+        graduating: "",
+        country: "",
+        year: "",
+        sex: "",
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        listServ: "false"
+    });
 
-                errorArray.map(error => {
-                    errorString += (error);
+    const [addUser] = useMutation(REGISTER_USER, {
+        onError(err) {
+            getErrors(err);
+        },
 
-                    if (error != errorArray[errorArray.length - 1]){
-                        errorString += "\n";
-                    }
-                })
+        onCompleted() {
+            Alert.alert("Registration Successful!");
+            navigation.navigate('Login');
+        },
 
-                Alert.alert(errorString);
-            } else {
-                Alert.alert("Thank you for registering " + data.firstName + "!");
-            }
-        })
-    }
-
-    const { register, handleSubmit, setValue } = useForm();
-
-    useEffect(() => {
-        register('firstName');
-        setValue('firstName', "");
-        register('lastName');
-        setValue('lastName', "");
-        register('major');
-        setValue('major', "");
-        register('year');
-        setValue('year', "");
-        register('graduating');
-        setValue('graduating', "");
-        register('country');
-        setValue('country', "");
-        register('ethnicity');
-        setValue('ethnicity', "");
-        register('sex');
-        setValue('sex', "");
-        register('username');
-        setValue('username', "");
-        register('email');
-        setValue('email', "");
-        register('password');
-        setValue('password', "");
-        register('confirmPassword');
-        setValue('confirmPassword', "");
-    }, [register]);
-
-    const [addUser, { loading }] = useMutation(REGISTER_USER);
+        variables: values
+    });
 
     return (
-        <SafeAreaView 
+        <SafeAreaView
             style={styles.container}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <KeyboardAwareScrollView>
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='First Name'
                         onChangeText={text => {
-                            setValue('firstName', text)
+                            values.firstName = text;
                         }}
                         spellCheck={false}
                         autoCorrect={false}
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Last Name'
                         onChangeText={text => {
-                            setValue('lastName', text)
+                            values.lastName = text;
                         }}
                         spellCheck={false}
                         autoCorrect={false}
@@ -115,7 +74,7 @@ function Register() {
                             color: '#9EA0A4',
                         }}
                         style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('major', value)}
+                        onValueChange={(value) => values.major = value}
                         items={majorOptions}
                     />
                     <RNPickerSelect
@@ -125,7 +84,7 @@ function Register() {
                             color: '#9EA0A4',
                         }}
                         style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('year', value)}
+                        onValueChange={(value) => values.year = value}
                         items={yearOptions}
                     />
                     <RNPickerSelect
@@ -135,7 +94,7 @@ function Register() {
                             color: '#9EA0A4',
                         }}
                         style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('graduating', value)}
+                        onValueChange={(value) => values.graduating = value}
                         items={graduatingOptions}
                     />
                     <RNPickerSelect
@@ -145,7 +104,7 @@ function Register() {
                             color: '#9EA0A4',
                         }}
                         style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('country', value)}
+                        onValueChange={(value) => values.country = value}
                         items={countryOptions}
                     />
                     <RNPickerSelect
@@ -155,7 +114,7 @@ function Register() {
                             color: '#9EA0A4',
                         }}
                         style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('ethnicity', value)}
+                        onValueChange={(value) => values.ethnicity = value}
                         items={ethnicityOptions}
                     />
                     <RNPickerSelect
@@ -165,45 +124,45 @@ function Register() {
                             color: '#9EA0A4',
                         }}
                         style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('sex', value)}
+                        onValueChange={(value) => values.sex = value}
                         items={sexOptions}
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Username'
                         onChangeText={text => {
-                            setValue('username', text)
+                            values.username = text;
                         }}
                         spellCheck={false}
                         autoCorrect={false}
                         autoCapitalize='none'
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='UF/SF Email'
                         onChangeText={text => {
-                            setValue('email', text)
+                            values.email = text;
                         }}
                         spellCheck={false}
                         autoCorrect={false}
                         autoCapitalize='none'
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Password'
                         onChangeText={text => {
-                            setValue('password', text)
+                            values.password = text;
                         }}
                         spellCheck={false}
                         autoCorrect={false}
                         secureTextEntry={true}
                         autoCapitalize='none'
                     />
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Confirm Password'
                         onChangeText={text => {
-                            setValue('confirmPassword', text)
+                            values.confirmPassword = text;
                         }}
                         spellCheck={false}
                         autoCorrect={false}
@@ -212,9 +171,13 @@ function Register() {
                     />
 
                     <View>
-                        <Button 
-                            title='Submit'
-                            onPress={handleSubmit(onSubmit)}
+                        <Button
+                            title="Submit"
+                            onPress={() => addUser()}
+                        />
+                        <Button
+                            title="Already Registered?"
+                            onPress={() => navigation.navigate('Login')}
                         />
                     </View>
                     <View style={{ flex : 1 }} />
@@ -236,7 +199,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '500',
       },
-      container: {
+    container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

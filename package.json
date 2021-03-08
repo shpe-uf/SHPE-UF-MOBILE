@@ -10,8 +10,13 @@
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@react-native-community/masked-view": "^0.1.10",
+<<<<<<< HEAD
     "@react-native-community/picker": "^1.8.1",
     "@react-navigation/bottom-tabs": "^5.11.8",
+=======
+    "@react-native-community/picker": "^1.6.6",
+    "@react-native-picker/picker": "^1.9.11",
+>>>>>>> origin/develop
     "@react-navigation/native": "^5.7.6",
     "@react-navigation/stack": "^5.9.3",
     "apollo-boost": "^0.4.9",
@@ -21,8 +26,11 @@
     "dotenv": "^8.2.0",
     "expo": "^40.0.1",
     "expo-status-bar": "~1.0.2",
-    "graphql": "^15.3.0",
+    "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.1",
+    "pod-install": "^0.1.12",
     "react": "16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "16.13.1",
@@ -30,13 +38,16 @@
     "react-hook-form-resolvers": "0.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
     "react-native-dotenv": "^2.4.2",
-    "react-native-gesture-handler": "^1.8.0",
+    "react-native-elements": "^3.0.0-alpha.1",
+    "react-native-gesture-handler": "^1.7.0",
     "react-native-keyboard-aware-scrollview": "^2.1.0",
     "react-native-picker-select": "^8.0.2",
-    "react-native-screens": "^2.11.0",
+    "react-native-responsive-screen": "^1.4.2",
+    "react-native-screens": "^2.10.0",
     "react-native-select-input-ios": "^2.0.5",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.2",
+    "redux": "^4.0.5",
     "util": "^0.12.3"
   },
   "devDependencies": {
