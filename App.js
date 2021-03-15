@@ -5,23 +5,23 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { settings } from "./config";
-import Points from "./Pages/Points";
+import Home from "./Pages/Home";
 import Login from "./Pages/Login";
+import Points from "./Pages/Points";
 import Register from "./Pages/Register";
-import UserProfile from "./Pages/UserProfile";
 import ResetPassword from "./Pages/ResetPassword";
 import TaskButton from "./Pages/TaskButton";
 import CodeButton from "./components/CodeButton";
 import ViewTasks from "./Pages/ViewTasks"
 import localStorage from 'react-native-sync-localstorage'
 import jwt_decode from "jwt-decode";
-
+import UserProfile from "./Pages/UserProfile";
 
 const Stack = createStackNavigator();
 
 const client = new ApolloClient({
   uri: `http://${settings.internalIP}:5000`,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 });
 
 export default function App() {
@@ -77,6 +77,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 });
