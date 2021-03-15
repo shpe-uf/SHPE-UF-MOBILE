@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, {useState, useEffect} from "react";
+import { StyleSheet, Text, View, Alert} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
@@ -13,6 +13,9 @@ import ResetPassword from "./Pages/ResetPassword";
 import TaskButton from "./Pages/TaskButton";
 import CodeButton from "./components/CodeButton";
 import ViewTasks from "./Pages/ViewTasks"
+import localStorage from 'react-native-sync-localstorage'
+import jwt_decode from "jwt-decode";
+
 
 const Stack = createStackNavigator();
 
@@ -22,20 +25,51 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  const [hasToken, retrieveToken] = useState(false);
+  const [userToken, getUserToken] = useState([]);
+
+  function getStorage(){
+    //localStorage.removeItem('jwtToken');     //This is how u delete the token
+    localStorage.getAllFromLocalStorage().then(() => {
+      if(localStorage.getItem('jwtToken')){
+        const token = localStorage.getItem('jwtToken');
+        getUserToken(jwt_decode(token));
+        retrieveToken(true);
+      }
+    })
+    .catch(err => {
+      console.warn(err);
+    })
+  }  
+  
+  if(!hasToken){
+    getStorage();
+    //console.log(userToken)
+  }
+
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={Login} />
+          {hasToken ? (
+            <>
+          <Stack.Screen name="UserProfile" component={UserProfile} />
+          <Stack.Screen name="ViewTasks" component={ViewTasks}/>
+          <Stack.Screen name="Points" component={Points}/> 
+          </>
+          ) : (
+            <>
+          <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
-          <Stack.Screen name="ViewTasks" component={ViewTasks}/>
-          <Stack.Screen name="Points" component={Points}/>
-          <Stack.Screen name="UserProfile" component={UserProfile}/>
+          </>
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
   );
+  
+  
 }
 
 const styles = StyleSheet.create({

@@ -1,27 +1,53 @@
 import  React from 'react';
-import { TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
+import { TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaView, Keyboard, Button, Alert, NativeModules } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
+import localStorage from 'react-native-sync-localstorage'
 
 function Login({navigation}) {
-    const { values } = useForm(loginUser, {
+
+  /* const sign = require('jwt-encode');
+
+  function generateToken(values) {
+    return sign({
+      values,
+    },
+      SECRET,
+    {
+      alg: "HS256",
+    })
+  }  */
+
+  var userToken = [];
+
+  const { values } = useForm(loginUser, {
         username: "",
         password: "",
         remember: "false"
       });
 
-    const [loginUser] = useMutation(LOGIN_USER, {
+    const [loginUser, {data}] = useMutation(LOGIN_USER, {
+      
       onError(err) {
         getErrors(err);
       },
-
+      
       onCompleted() {
         Alert.alert("Login Successful!");
+        
+        NativeModules.DevSettings.reload();
       },
-
+    
       variables: values
     });
+    
+    if(data){
+      //console.log(data);
+      userToken = data.login.token;
+      //console.log(userToken);
+      localStorage.setItem('jwtToken', userToken);
+    }
 
     return (
       <SafeAreaView
@@ -51,7 +77,10 @@ function Login({navigation}) {
           <Button
               color='black'
               title="Login"
-              onPress={() => loginUser()}
+              onPress={() => {
+                values.remember = "true";
+                loginUser()
+                }}
           />
           <Button
               title="Register"
@@ -61,10 +90,10 @@ function Login({navigation}) {
               title="ResetPassword"
               onPress={() => navigation.navigate('ResetPassword')}
           />
-          <Button
+          {/* <Button
               title="ViewTasks"
               onPress={() => navigation.navigate('ViewTasks')}
-          />
+          /> */}
           </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
       </SafeAreaView>
