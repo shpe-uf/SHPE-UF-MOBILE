@@ -20,14 +20,14 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-
+import {Icon} from "native-base";
+import {useState} from "react"
 import majorOptions from "../assets/options/major.json";
 import yearOptions from "../assets/options/year.json";
 import graduatingOptions from "../assets/options/graduating.json";
 import countryOptions from "../assets/options/country.json";
 import ethnicityOptions from "../assets/options/ethnicity.json";
 import sexOptions from "../assets/options/sex.json";
-import { useState } from "react";
 
 function Register({ navigation }) {
   const { values } = useForm(addUser, {
@@ -58,6 +58,8 @@ function Register({ navigation }) {
 
     variables: values,
   });
+
+  const [dummy, setDummy] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -93,9 +95,12 @@ function Register({ navigation }) {
               value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input, inputAndroid: styles.input}}
+            style={{ inputIOS: styles.input, inputAndroid: styles.input, iconContainer: {right: wp("18%"), top: hp("1.7%")} }}
             onValueChange={(value) => (values.major = value)}
             items={majorOptions}
+            Icon={() => {
+              return <Icon type="FontAwesome" name="sort-down" style={{color: "#9EA0A4"}} />;
+            }}
           />
           <RNPickerSelect
           useNativeAndroidPickerStyle={false}
@@ -104,9 +109,12 @@ function Register({ navigation }) {
               value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input, inputAndroid: styles.input }}
+            style={{ inputIOS: styles.input, inputAndroid: styles.input, iconContainer: {right: wp("18%"), top: hp("1.7%")} }}
             onValueChange={(value) => (values.year = value)}
             items={yearOptions}
+            Icon={() => {
+              return <Icon type="FontAwesome" name="sort-down" style={{color: "#9EA0A4"}} />;
+            }}
           />
           <RNPickerSelect
           useNativeAndroidPickerStyle={false}
@@ -115,9 +123,12 @@ function Register({ navigation }) {
               value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input, inputAndroid: styles.input }}
+            style={{ inputIOS: styles.input, inputAndroid: styles.input, iconContainer: {right: wp("18%"), top: hp("1.7%")} }}
             onValueChange={(value) => (values.graduating = value)}
             items={graduatingOptions}
+            Icon={() => {
+              return <Icon type="FontAwesome" name="sort-down" style={{color: "#9EA0A4"}} />;
+            }}
           />
           <RNPickerSelect
             useNativeAndroidPickerStyle={false}
@@ -126,9 +137,12 @@ function Register({ navigation }) {
               value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input, inputAndroid: styles.input }}
+            style={{ inputIOS: styles.input, inputAndroid: styles.input, iconContainer: {right: wp("18%"), top: hp("1.7%")} }}
             onValueChange={(value) => (values.country = value)}
             items={countryOptions}
+            Icon={() => {
+              return <Icon type="FontAwesome" name="sort-down" style={{color: "#9EA0A4"}} />;
+            }}
           />
           <RNPickerSelect
           useNativeAndroidPickerStyle={false}
@@ -136,11 +150,13 @@ function Register({ navigation }) {
               label: "Ethnicity",
               value: null,
               color: "#9EA0A4",
-              textDecorationColor: 'BLACK'
             }}
-            style={{ inputIOS: styles.input, inputAndroid: styles.input }}
+            style={{ inputIOS: styles.input, inputAndroid: styles.input, iconContainer: {right: wp("18%"), top: hp("1.7%")} }}
             onValueChange={(value) => (values.ethnicity = value)}
             items={ethnicityOptions}
+            Icon={() => {
+              return <Icon type="FontAwesome" name="sort-down" style={{color: "#9EA0A4"}} />;
+            }}
           />
           <RNPickerSelect
           useNativeAndroidPickerStyle={false}
@@ -149,9 +165,12 @@ function Register({ navigation }) {
               value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input, inputAndroid: styles.input }}
+            style={{ inputIOS: styles.input, inputAndroid: styles.input, iconContainer: {right: wp("18%"), top: hp("1.7%")} }}
             onValueChange={(value) => (values.sex = value)}
             items={sexOptions}
+            Icon={() => {
+              return <Icon type="FontAwesome" name="sort-down" style={{color: "#9EA0A4"}} />;
+            }}
           />
           <TextInput
             style={styles.input}
@@ -189,6 +208,15 @@ function Register({ navigation }) {
             placeholder="Confirm Password"
             onChangeText={(text) => {
               values.confirmPassword = text;
+              // console.log('here')
+              // if(text.length == 0) {
+              //   setDummy(false)
+              //   console.log('text is zero legnth')
+              // }
+              // else {
+              //   setDummy(true)
+              //   console.log('text is more than 0 length')
+              // }
             }}
             spellCheck={false}
             autoCorrect={false}
@@ -200,6 +228,7 @@ function Register({ navigation }) {
               marginHorizontal: wp("12.5%"),
               color: "red",
               marginBottom: hp("4%"),
+              fontSize: hp("1.8%"),
             }}
           >
             Password must be at least 8 characters. It must contain at least one
@@ -246,7 +275,6 @@ const styles = StyleSheet.create({
     height: hp("7.2%"),
     fontSize: hp("2.3%"),
     alignSelf: "center",
-    textDecorationColor: 'black'
   },
   image: {
     width: wp("17.5%"),
@@ -274,7 +302,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     justifyContent: "center",
     alignSelf: "center",
-    //margin: hp("1%"),
     width: wp("75%"),
     height: hp("7.2%"),
   },
@@ -300,6 +327,7 @@ const styles = StyleSheet.create({
     width: wp("75%"),
     height: hp("7.2%"),
     alignSelf: "center",
+    fontFamily: "Roboto-Regular"
   },
 });
 

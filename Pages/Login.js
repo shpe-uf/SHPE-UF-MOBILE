@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+    marginBottom: hp("3%"),
   },
   buttonContainer: {
     backgroundColor: "#001f5b",
