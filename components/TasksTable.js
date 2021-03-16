@@ -9,7 +9,15 @@ function TasksTable() {
   let { data, loading } = useQuery(FETCH_TASKS_QUERY);
 
   let tasks = null;
+  let tablePage = [];
   let tableContents = [];
+  let total = 0;
+
+  const [page, setPage] = React.useState(0);
+  const itemsPerPage = 5;
+  const from = page * itemsPerPage;
+  const to = (page + 1) * itemsPerPage;
+
 
   const monthOptions = require("./../assets/options/month.json");
   const now = new Date();
@@ -20,7 +28,7 @@ function TasksTable() {
     tasks = data.getTasks;
 
     const maxTasks = Math.min(tasks.length, 5);
-    for (let i = 0; i < maxTasks; i++) {
+    for (let i = 0; i < tasks.length; i++) {
       const task = tasks[i];
       if (now < Date.parse(task.endDate)) {
         let row = [
@@ -30,7 +38,12 @@ function TasksTable() {
             <DataTable.Cell numeric>{task.points}</DataTable.Cell>
           </DataTable.Row>
         ];
-        tableContents.push(row);
+        tablePage.push(row);
+        if (tablePage.length >= maxTasks || i === tasks.length - 1) {
+          tableContents.push(tablePage);
+          total += tablePage.length;
+          tablePage = [];
+        }
       }
     }
   }
@@ -50,7 +63,13 @@ function TasksTable() {
               <DataTable.Title>End Date</DataTable.Title>
               <DataTable.Title numeric>Points</DataTable.Title>
             </DataTable.Header>
-            {tableContents}
+            {tableContents[page]}
+            <DataTable.Pagination
+              page={page}
+              numberOfPages={tasks.length}
+              onPageChange={page => setPage(page)}
+              label={`${from + 1}-${Math.min(to,total)} of ${total}`}
+            />
           </DataTable>
         </View>
       )}
