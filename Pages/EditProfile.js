@@ -13,19 +13,20 @@ import ethnicityOptions from "../assets/options/ethnicity.json";
 import sexOptions from "../assets/options/sex.json";
 
 
-function EditProfile({navigation}) {
+function EditProfile({navigation, token}) {
     const [user, setUser] = useState({})
     const {data} = useQuery(FETCH_USER_QUERY, {
         onError(err){
             console.log(err);
         },
         variables: {
-            userId: "5f90e4d4920bab09f6df0106"
+            userId: token.id
         }
     });
 
     if(data && data.getUser != user){
         setUser(data.getUser);
+        console.log(data);
     }
 
     const { values } = useForm(editUser, {
@@ -176,6 +177,7 @@ function EditProfile({navigation}) {
                                 values.classes = user.classes;
                                 values.internships = user.internships;
                                 values.socialMedia = user.socialMedia;
+                                console.log(values);
                                 editUser();
                             }}
                         />
@@ -270,9 +272,6 @@ const EDIT_USER_PROFILE = gql`
       sex
       createdAt
       permission
-      classes
-      internships
-      socialMedia
     }
   }
 `;
@@ -293,9 +292,6 @@ const FETCH_USER_QUERY = gql`
       sex
       createdAt
       permission
-      classes
-      internships
-      socialMedia
     }
   }
 `;

@@ -1,23 +1,26 @@
 import React, {useState} from 'react';
-import { Alert, StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, Dimensions, FlatList, Image} from 'react-native';
+import { Alert, StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, Dimensions, FlatList, Image, NativeModules} from 'react-native';
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
+import localStorage from 'react-native-sync-localstorage';
+import jwt_decode from "jwt-decode";
 
 import EditProfile from "./EditProfile";
 
-function UserProfile({navigation}){
+function UserProfile({navigation, token}){
+
   const [user, setUser] = useState({})
   const {data, refetch} = useQuery(FETCH_USER_QUERY, {
       onError(err){
           console.log(err);
       },
       variables: {
-          userId: "5f90e4d4920bab09f6df0106"
+          userId: token.id
       }
   });
 
   navigation.addListener('focus', () => {
-    refetch();
+      refetch();
   });
 
   if(data && data.getUser != user){
@@ -74,6 +77,12 @@ function UserProfile({navigation}){
                 <TouchableOpacity>
                   <Text style={styles.opacityBtn2} onPress={() => navigation.navigate('EditProfile')}>
                     {"\n\n\n"}Edit Profile{"\n\n\n"}
+                    <Text onPress={() =>{
+                        localStorage.removeItem('jwtToken');
+                        NativeModules.DevSettings.reload();
+                      }}>
+                          {"\n\n\n"}Log Out{"\n\n\n"}
+                    </Text>
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -177,9 +186,6 @@ const FETCH_USER_QUERY = gql`
       sex
       createdAt
       permission
-      classes
-      internships
-      socialMedia
     }
   }
 `;

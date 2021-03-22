@@ -53,11 +53,15 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           {hasToken ? (
-            <>
-          <Stack.Screen name="UserProfile" component={UserProfile} />
-          <Stack.Screen name="EditProfile" component={EditProfile}/>
+            <>         
+          <Stack.Screen name="UserProfile">
+            {props => <UserProfile {...props} token={userToken}/>}
+          </Stack.Screen>
+          <Stack.Screen name="EditProfile">
+            {props => <EditProfile {...props} token={userToken}/>}
+          </Stack.Screen> 
+          <Stack.Screen name="Points" component={Points}/>
           <Stack.Screen name="ViewTasks" component={ViewTasks}/>
-          <Stack.Screen name="Points" component={Points}/> 
           </>
           ) : (
             <>
