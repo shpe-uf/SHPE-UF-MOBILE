@@ -6,69 +6,10 @@ import Icon from "react-native-vector-icons/Ionicons";
 import {Platform } from "react-native";
 
 
-function Home() {
-    return (
-        <View 
-            style={{
-                flex: 1,
-                alignItems:'center',
-                justifyContent:'center',
-                backgroundColor: "#03cafc"
-            }}
-        >
-            <Text style={{fontSize: 20, color: "#ffffff", fontWeight: '800'}}>Home is here!</Text>
-        </View>
-    )
-}
-
-
-function Points( {navigaton} ) {
-    return (
-        <View 
-            style={{
-                flex: 1,
-                alignItems:'center',
-                justifyContent:'center',
-                backgroundColor: "#c203fc"
-            }}
-        >
-            <Text style={{fontSize: 20, color: "#ffffff", fontWeight: '800'}}>Points goes here!</Text>
-            <Button title="Go back" onPress={() => NavigationContainer.goBack()}/>
-        </View>
-    )
-}
-
-function Tasks( {navigaton} ) {
-    return (
-        <View 
-            style={{
-                flex: 1,
-                alignItems:'center',
-                justifyContent:'center',
-                backgroundColor: "#48b969"
-            }}
-        >
-            <Text style={{fontSize: 20, color: "#ffffff", fontWeight: '800'}}>Tasks go here!</Text>
-            <Button title="Go back" onPress={() => NavigationContainer.goBack()}/>
-        </View>
-    )
-}
-
-function Profile( {navigaton} ) {
-    return (
-        <View 
-            style={{
-                flex: 1,
-                alignItems:'center',
-                justifyContent:'center',
-                backgroundColor: "#48b969"
-            }}
-        >
-            <Text style={{fontSize: 20, color: "#ffffff", fontWeight: '800'}}>Profile goes here!</Text>
-            <Button title="Go back" onPress={() => NavigationContainer.goBack()}/>
-        </View>
-    )
-}
+import Home from "./Home";
+import Points from "./Points";
+import UserProfile from "./UserProfile";
+import ViewTasks from "./ViewTasks";
 
 const Tab = createBottomTabNavigator();
 
@@ -85,17 +26,18 @@ function MyTabs() {
                 component={Home}
                 options={{
                     tabBarLabel: "Home",
-                    tabBarIcon: ({ color, size}) => {
-                        <Icon name={Platform.OS === 'ios' ? "ios-home" : "md-home"} color={color} size={size}  />
+                    tabBarIcon  : ({  focused, color, size}) => {
+                        let iconName = "home";
+                        return <Icon name={"home"} size={size} color={color}/>
                       }
                 }} />
             <Tab.Screen
                 name='Tasks'
-                component={Tasks}
+                component={ViewTasks}
                 options={{
                     tabBarLabel: "Tasks",
                     tabBarIcon: ({ color, size}) => {
-                        <Icon name={Platform.OS === 'ios' ? "ios-contacts" : "md-contacts"} color={color} size={size}  />
+                        return <Icon name={"clipboard"} color={color} size={size}  />
                       }
                 }} />
             <Tab.Screen
@@ -104,17 +46,17 @@ function MyTabs() {
                 options={{
                     tabBarLabel: "Points",
                     tabBarIcon: ({ color, size}) => {
-                        <Icon name={Platform.OS === 'ios' ? "ios-information-circle" : "md-information-circle"} 
+                        return <Icon name={"trophy"} 
                         color={color} size={size}  />
                       }
                 }} />
             <Tab.Screen
                 name='Profile'
-                component={Profile}
+                component={UserProfile}
                 options={{
                     tabBarLabel: "Profile",
                     tabBarIcon: ({ color, size}) => {
-                        <Icon name={Platform.OS === 'ios' ? "ios-profile" : "md-profile"} color={color} size={size}  />
+                        return <Icon name={"person"} color={color} size={size}  />
                       }
                 }} />    
 
@@ -124,7 +66,7 @@ function MyTabs() {
 
 export default function BottomTabNavigation(){
     return(
-        <NavigationContainer>
+        <NavigationContainer independent={true}>
             <MyTabs />
         </NavigationContainer>
     )

@@ -28,13 +28,6 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Points" component={Points} />
-          <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="ResetPassword" component={ResetPassword} />
-          <Stack.Screen name="ViewTasks" component={ViewTasks} />
-          <Stack.Screen name="UserProfile" component={UserProfile} />
           <Stack.Screen name="BottomTabNavigation" component={BottomTabNavigation} />
         </Stack.Navigator>
       </NavigationContainer>

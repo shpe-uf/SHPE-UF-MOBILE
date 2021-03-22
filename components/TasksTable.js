@@ -40,7 +40,7 @@ function TasksTable() {
       <Text style={styles.title}>Tasks</Text>
       {!tasks || tasks.length === 0 || tableContents.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
-          <Text>No upcoming tasks for this semester.</Text>
+          <Text style={styles.text}>No upcoming tasks for this semester.</Text>
         </View>
       ) : (
         <View>
@@ -65,7 +65,9 @@ const styles = StyleSheet.create({
   title: {
     alignSelf: "center",
     fontSize: 23,
-    margin: 6
+    margin: 6,
+    color:"#ff800a",
+    textDecorationLine: 'underline'
   },
   header: {
     fontWeight: "bold",
@@ -79,7 +81,8 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   text: {
-    textAlign: "center"
+    textAlign: "center",
+    color: "#f2f2f7"
   }
 });
 
