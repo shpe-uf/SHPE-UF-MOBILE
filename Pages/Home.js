@@ -57,7 +57,7 @@ function Home() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1c1c1e",
+    
     height: "100%",
     width: "100%"
   },

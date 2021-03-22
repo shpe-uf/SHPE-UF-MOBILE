@@ -42,7 +42,7 @@ function EventsTable() {
       <Text style={styles.title}>Events</Text>
       {!events || events.length === 0 || tableContents.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
-          <Text style={styles.text}>No events on record for this semester.</Text>
+          <Text>No events on record for this semester.</Text>
         </View>
       ) : (
         <View>
@@ -68,8 +68,7 @@ const styles = StyleSheet.create({
   title: {
     alignSelf: "center",
     fontSize: 23,
-    margin: 6,
-    color: "#3571f2"
+    margin: 6
   },
   header: {
     fontWeight: "bold",
@@ -83,8 +82,7 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   text: {
-    textAlign: "center",
-    color: "#f2f2f7"
+    textAlign: "center"
   }
 });
 

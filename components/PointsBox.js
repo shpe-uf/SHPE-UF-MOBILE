@@ -18,7 +18,7 @@ const PointsBox = ({ props }) => {
         </View>
       ) : semester === "Spring Semester" ? (
         <View style={styles.pointsBox}>
-          <Text style={styles.title}>SPRING POINTS</Text>
+          <Text style={styles.center}>SPRING POINTS</Text>
           <Text style={styles.center}>{user ? user.springPoints : "0"}</Text>
           <Text style={styles.center}>
             {user ? user.springPercentile : "0"} percentile
@@ -44,7 +44,7 @@ const PointsBox = ({ props }) => {
 
 const styles = StyleSheet.create({
   pointsBox: {
-    backgroundColor: "#1c1c1e",
+    backgroundColor: "#72A9BE",
     borderColor: "gray",
     margin: "2%",
     paddingBottom: "2%",
