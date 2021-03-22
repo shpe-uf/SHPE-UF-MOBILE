@@ -10,45 +10,44 @@ import {
 
 import { gql, useMutation, useQuery } from "@apollo/client";
 
-import PointsBar from ".././components/PointsBar";
-import UserEventsTable from ".././components/UserEventsTable";
+import PointsBox from ".././components/PointsBox";
+import TasksTable from ".././components/TasksTable";
+import EventsTable from ".././components/EventsTable";
 
-function Points() {
-  let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
+function Home() {
+  const [user, setUser] = useState({});
+  const { data } = useQuery(FETCH_USER_QUERY, {
+    onError(err) {
+      console.log(err);
+    },
     variables: {
-      userId: "5fb2faa33945aa36700adfd0"
+      userId: "5f90e4d4920bab09f6df0106"
     }
   });
-  let user = null;
 
-  if (data) {
-    user = data.getUser;
+  if (data && data.getUser != user) {
+    setUser(data.getUser);
   }
+
+  const monthOptions = require("./../assets/options/month.json");
+  const month = new Date().getMonth();
+  const semester = monthOptions[month].value;
+  const props = { user: user, semester: monthOptions[month].value };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.page}>
-        <View style={styles.button}>
-          <Button
-            accessibilityLabel="Button to redeem code."
-            title="Redeem Code"
-            onPress={() => Alert.alert("Redeem Code button pressed.")}
-          />
-        </View>
-        {loading ? (
-          <View>
-            <Text>Loading...</Text>
-          </View>
-        ) : user ? (
+        {user ? (
           <View style={styles.content}>
-            <PointsBar user={user} />
-            <View style={styles.events}>
-              <UserEventsTable user={user} />
-            </View>
+            <PointsBox props={props} />
+            <TasksTable />
+            <EventsTable />
           </View>
         ) : (
-          <View>
+          <View style={styles.content}>
             <Text>User not found</Text>
+            <TasksTable />
+            <EventsTable />
           </View>
         )}
       </View>
@@ -66,12 +65,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     width: "80%"
-  },
-  button: {
-    backgroundColor: "#1395b9",
-    color: "#fff",
-    margin: "2%",
-    width: "60%"
   },
   content: {
     width: "100%"
@@ -109,4 +102,4 @@ const FETCH_USER_QUERY = gql`
   }
 `;
 
-export default Points;
+export default Home;
