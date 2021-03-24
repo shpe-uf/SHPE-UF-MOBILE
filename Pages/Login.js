@@ -18,6 +18,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useRef, useEffect } from "react";
 
 function Login({ navigation }) {
   const { values } = useForm(loginUser, {
@@ -38,6 +39,13 @@ function Login({ navigation }) {
     variables: values,
   });
 
+  const inputElementRef = useRef(null);
+  useEffect(() => {
+    inputElementRef.current.setNativeProps({
+      style: { fontFamily: "Roboto" },
+    });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -52,6 +60,7 @@ function Login({ navigation }) {
             <TextInput
               style={styles.input}
               placeholder="Username"
+              placeholderTextColor="#a9a9a9"
               onChangeText={(value) => (values.username = value)}
               spellCheck={false}
               autoCorrect={false}
@@ -59,8 +68,10 @@ function Login({ navigation }) {
             />
 
             <TextInput
+              ref={inputElementRef}
               style={styles.input}
               placeholder="Password"
+              placeholderTextColor="#a9a9a9"
               onChangeText={(value) => (values.password = value)}
               spellCheck={false}
               autoCorrect={false}
