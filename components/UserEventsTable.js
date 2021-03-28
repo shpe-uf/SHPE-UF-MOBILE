@@ -8,7 +8,12 @@ function UserEventsTable({ user }) {
     for (let i = 0; i < user.events.length; i++) {
       const event = user.events[i];
       const createdAt = new Date(event.createdAt);
-      const date = createdAt.getMonth() +"/" + createdAt.getDate() + "/" + createdAt.getFullYear();
+      const date =
+        createdAt.getMonth() +
+        "/" +
+        createdAt.getDate() +
+        "/" +
+        createdAt.getFullYear();
 
       let row = [
         <DataTable.Row key={event.name}>
@@ -16,7 +21,7 @@ function UserEventsTable({ user }) {
           <DataTable.Cell>{event.category}</DataTable.Cell>
           <DataTable.Cell>{date}</DataTable.Cell>
           <DataTable.Cell numeric>{event.points}</DataTable.Cell>
-        </DataTable.Row>
+        </DataTable.Row>,
       ];
       tableContents.push(row);
     }
@@ -48,27 +53,13 @@ function UserEventsTable({ user }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%"
+    width: "100%",
   },
   title: {
     alignSelf: "center",
     fontSize: 23,
-    margin: 6
+    margin: 6,
   },
-  header: {
-    fontWeight: "bold",
-    paddingBottom: "3%",
-    textAlign: "center"
-  },
-  table: {
-    backgroundColor: "powderblue",
-    marginBottom: "2%",
-    padding: "1.5%",
-    width: "100%"
-  },
-  text: {
-    textAlign: "center"
-  }
 });
 
 export default UserEventsTable;

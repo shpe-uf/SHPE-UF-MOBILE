@@ -7,18 +7,20 @@ import {
   StyleSheet,
   SafeAreaView,
   Keyboard,
-  Alert,
-  Image,
   TouchableOpacity,
+  Alert,
+  NativeModules,
+  Image,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
-import { useMutation, gql } from "@apollo/client";
-import { useForm, getErrors } from "../util/hooks";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useRef, useEffect } from "react";
+
+import { useMutation, gql } from "@apollo/client";
+import { useForm, getErrors } from "../util/hooks";
 
 function Login({ navigation }) {
   const { values } = useForm(loginUser, {
@@ -27,13 +29,14 @@ function Login({ navigation }) {
     remember: "false",
   });
 
-  const [loginUser] = useMutation(LOGIN_USER, {
+  const [loginUser, { data }] = useMutation(LOGIN_USER, {
     onError(err) {
       getErrors(err);
     },
 
     onCompleted() {
       Alert.alert("Login Successful!");
+      NativeModules.DevSettings.reload();
     },
 
     variables: values,

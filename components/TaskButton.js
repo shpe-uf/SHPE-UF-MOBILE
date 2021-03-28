@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Text, View, StyleSheet, Button, Alert } from "react-native";
+import Constants from "expo-constants";
+
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
-import Constants from "expo-constants";
 
 function TaskButton(props) {
   let taskName = props.task;
@@ -47,12 +48,6 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     padding: 8,
     backgroundColor: "#004D73",
-  },
-  textStyle: {
-    padding: 8,
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
   },
 });
 
