@@ -16,6 +16,7 @@ import ViewTasks from "./Pages/ViewTasks"
 import localStorage from 'react-native-sync-localstorage'
 import jwt_decode from "jwt-decode";
 import UserProfile from "./Pages/UserProfile";
+import BottomTabNavigation from "./Pages/BottomTabNavigation";
 
 const Stack = createStackNavigator();
 
@@ -53,6 +54,7 @@ export default function App() {
         <Stack.Navigator>
           {hasToken ? (
             <>
+          <Stack.Screen name="BottomTabNavigation" component={BottomTabNavigation} />
           <Stack.Screen name="UserProfile" component={UserProfile} />
           <Stack.Screen name="ViewTasks" component={ViewTasks}/>
           <Stack.Screen name="Points" component={Points}/> 
