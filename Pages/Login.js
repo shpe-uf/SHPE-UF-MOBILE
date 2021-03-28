@@ -13,7 +13,6 @@ import {
   Image,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
-import localStorage from "react-native-sync-localstorage";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -23,8 +22,6 @@ import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function Login({ navigation }) {
-  var userToken = [];
-
   const { values } = useForm(loginUser, {
     username: "",
     password: "",
@@ -38,17 +35,11 @@ function Login({ navigation }) {
 
     onCompleted() {
       Alert.alert("Login Successful!");
-
       NativeModules.DevSettings.reload();
     },
 
     variables: values,
   });
-
-  if (data) {
-    userToken = data.login.token;
-    localStorage.setItem("jwtToken", userToken);
-  }
 
   return (
     <SafeAreaView style={styles.container}>
