@@ -1,72 +1,72 @@
-import  React from 'react';
-import { TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
+import React from "react";
+import {
+  TouchableWithoutFeedback,
+  TextInput,
+  StyleSheet,
+  SafeAreaView,
+  Keyboard,
+  Button,
+  Alert,
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
-function Login({navigation}) {
-    const { values } = useForm(resetPassword, {
-        email: ""
-    });
+function ResetPassword({ navigation }) {
+  const { values } = useForm(resetPassword, {
+    email: "",
+  });
 
-    const [resetPassword] = useMutation(FORGOT_PASSWORD, {
-      onError(err) {
-        getErrors(err);
-      },
+  const [resetPassword] = useMutation(FORGOT_PASSWORD, {
+    onError(err) {
+      getErrors(err);
+    },
 
-      onCompleted() {
-        Alert.alert("Check your email!");
-        navigation.navigate('Login');
-      },
+    onCompleted() {
+      Alert.alert("Check your email!");
+      navigation.navigate("Login");
+    },
 
-      variables: values
-    });
+    variables: values,
+  });
 
-    return (
-        <SafeAreaView style ={styles.container}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <KeyboardAwareScrollView>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Email'
-                        onChangeText={text =>
-                            values.email = text
-                        }
-                        spellCheck={false}
-                        autoCorrect={false}
-                        />
-                        <Button
-                        title ="Reset Password"
-                        onPress={() => resetPassword()}
-                    />
-                </KeyboardAwareScrollView>
-            </TouchableWithoutFeedback>
-        </SafeAreaView>   
-    )
+  return (
+    <SafeAreaView style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAwareScrollView>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            onChangeText={(text) => (values.email = text)}
+            spellCheck={false}
+            autoCorrect={false}
+          />
+          <Button title="Reset Password" onPress={() => resetPassword()} />
+        </KeyboardAwareScrollView>
+      </TouchableWithoutFeedback>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        backgroundColor: '#42A5F5',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    input: {
-        borderWidth: 1,
-        backgroundColor: 'white',
-        color: "black",
-        borderRadius: 14,
-        padding: 8,
-        margin: 10,
-        width: 350,
-        height: 55, 
-        fontSize: 18,
-    },
-    wording: {
-        fontSize: 20,
-        color: 'black',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: "#42A5F5",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    borderWidth: 1,
+    backgroundColor: "white",
+    color: "black",
+    borderRadius: 14,
+    padding: 8,
+    margin: 10,
+    width: 350,
+    height: 55,
+    fontSize: 18,
+  },
 });
 
 const FORGOT_PASSWORD = gql`
@@ -81,4 +81,4 @@ const FORGOT_PASSWORD = gql`
   }
 `;
 
-export default Login;
+export default ResetPassword;

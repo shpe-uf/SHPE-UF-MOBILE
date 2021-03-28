@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, 
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
 
-function UserProfile(){   
+function UserProfile(){
   const [user, setUser] = useState({})
   const {data} = useQuery(FETCH_USER_QUERY, {
       onError(err){
@@ -56,9 +56,9 @@ function UserProfile(){
             <Text style={styles.opacityBtn}>
                 {"\n\n\n"}Change Profile Photo{"\n\n\n"}
             </Text>
-          </TouchableOpacity>   
+          </TouchableOpacity>
         </View>
-        <View style={styles.line} ></View> 
+        <View style={styles.line} ></View>
         </View>;
 };
 
@@ -74,9 +74,9 @@ function UserProfile(){
               </View>
             </View>;
   };
-  
+
   const numColumns=2
-    return (      
+    return (
         <FlatList
           data={dataList}
           renderItem={_renderItem}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   itemStyle:{
-    backgroundColor: "#1c1c1e",
+    backgroundColor: "#f0f0f0",
     alignItems: 'flex-start',
     justifyContent: 'center',
     flex: 1,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     paddingHorizontal:13,
   },
   itemText: {
-    color: '#f2f2f7',
+    color: '#1c1c1e',
     fontSize: 18,
     paddingHorizontal:10,
     lineHeight: 38,
@@ -131,12 +131,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   container: {
-    backgroundColor: "#1c1c1e",
+    backgroundColor: "#f2f2f7",
     alignItems: 'center',
     marginTop: 10,
   },
   view: {
-    backgroundColor: "#1c1c1e",
+    backgroundColor: "#f2f2f7",
   },
   profilePic:{
     width: 150,
