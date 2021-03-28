@@ -18,7 +18,6 @@ function TasksTable() {
   const from = page * itemsPerPage;
   const to = (page + 1) * itemsPerPage;
 
-
   const monthOptions = require("./../assets/options/month.json");
   const now = new Date();
   const month = now.getMonth();
@@ -36,7 +35,7 @@ function TasksTable() {
             <DataTable.Cell>{task.name}</DataTable.Cell>
             <DataTable.Cell>{task.endDate}</DataTable.Cell>
             <DataTable.Cell numeric>{task.points}</DataTable.Cell>
-          </DataTable.Row>
+          </DataTable.Row>,
         ];
         tablePage.push(row);
         if (tablePage.length >= maxTasks || i === tasks.length - 1) {
@@ -67,8 +66,8 @@ function TasksTable() {
             <DataTable.Pagination
               page={page}
               numberOfPages={tasks.length}
-              onPageChange={page => setPage(page)}
-              label={`${from + 1}-${Math.min(to,total)} of ${total}`}
+              onPageChange={(page) => setPage(page)}
+              label={`${from + 1}-${Math.min(to, total)} of ${total}`}
             />
           </DataTable>
         </View>
@@ -79,27 +78,13 @@ function TasksTable() {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%"
+    width: "100%",
   },
   title: {
     alignSelf: "center",
     fontSize: 23,
-    margin: 6
+    margin: 6,
   },
-  header: {
-    fontWeight: "bold",
-    paddingBottom: "3%",
-    textAlign: "center"
-  },
-  table: {
-    backgroundColor: "powderblue",
-    marginBottom: "2%",
-    padding: "1.5%",
-    width: "100%"
-  },
-  text: {
-    textAlign: "center"
-  }
 });
 
 export default TasksTable;

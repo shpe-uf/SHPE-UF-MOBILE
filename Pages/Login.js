@@ -1,57 +1,54 @@
-import  React from 'react';
-import { View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaView, Keyboard, TouchableOpacity, Alert, NativeModules, Image } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import { useMutation, gql } from "@apollo/client";
-import { useForm, getErrors } from "../util/hooks";
-import localStorage from 'react-native-sync-localstorage'
+import React from "react";
+import {
+  View,
+  TouchableWithoutFeedback,
+  TextInput,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Keyboard,
+  TouchableOpacity,
+  Alert,
+  NativeModules,
+  Image,
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import localStorage from "react-native-sync-localstorage";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-function Login({navigation}) {
+import { useMutation, gql } from "@apollo/client";
+import { useForm, getErrors } from "../util/hooks";
 
-  /* const sign = require('jwt-encode');
-
-  function generateToken(values) {
-    return sign({
-      values,
-    },
-      SECRET,
-    {
-      alg: "HS256",
-    })
-  }  */
-
+function Login({ navigation }) {
   var userToken = [];
 
   const { values } = useForm(loginUser, {
-        username: "",
-        password: "",
-        remember: "false"
-      });
+    username: "",
+    password: "",
+    remember: "false",
+  });
 
-    const [loginUser, {data}] = useMutation(LOGIN_USER, {
-      
-      onError(err) {
-        getErrors(err);
-      },
-      
-      onCompleted() {
-        Alert.alert("Login Successful!");
-        
-        NativeModules.DevSettings.reload();
-      },
-    
-      variables: values
-    });
-    
-    if(data){
-      //console.log(data);
-      userToken = data.login.token;
-      //console.log(userToken);
-      localStorage.setItem('jwtToken', userToken);
-    }
+  const [loginUser, { data }] = useMutation(LOGIN_USER, {
+    onError(err) {
+      getErrors(err);
+    },
+
+    onCompleted() {
+      Alert.alert("Login Successful!");
+
+      NativeModules.DevSettings.reload();
+    },
+
+    variables: values,
+  });
+
+  if (data) {
+    userToken = data.login.token;
+    localStorage.setItem("jwtToken", userToken);
+  }
 
   return (
     <SafeAreaView style={styles.container}>

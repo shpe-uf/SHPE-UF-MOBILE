@@ -8,9 +8,10 @@ import {
   Alert,
   Modal,
 } from "react-native";
+import Constants from "expo-constants";
+
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
-import Constants from "expo-constants";
 
 function CodeButton(props) {
   const [errors, setErrors] = useState({});
@@ -138,12 +139,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderColor: "#c8c8c8",
-  },
-  textStyle: {
-    padding: 8,
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
   },
 });
 
