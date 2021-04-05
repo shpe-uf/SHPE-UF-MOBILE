@@ -71,6 +71,36 @@ function Register({ navigation }) {
     });
   }, []);
 
+  majorOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const majorChoices = majorOptions;
+
+  yearOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const yearChoices = yearOptions;
+
+  graduatingOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const graduatingChoices = graduatingOptions;
+
+  countryOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const countryChoices = countryOptions;
+
+  ethnicityOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const ethnicityChoices = ethnicityOptions;
+
+  sexOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const sexChoices = sexOptions;
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -114,7 +144,7 @@ function Register({ navigation }) {
                 placeholder: { color: "#a9a9a9" },
               }}
               onValueChange={(value) => (values.major = value)}
-              items={majorOptions}
+              items={majorChoices}
               Icon={() => {
                 return (
                   <Icon
@@ -139,7 +169,7 @@ function Register({ navigation }) {
                 placeholder: { color: "#a9a9a9" },
               }}
               onValueChange={(value) => (values.year = value)}
-              items={yearOptions}
+              items={yearChoices}
               Icon={() => {
                 return (
                   <Icon
@@ -164,7 +194,7 @@ function Register({ navigation }) {
                 placeholder: { color: "#a9a9a9" },
               }}
               onValueChange={(value) => (values.graduating = value)}
-              items={graduatingOptions}
+              items={graduatingChoices}
               Icon={() => {
                 return (
                   <Icon
@@ -189,7 +219,7 @@ function Register({ navigation }) {
                 placeholder: { color: "#a9a9a9" },
               }}
               onValueChange={(value) => (values.country = value)}
-              items={countryOptions}
+              items={countryChoices}
               Icon={() => {
                 return (
                   <Icon
@@ -214,7 +244,7 @@ function Register({ navigation }) {
                 placeholder: { color: "#a9a9a9" },
               }}
               onValueChange={(value) => (values.ethnicity = value)}
-              items={ethnicityOptions}
+              items={ethnicityChoices}
               Icon={() => {
                 return (
                   <Icon
@@ -239,7 +269,7 @@ function Register({ navigation }) {
                 placeholder: { color: "#a9a9a9" },
               }}
               onValueChange={(value) => (values.sex = value)}
-              items={sexOptions}
+              items={sexChoices}
               Icon={() => {
                 return (
                   <Icon
