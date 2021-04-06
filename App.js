@@ -24,10 +24,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <>
-            <Stack.Screen
+            {/* <Stack.Screen
               name="BottomTabNavigation"
               component={BottomTabNavigation}
-            />
+            /> */}
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="ResetPassword" component={ResetPassword} />

@@ -17,6 +17,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useRef, useEffect } from "react";
 
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
@@ -41,6 +42,13 @@ function Login({ navigation }) {
     variables: values,
   });
 
+  const inputElementRef = useRef(null);
+  useEffect(() => {
+    inputElementRef.current.setNativeProps({
+      style: { fontFamily: "Roboto" },
+    });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -55,6 +63,7 @@ function Login({ navigation }) {
             <TextInput
               style={styles.input}
               placeholder="Username"
+              placeholderTextColor="#a9a9a9"
               onChangeText={(value) => (values.username = value)}
               spellCheck={false}
               autoCorrect={false}
@@ -62,8 +71,10 @@ function Login({ navigation }) {
             />
 
             <TextInput
+              ref={inputElementRef}
               style={styles.input}
               placeholder="Password"
+              placeholderTextColor="#a9a9a9"
               onChangeText={(value) => (values.password = value)}
               spellCheck={false}
               autoCorrect={false}
@@ -96,7 +107,7 @@ function Login({ navigation }) {
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <Text style={{ fontSize: hp("2.3%"), color: "rgb(0,122,255)" }}>
                 {" "}
-                Register here
+                Register here!
               </Text>
             </TouchableOpacity>
           </View>
@@ -136,6 +147,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+    marginBottom: hp("3%"),
   },
   buttonContainer: {
     backgroundColor: "#001f5b",
