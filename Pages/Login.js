@@ -3,25 +3,14 @@ import { View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaVi
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
-import localStorage from 'react-native-sync-localstorage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { DevSettings } from 'react-native';
 
 function Login({navigation}) {
-
-  /* const sign = require('jwt-encode');
-
-  function generateToken(values) {
-    return sign({
-      values,
-    },
-      SECRET,
-    {
-      alg: "HS256",
-    })
-  }  */
 
   var userToken = [];
 
@@ -38,19 +27,30 @@ function Login({navigation}) {
       },
       
       onCompleted() {
-        Alert.alert("Login Successful!");
-        
-        NativeModules.DevSettings.reload();
+        Alert.alert("Login Successful!");  
       },
     
       variables: values
     });
     
+    const storeData = async (value) => {
+      try {
+        const jsonValue = JSON.stringify(value)
+        await AsyncStorage.setItem('@storage_Key', jsonValue);
+        if(await AsyncStorage.getItem('@storage_Key')){
+          try{
+            DevSettings.reload();
+          }catch(e){
+            location.reload();  // For web local host
+          }
+        }
+      } catch (e) {
+      }
+    }
+
     if(data){
-      //console.log(data);
       userToken = data.login.token;
-      //console.log(userToken);
-      localStorage.setItem('jwtToken', userToken);
+      storeData(data);      
     }
 
   return (
