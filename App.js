@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { settings } from "./config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import BottomTabNavigation from "./Pages/BottomTabNavigation";
 import Login from "./Pages/Login";
@@ -19,19 +20,45 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  const [hasToken, retrieveToken] = useState(false);
+  const [userToken, getUserToken] = useState([]);
+
+  const getData = async () => {
+    try {
+      //await AsyncStorage.removeItem('@storage_Key')  //deletes stored key
+      const jsonValue = await AsyncStorage.getItem("@storage_Key");
+      if (jsonValue !== null) {
+        retrieveToken(true);
+      }
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    if (!hasToken) {
+      getUserToken(getData());
+    }
+  }, []);
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <>
-            {/* <Stack.Screen
-              name="BottomTabNavigation"
-              component={BottomTabNavigation}
-            /> */}
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="ResetPassword" component={ResetPassword} />
-          </>
+          {hasToken ? (
+            <>
+              <Stack.Screen
+                name="BottomTabNavigation"
+                component={BottomTabNavigation}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Register" component={Register} />
+              <Stack.Screen name="ResetPassword" component={ResetPassword} />
+            </>
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
