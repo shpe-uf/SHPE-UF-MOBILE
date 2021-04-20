@@ -25,6 +25,8 @@ import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function Login({ navigation }) {
+  let userToken = [];
+
   const { values } = useForm(loginUser, {
     username: "",
     password: "",
