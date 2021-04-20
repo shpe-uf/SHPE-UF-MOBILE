@@ -10,9 +10,11 @@ import {
   TouchableOpacity,
   Alert,
   NativeModules,
+  DevSettings,
   Image,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -48,6 +50,25 @@ function Login({ navigation }) {
       style: { fontFamily: "Roboto" },
     });
   }, []);
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("@storage_Key", jsonValue);
+      if (await AsyncStorage.getItem("@storage_Key")) {
+        try {
+          DevSettings.reload();
+        } catch (e) {
+          location.reload(); // For web local host
+        }
+      }
+    } catch (e) {}
+  };
+
+  if (data) {
+    userToken = data.login.token;
+    storeData(data);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
