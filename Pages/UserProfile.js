@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-import { StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, Dimensions, FlatList, Image} from 'react-native';
+import { StyleSheet, Button, TouchableOpacity, Text, View, ScrollView, ImageBackground, Dimensions, FlatList, Image} from 'react-native';
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
+
+import SmallCard from '../components/SmallCard';
 
 function UserProfile(){
   const [user, setUser] = useState({})
@@ -33,33 +35,38 @@ function UserProfile(){
   let _renderItem = ({item, index}) =>{
     let {itemStyle, itemText, itemStyle2, itemText2} = styles
     return(
-      <View style={itemStyle}>
-        <Text style={itemText}>{item.key} </Text>
+      <View style={{paddingHorizontal:30, backgroundColor:'#f00'}}>
+        
+        <View style={itemStyle}>
+          <Text style={itemText}>{item.key} </Text>
+        </View>
+
+        <View style={{ backgroundColor: '#fff', paddingHorizontal:30}}>
+          <Text></Text>
+        </View>
+      
       </View>
+      
     )
   }
 
   const getHeader = () => {
-    return <View style= {styles.view}>
-            <View>
-            <Text style={styles.title}> My<Text style={{color: '#3571f2',}}> Profile </Text></Text>
-        </View>
-        <View style={styles.line} ></View>
-
+    return (
+      <View style= {styles.view}>
         <View style={styles.container}>
               {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
               <Image source ={require('../assets/images/SHPE_UF_LOGO.jpg')} style={styles.profilePic}/>
         </View>
         {/*  Add functionality to change profile picture   */}
-        <View style={styles.container}>
+        <View style = {{alignItems: 'flex-end', flexDirection: 'row-reverse', paddingBottom:15}}>
           <TouchableOpacity>
-            <Text style={styles.opacityBtn}>
-                {"\n\n\n"}Change Profile Photo{"\n\n\n"}
-            </Text>
+            <View style={styles.btn}>
+              <Text style={styles.btnText}>Edit Profile</Text>
+            </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.line} ></View>
-        </View>;
+      </View>
+    )
 };
 
   const getFooter = () => {
@@ -75,16 +82,48 @@ function UserProfile(){
             </View>;
   };
 
+  
   const numColumns=2
     return (
-        <FlatList
-          data={dataList}
-          renderItem={_renderItem}
-          keyExtractor={(item, index) => index.toString()}
-          numColumns={numColumns}
-          ListHeaderComponent={getHeader}
-          ListFooterComponent={getFooter}
-       />
+      //   <FlatList
+      //     data={dataList}
+      //     renderItem={_renderItem}
+      //     keyExtractor={(item, index) => index.toString()}
+      //     numColumns={numColumns}
+      //     ListHeaderComponent={getHeader}
+      //     ListFooterComponent={getFooter}
+      //  />
+
+       <ScrollView style ={{backgroundColor: '#fff'}}>
+        <View style= {styles.view}>
+          <View style={styles.container}>
+                {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
+                <Image source ={require('../assets/images/SHPE_UF_LOGO.jpg')} style={styles.profilePic}/>
+          </View>
+          {/*  Add functionality to change profile picture   */}
+          <View style = {{alignItems: 'flex-end', flexDirection: 'row-reverse', paddingBottom:15}}>
+            <TouchableOpacity style={{paddingHorizontal: 40}}>
+              <View style={styles.btn}>
+                <Text style={styles.btnText}>Edit Profile</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+        
+        <View style= {styles.view, {paddingHorizontal: 40}}>
+          <SmallCard label='Name' info={user.firstName+' '+user.lastName}/>
+          <SmallCard label='Username' info={user.username}/>
+          <SmallCard label='Email' info={user.email}/>
+          <SmallCard label='Major' info={user.major}/>
+          <SmallCard label='Year' info={user.country}/>
+          <SmallCard label='Graduating' info={user.graduating}/>
+          <SmallCard label='Country of Origin' info={user.country}/>
+          <SmallCard label='Ethnicity' info={user.ethnicity}/>
+          <SmallCard label='Sex' info={user.sex}/>
+          <SmallCard label='Member Since' info={user.createdAt}/>
+        </View> 
+
+       </ScrollView>
   )
 }
 const styles = StyleSheet.create({
@@ -98,13 +137,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   itemStyle:{
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#0f0",
     alignItems: 'flex-start',
     justifyContent: 'center',
     flex: 1,
     marginHorizontal: 0,
     marginVertical: 0,
     paddingHorizontal:13,
+    borderRadius: 0
   },
   itemText: {
     color: '#1c1c1e',
@@ -113,12 +153,18 @@ const styles = StyleSheet.create({
     lineHeight: 38,
     textAlign: 'right',
   },
-  opacityBtn: {
-    flexDirection: 'row',
-    color: '#0a84ff',
-    fontSize: 16,
-    lineHeight: 7,
-    justifyContent: 'space-between',
+  btn: {
+    borderRadius: 10,
+    paddingVertical: 14,
+    paddingHorizontal: 10,
+    backgroundColor: '#FD652F',
+    alignItems: 'center',
+    width: 119,
+    height: 50,
+  },
+  btnText: {
+    fontSize: 20,
+    color: '#fff'
   },
   opacityBtn2: {
     flexDirection: 'row',
@@ -131,16 +177,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   container: {
-    backgroundColor: "#f2f2f7",
     alignItems: 'center',
     marginTop: 10,
   },
   view: {
-    backgroundColor: "#f2f2f7",
+    backgroundColor: "#fff",
   },
   profilePic:{
-    width: 150,
-    height: 150,
+    width: 175,
+    height: 175,
     borderRadius:75,
     backgroundColor: '#4e5252',
     marginTop: 0,
@@ -151,7 +196,18 @@ const styles = StyleSheet.create({
     width: 2000,
     height: 0.3,
     backgroundColor: '#48484a',
+  },
+  box:{
+    alignContent: 'center',
+    backgroundColor: '#0af',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius:10
+
+
   }
+
+
 })
 
 const FETCH_USER_QUERY = gql`
