@@ -3,6 +3,8 @@ import { StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, 
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
 
+import LogoutButton from '../components/LogoutButton';
+
 function UserProfile(){
   const [user, setUser] = useState({})
   const {data} = useQuery(FETCH_USER_QUERY, {
@@ -65,6 +67,7 @@ function UserProfile(){
   const getFooter = () => {
       return <View style= {styles.view}>
               <View style={styles.line} ></View>
+              <LogoutButton/>
               <View style={styles.container, {alignItems: 'flex-start'}}>
                 <TouchableOpacity>
                   <Text style={styles.opacityBtn2}>
