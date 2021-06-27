@@ -26,6 +26,8 @@ function Tasks() {
 
   let bookTasks = [];
   let restTasks = [];
+  let bookProps = [];
+  let restProps = [];
 
   if (data && data.getUser && data.getTasks) {
     const user = data.getUser;
@@ -34,33 +36,41 @@ function Tasks() {
     bookTasks = allTasks.filter(task =>
       user.bookmarkedTasks.includes(task.name)
     );
+    bookProps = {
+      "user": user,
+      "tasks": bookTasks,
+    }
 
     restTasks = allTasks.filter(
       task => !user.bookmarkedTasks.includes(task.name)
     );
+    restProps = {
+      "user": user,
+      "tasks": restTasks,
+    }
   }
 
   return (
     <View style={allStyles.container}>
       <View style={allStyles.page}>
-        <View style={allStyles.content}>
           {loading ? (
             <Text>loading data</Text>
           ) : error ? (
             <Text>there was a problem</Text>
           ) : (
             <>
+            <View style={allStyles.content}>
               <View>
                 <Text style={allStyles.h1}>BOOKMARKED TASKS</Text>
-                <TaskCard tasks={bookTasks} />
+                <TaskCard props={bookProps} />
               </View>
               <View>
                 <Text style={allStyles.h1}>UNBOOKMARKED TASKS</Text>
-                <TaskCard tasks={restTasks} />
+                <TaskCard props={restProps} />
+              </View>
               </View>
             </>
           )}
-        </View>
       </View>
     </View>
   );

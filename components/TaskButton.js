@@ -13,12 +13,12 @@ function TaskButton(props) {
     update(_, { data: { redeemTasksPoints: userData } }) {},
 
     onError(err) {
+      console.log(err);
       getErrors(err);
     },
   });
 
   return (
-    <View style={styles.container}>
       <View style={styles.button}>
         <Button
           onPress={() => {
@@ -30,24 +30,15 @@ function TaskButton(props) {
           accessibilityLabel="Button to request task points"
         />
       </View>
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: "9%",
-    backgroundColor: "#42A5F5",
-    borderRadius: 50,
-    marginLeft: "15%",
-    width: "70%",
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    padding: 8,
-    backgroundColor: "#004D73",
+    marginTop: "3%",
+    backgroundColor: "#72A9BE",
+    borderRadius: 70,
+    width: "100%",
   },
 });
 
