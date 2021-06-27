@@ -8,7 +8,7 @@ import { Platform } from "react-native";
 import Home from "./Home";
 import Points from "./Points";
 import UserProfile from "./UserProfile";
-import ViewTasks from "./ViewTasks";
+import Tasks from "./Tasks";
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Tasks"
-        component={ViewTasks}
+        component={Tasks}
         options={{
           tabBarLabel: "Tasks",
           tabBarIcon: ({ color, size }) => {
