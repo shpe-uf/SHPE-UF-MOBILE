@@ -79,11 +79,23 @@ function Tasks() {
             <View style={allStyles.content}>
               <View>
                 <Text style={allStyles.h1}>BOOKMARKED TASKS</Text>
-                <TaskCard props={bookProps} />
+                {bookTasks.length == 0 ? (
+                  <Card>
+                    <Text>No tasks have been bookmarked yet.</Text>
+                  </Card>
+                ) : (
+                  <TaskCard props={bookProps} />
+                )}
               </View>
               <View>
                 <Text style={allStyles.h1}>UNBOOKMARKED TASKS</Text>
-                <TaskCard props={restProps} />
+                {restTasks.length == 0 ? (
+                  <Card>
+                    <Text>There are no tasks yet.</Text>
+                  </Card>
+                ) : (
+                  <TaskCard props={restProps} />
+                )}
               </View>
             </View>
           </>
