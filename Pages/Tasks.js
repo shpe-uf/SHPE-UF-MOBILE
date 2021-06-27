@@ -29,36 +29,53 @@ function Tasks() {
   let bookProps = [];
   let restProps = [];
 
+  const monthOptions = require("./../assets/options/month.json");
+  const now = new Date();
+  const month = now.getMonth();
+  const semester = monthOptions[month].value;
+
   if (data && data.getUser && data.getTasks) {
     const user = data.getUser;
     const allTasks = data.getTasks;
 
-    bookTasks = allTasks.filter(task =>
-      user.bookmarkedTasks.includes(task.name)
-    );
+    for (let i = 0; i < allTasks.length; i++) {
+      const task = allTasks[i];
+      if (
+        now < Date.parse(task.endDate) &&
+        user.bookmarkedTasks.includes(task.name)
+      ) {
+        bookTasks.push(task);
+      }
+    }
     bookProps = {
-      "user": user,
-      "tasks": bookTasks,
-    }
+      user: user,
+      tasks: bookTasks
+    };
 
-    restTasks = allTasks.filter(
-      task => !user.bookmarkedTasks.includes(task.name)
-    );
-    restProps = {
-      "user": user,
-      "tasks": restTasks,
+    for (let i = 0; i < allTasks.length; i++) {
+      const task = allTasks[i];
+      if (
+        now < Date.parse(task.endDate) &&
+        !user.bookmarkedTasks.includes(task.name)
+      ) {
+        restTasks.push(task);
+      }
     }
+    restProps = {
+      user: user,
+      tasks: restTasks
+    };
   }
 
   return (
     <View style={allStyles.container}>
       <View style={allStyles.page}>
-          {loading ? (
-            <Text>loading data</Text>
-          ) : error ? (
-            <Text>there was a problem</Text>
-          ) : (
-            <>
+        {loading ? (
+          <Text>loading data</Text>
+        ) : error ? (
+          <Text>there was a problem</Text>
+        ) : (
+          <>
             <View style={allStyles.content}>
               <View>
                 <Text style={allStyles.h1}>BOOKMARKED TASKS</Text>
@@ -68,9 +85,9 @@ function Tasks() {
                 <Text style={allStyles.h1}>UNBOOKMARKED TASKS</Text>
                 <TaskCard props={restProps} />
               </View>
-              </View>
-            </>
-          )}
+            </View>
+          </>
+        )}
       </View>
     </View>
   );

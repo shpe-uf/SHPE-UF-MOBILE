@@ -38,6 +38,7 @@ function TaskCard({ props }) {
 const styles = StyleSheet.create({
   card: {
     margin: 0,
+    borderRadius: 10,
   },
   date: {
     color: "#72A9BE",
