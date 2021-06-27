@@ -14,6 +14,8 @@ import { Card, ListItem, Icon, ScrollView } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
+import allStyles from ".././allStyles.js";
+import TaskCard from ".././components/TaskCard";
 
 function Tasks() {
   const { loading, data, error } = useQuery(FETCH_USER_QUERY, {
@@ -39,9 +41,9 @@ function Tasks() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.page}>
-        <View style={styles.content}>
+    <View style={allStyles.container}>
+      <View style={allStyles.page}>
+        <View style={allStyles.content}>
           {loading ? (
             <Text>loading data</Text>
           ) : error ? (
@@ -49,34 +51,13 @@ function Tasks() {
           ) : (
             <>
               <View>
-                <Text style={styles.h1}>BOOKMARKED TASKS</Text>
+                <Text style={allStyles.h1}>BOOKMARKED TASKS</Text>
+                <TaskCard tasks={bookTasks} />
               </View>
-              {bookTasks.map(task => (
-                <Card key={task.name}>
-                  <Text>{task.name}</Text>
-                  <Text>{task.points}</Text>
-                  <Card.Divider />
-                  <Text>
-                    Points: {task.points}
-                    {"\n\n"}
-                    {task.description}
-                  </Text>
-                </Card>
-              ))}
               <View>
-                <Text style={styles.h1}>UNBOOKMARKED TASKS</Text>
+                <Text style={allStyles.h1}>UNBOOKMARKED TASKS</Text>
+                <TaskCard tasks={restTasks} />
               </View>
-              {restTasks.map(task => (
-                <Card key={task.name} style={styles.content}>
-                  <Card.Title>{task.name}</Card.Title>
-                  <Card.Divider />
-                  <Text>
-                    Points: {task.points}
-                    {"\n\n"}
-                    {task.description}
-                  </Text>
-                </Card>
-              ))}
             </>
           )}
         </View>
@@ -84,28 +65,6 @@ function Tasks() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%"
-  },
-  page: {
-    alignItems: "center",
-    alignSelf: "center",
-    width: "80%"
-  },
-  content: {
-    width: "100%"
-  },
-  h1: {
-    fontSize: 23,
-    margin: 6,
-    color: "#FD652F",
-    fontWeight: "bold",
-    fontStyle: "italic"
-  }
-});
 
 const FETCH_USER_QUERY = gql`
   query($userId: ID!) {
