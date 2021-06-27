@@ -18,31 +18,31 @@ function TaskButton(props) {
 
     onCompleted() {
       Alert.alert("Request Successful!");
-    },
+    }
   });
 
   return (
-      <View style={styles.button}>
-        <Button
-          onPress={() => {
-            redeemTasksPoints({
-              variables: { name: taskName, username: user.username },
-            });
-          }}
-          title="Request"
-          accessibilityLabel="Button to request task points"
-        />
-      </View>
+    <View style={styles.button}>
+      <Button
+        color="#72A9BE"
+        onPress={() => {
+          redeemTasksPoints({
+            variables: { name: taskName, username: user.username }
+          });
+        }}
+        title="Request"
+        accessibilityLabel="Button to request task points"
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
     marginTop: "3%",
-    backgroundColor: "#72A9BE",
     borderRadius: 70,
-    width: "100%",
-  },
+    width: "100%"
+  }
 });
 
 const REDEEM_TASK_POINTS_MUTATION = gql`
