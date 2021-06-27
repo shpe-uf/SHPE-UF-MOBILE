@@ -13,8 +13,11 @@ function TaskButton(props) {
     update(_, { data: { redeemTasksPoints: userData } }) {},
 
     onError(err) {
-      console.log(err);
       getErrors(err);
+    },
+
+    onCompleted() {
+      Alert.alert("Request Successful!");
     },
   });
 
