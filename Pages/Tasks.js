@@ -35,6 +35,7 @@ function Tasks() {
   const semester = monthOptions[month].value;
 
   if (data && data.getUser && data.getTasks) {
+    console.log(data);
     const user = data.getUser;
     const allTasks = data.getTasks;
 
@@ -110,6 +111,7 @@ const FETCH_USER_QUERY = gql`
     getUser(userId: $userId) {
       firstName
       lastName
+      username
       points
       fallPoints
       springPoints

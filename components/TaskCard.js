@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext, useContext } from "react";
 import {
   TouchableWithoutFeedback,
   TextInput,
@@ -17,6 +17,7 @@ import allStyles from ".././allStyles.js";
 function TaskCard({ props }) {
   const user = props.user;
   const tasks = props.tasks;
+
   return (
     <>
       {tasks.map(task => (
@@ -25,10 +26,12 @@ function TaskCard({ props }) {
           <Text>
             <b>Points: {task.points}</b>
           </Text>
-          <Text style={styles.date}>{task.startDate + " - " + task.endDate}</Text>
+          <Text style={styles.date}>
+            {task.startDate + " - " + task.endDate}
+          </Text>
           <Text>{task.description}</Text>
           {}
-          <TaskButton user={user} task={task.name} />
+          <TaskButton username={user.username} taskName={task.name} />
         </Card>
       ))}
     </>
@@ -38,14 +41,13 @@ function TaskCard({ props }) {
 const styles = StyleSheet.create({
   card: {
     margin: 0,
-    borderRadius: 10,
+    borderRadius: 10
   },
   date: {
     color: "#72A9BE",
     marginTop: 8,
-    marginBottom: 8,
-  },
+    marginBottom: 8
+  }
 });
-
 
 export default TaskCard;

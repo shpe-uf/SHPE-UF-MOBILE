@@ -6,8 +6,8 @@ import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function TaskButton(props) {
-  let taskName = props.task;
-  let user = props.user;
+  console.log( props.taskName);
+  console.log( props.username);
 
   const [redeemTasksPoints] = useMutation(REDEEM_TASK_POINTS_MUTATION, {
     update(_, { data: { redeemTasksPoints: userData } }) {},
@@ -27,7 +27,7 @@ function TaskButton(props) {
         color="#72A9BE"
         onPress={() => {
           redeemTasksPoints({
-            variables: { name: taskName, username: user.username }
+            variables: { name: props.taskName, username: props.username }
           });
         }}
         title="Request"
