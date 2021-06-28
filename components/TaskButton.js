@@ -6,9 +6,6 @@ import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function TaskButton(props) {
-  console.log( props.taskName);
-  console.log( props.username);
-
   const [redeemTasksPoints] = useMutation(REDEEM_TASK_POINTS_MUTATION, {
     update(_, { data: { redeemTasksPoints: userData } }) {},
 
