@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
@@ -14,18 +14,18 @@ export default StyleSheet.create({
     width: "100%"
   },
   h1: {
-    fontSize: 23,
-    marginBottom: 6,
-    marginTop: 10,
     color: "#FD652F",
+    fontSize: 23,
+    fontStyle: "italic",
     fontWeight: "bold",
-    fontStyle: "italic"
+    marginBottom: 6,
+    marginTop: 10
   },
   h2: {
-    fontSize: 20,
     color: "#FD652F",
-    marginBottom: 6,
+    fontSize: 20,
+    fontStyle: "italic",
     fontWeight: "bold",
-    fontStyle: "italic"
+    marginBottom: 6
   }
 });

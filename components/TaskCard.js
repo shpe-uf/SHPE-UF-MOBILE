@@ -1,15 +1,5 @@
 import React, { useState, createContext, useContext } from "react";
-import {
-  TouchableWithoutFeedback,
-  TextInput,
-  StyleSheet,
-  SafeAreaView,
-  Keyboard,
-  Button,
-  Alert,
-  Text,
-  View
-} from "react-native";
+import { StyleSheet, Button, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import TaskButton from "./TaskButton";
 import allStyles from ".././allStyles.js";

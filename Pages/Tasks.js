@@ -1,20 +1,12 @@
 import React, { useState } from "react";
-import {
-  TouchableWithoutFeedback,
-  TextInput,
-  StyleSheet,
-  SafeAreaView,
-  Keyboard,
-  Button,
-  Alert,
-  Text,
-  View
-} from "react-native";
-import { Card, ListItem, Icon, ScrollView } from "react-native-elements";
+import { Keyboard, Text, View } from "react-native";
+import { ScrollView, Card } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+
 import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 import allStyles from ".././allStyles.js";
+
 import TaskCard from ".././components/TaskCard";
 
 function Tasks() {

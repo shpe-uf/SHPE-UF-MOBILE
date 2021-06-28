@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Text, View, StyleSheet, Button, Alert } from "react-native";
+import { Alert, Button, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 
 import { useMutation, gql } from "@apollo/client";
