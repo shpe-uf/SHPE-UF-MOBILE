@@ -4,6 +4,8 @@ import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
 
 import SmallCard from '../components/SmallCard';
+import SmallCard2 from '../components/SmallCard2';
+import EditProfileButton from '../components/editProfileButton';
 
 function UserProfile(){
   const [user, setUser] = useState({})
@@ -33,36 +35,27 @@ function UserProfile(){
   ]
   
     return (
-       <ScrollView style ={{backgroundColor: '#fff'}}>
-        <View style= {styles.view}>
-          <View style={styles.container}>
-                {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
-                <Image source ={require('../assets/images/SHPE_UF_LOGO.jpg')} style={styles.profilePic}/>
-          </View>
-          {/*  Add functionality to change profile picture   */}
-          <View style = {{alignItems: 'flex-end', flexDirection: 'row-reverse', paddingBottom:15}}>
-            <TouchableOpacity style={{paddingHorizontal: 40}}>
-              <View style={styles.btn}>
-                <Text style={styles.btnText}>Edit Profile</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
+    <ScrollView style ={{backgroundColor: '#fff'}}>
+      <View style={styles.container}>
+        {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
+        <Image source ={require('../assets/images/SHPE_UF_LOGO.jpg')} style={styles.profilePic}/>
+        <Text style={styles.nameStyling}>Daniel Camejo</Text>
+      </View>
 
-        <View style= {styles.view, {paddingHorizontal: 40}}>
-          <SmallCard label='Name' info={user.firstName+' '+user.lastName}/>
-          <SmallCard label='Username' info={user.username}/>
-          <SmallCard label='Email' info={user.email}/>
-          <SmallCard label='Major' info={user.major}/>
-          <SmallCard label='Year' info={user.year}/>
-          <SmallCard label='Graduating' info={user.graduating}/>
-          <SmallCard label='Country of Origin' info={user.country}/>
-          <SmallCard label='Ethnicity' info={user.ethnicity}/>
-          <SmallCard label='Sex' info={user.sex}/>
-          <SmallCard label='Member Since' info={user.createdAt}/>
-        </View> 
+      <Text style={styles.email}>{user.email}dcamejo1@ufl.edu</Text>
+    
+      <EditProfileButton/>
+      <View style={{height:'3%'}}></View>
 
-       </ScrollView>
+      <SmallCard2 label='Username' info={user.username}/>
+      <SmallCard2 label='Major' info={user.major}/>
+      <SmallCard2 label='Year' info={user.year}/>
+      <SmallCard2 label='Graduating' info={user.graduating}/>
+      <SmallCard2 label='Country of Origin' info={user.country}/>
+      <SmallCard2 label='Ethnicity' info={user.ethnicity}/>
+      <SmallCard2 label='Sex' info={user.sex}/>
+      <SmallCard2 label='Member Since' info={user.createdAt}/>
+    </ScrollView>
   )
 }
 const styles = StyleSheet.create({
@@ -82,9 +75,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginTop: 10,
-  },
-  view: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   profilePic:{
     width: 175,
@@ -95,6 +86,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  nameStyling:{
+    textAlign: 'center',
+    backgroundColor: '#fff',
+    fontSize: 28,
+    fontFamily: 'Archivo Narrow',
+    paddingVertical: '1%',
+
+  },
+  email:{
+    textAlign:'center',
+    fontSize: 19,
+    paddingBottom:'2%',
+    color:'#0070C0'
+  }
 })
 
 const FETCH_USER_QUERY = gql`
