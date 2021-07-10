@@ -54,7 +54,7 @@ function UserProfile(){
           <SmallCard label='Username' info={user.username}/>
           <SmallCard label='Email' info={user.email}/>
           <SmallCard label='Major' info={user.major}/>
-          <SmallCard label='Year' info={user.country}/>
+          <SmallCard label='Year' info={user.year}/>
           <SmallCard label='Graduating' info={user.graduating}/>
           <SmallCard label='Country of Origin' info={user.country}/>
           <SmallCard label='Ethnicity' info={user.ethnicity}/>

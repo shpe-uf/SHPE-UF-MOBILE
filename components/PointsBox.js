@@ -6,32 +6,65 @@ const PointsBox = ({ props }) => {
   const semester = props.semester;
 
   return (
-    <View>
+    <View style={{paddingHorizontal: 15}}>
       {semester === "Fall Semester" ? (
         <View style={styles.pointsBox}>
-          <Text style={styles.center}>FALL POINTS</Text>
-          <Text style={styles.center}>{user ? user.fallPoints : "0"}</Text>
-          <Text style={styles.center}>
-            {user ? user.fallPercentile : "0"} percentile
-          </Text>
+          <View style={{paddingTop:'10%'}}>
+            <Text style={styles.top}>Fall</Text>
+          </View>
+
+          
+          
+          <Text style={styles.middle}
+          >{user ? user.fallPoints : "0"}</Text>
+
+
+          <View style={{paddingTop: '4%'}}>
+            <Text style={styles.bottom}>
+              {user ? user.fallPercentile : "0"} percentile
+            </Text>
+            
+          </View>
 
         </View>
       ) : semester === "Spring Semester" ? (
         <View style={styles.pointsBox}>
-          <Text style={styles.center}>SPRING POINTS</Text>
-          <Text style={styles.center}>{user ? user.springPoints : "0"}</Text>
-          <Text style={styles.center}>
-            {user ? user.springPercentile : "0"} percentile
-          </Text>
+          <View style={{paddingTop:'10%'}}>
+            <Text style={styles.top}>Spring</Text>
+          </View>
+
+          
+          
+          <Text style={styles.middle}
+          >{user ? user.springPoints : "0"}</Text>
+
+
+          <View style={{paddingTop: '4%'}}>
+            <Text style={styles.bottom}>
+              {user ? user.springPercentile : "0"} percentile
+            </Text>
+            
+          </View>
 
         </View>
       ) : semester === "Summer Semester" ? (
         <View style={styles.pointsBox}>
-          <Text style={styles.center}>SUMMER POINTS</Text>
-          <Text style={styles.center}>{user ? user.summerPoints : "0"}</Text>
-          <Text style={styles.center}>
-            {user ? user.summerPercentile : "0"} percentile
-          </Text>
+          <View style={{paddingTop:'10%'}}>
+            <Text style={styles.top}>Summer</Text>
+          </View>
+
+          
+          
+          <Text style={styles.middle}
+          >{user ? user.SummerPoints : "0"}</Text>
+
+
+          <View style={{paddingTop: '4%'}}>
+            <Text style={styles.bottom}>
+              {user ? user.SummerPercentile : "0"} percentile
+            </Text>
+            
+          </View>
         </View>
       ) : (
         <View>
@@ -44,17 +77,34 @@ const PointsBox = ({ props }) => {
 
 const styles = StyleSheet.create({
   pointsBox: {
-    backgroundColor: "#72A9BE",
+    backgroundColor: "#1395B9",
     borderColor: "gray",
     margin: "2%",
     paddingBottom: "2%",
     paddingTop: "2%",
     textAlign: "center",
-    width: "100%",
+    width: "110%",
+    borderRadius:5,
+    height: '65%'
   },
   center: {
-    textAlign: "center"
+    textAlign: "center",
+    color: 'red'
   },
+  top:{
+    textAlign: "center",
+    fontSize:20,
+    color: '#fff'
+  },
+  middle:{
+    textAlign: "center",
+    fontSize:29,
+    color: '#fff'
+  },
+  bottom: {
+    textAlign: "center",
+    color: '#fff'
+  }
 });
 
 export default PointsBox;

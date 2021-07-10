@@ -9,7 +9,7 @@ const PointsBar = ({ user }) => {
   const summerProps = { user: user, semester: "Summer Semester" };
 
   return (
-    <View>
+    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
       <PointsBox props={fallProps} />
       <PointsBox props={springProps} />
       <PointsBox props={summerProps} />

@@ -52,6 +52,13 @@ function Points({ navigation }) {
           </View>
         )}
       </View>
+
+      
+      <PointsBar />
+      <UserEventsTable />
+      <Text>HERE</Text>
+
+
     </ScrollView>
   );
 }
@@ -61,6 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     height: "100%",
     width: "100%",
+    paddingHorizontal: 40,
   },
   page: {
     alignItems: "center",
@@ -78,6 +86,15 @@ const styles = StyleSheet.create({
   },
   events: {
     alignItems: "flex-start",
+  },
+  box: {
+    height: 130,
+    width: 110,
+    backgroundColor: '#ADE7F7',
+    alignItems: 'center',
+    borderRadius:5,
+    paddingHorizontal: 20,
+
   },
 });
 
