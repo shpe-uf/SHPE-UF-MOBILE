@@ -1,6 +1,9 @@
+import { Tab } from "native-base";
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { DataTable } from "react-native-paper";
+
+import Table from "./Table";
 
 function UserEventsTable({ user }) {
   let tableContents = [];
@@ -27,9 +30,27 @@ function UserEventsTable({ user }) {
     }
   }
 
+  let tableContents2 = [];
+
+  let row = [
+    <DataTable.Row key='{event.name}'>
+      <DataTable.Cell>name</DataTable.Cell>
+      <DataTable.Cell>date</DataTable.Cell>
+      <DataTable.Cell numeric>points</DataTable.Cell>
+    </DataTable.Row>,
+  ];
+  tableContents2.push(row)
+
+
+
+
+
+
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Events</Text>
+      {/* <Text style={styles.title}>Events</Text>
       {user === undefined || user.events.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
           <Text>No events on record.</Text>
@@ -46,7 +67,22 @@ function UserEventsTable({ user }) {
             {tableContents}
           </DataTable>
         </View>
-      )}
+      )} */}
+      <Text style={styles.title}>Events</Text>
+      <View className="table-responsive">
+      <DataTable>
+        <DataTable.Header>
+          <DataTable.Title>Name</DataTable.Title>
+          <DataTable.Title>Date</DataTable.Title>
+          <DataTable.Title numeric>Points</DataTable.Title>
+        </DataTable.Header>
+        {tableContents2}
+      </DataTable>
+      </View>
+      
+
+
+
     </View>
   );
 }
@@ -56,9 +92,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   title: {
-    alignSelf: "center",
-    fontSize: 23,
+    alignSelf: 'flex-start',
+    fontSize: 30,
     margin: 6,
+    fontWeight: 'bold',
+    color: '#FD652F'
   },
 });
 

@@ -53,10 +53,23 @@ function Points({ navigation }) {
         )}
       </View>
 
+      <View>
+        <PointsBar />
+      </View>
+
+
       
-      <PointsBar />
-      <UserEventsTable />
+      
+      <View>
       <Text>HERE</Text>
+      </View>
+
+
+
+
+      <UserEventsTable />
+
+      
 
 
     </ScrollView>
@@ -65,7 +78,7 @@ function Points({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: "#aaf",
     height: "100%",
     width: "100%",
     paddingHorizontal: 40,

@@ -77,7 +77,7 @@ const PointsBox = ({ props }) => {
 
 const styles = StyleSheet.create({
   pointsBox: {
-    backgroundColor: "#1395B9",
+    backgroundColor: "#0070C0",
     borderColor: "gray",
     margin: "2%",
     paddingBottom: "2%",
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: "110%",
     borderRadius:5,
-    height: '65%'
+    height: 110
   },
   center: {
     textAlign: "center",
