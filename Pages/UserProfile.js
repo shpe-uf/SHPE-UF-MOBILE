@@ -6,6 +6,7 @@ import { useQuery, gql } from "@apollo/client";
 import SmallCard from '../components/SmallCard';
 import SmallCard2 from '../components/SmallCard2';
 import EditProfileButton from '../components/editProfileButton';
+import LogoutButton from '../components/LogoutButton';
 
 function UserProfile(){
   const [user, setUser] = useState({})
@@ -55,6 +56,8 @@ function UserProfile(){
       <SmallCard2 label='Ethnicity' info={user.ethnicity}/>
       <SmallCard2 label='Sex' info={user.sex}/>
       <SmallCard2 label='Member Since' info={user.createdAt}/>
+
+      <LogoutButton/>
     </ScrollView>
   )
 }

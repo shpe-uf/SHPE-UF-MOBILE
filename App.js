@@ -25,7 +25,6 @@ export default function App() {
 
   const getData = async () => {
     try {
-      //await AsyncStorage.removeItem('@storage_Key')  //deletes stored key
       const jsonValue = await AsyncStorage.getItem("@storage_Key");
       if (jsonValue !== null) {
         retrieveToken(true);
