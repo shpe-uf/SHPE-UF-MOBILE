@@ -27,7 +27,9 @@ function Points({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.page}>
+      <Text style={styles.title}>POINTS PROGRAM</Text>
+
+      {/* <View style={styles.page}>
         <View style={styles.button}>
           <Button
             accessibilityLabel="Button to redeem code."
@@ -51,7 +53,7 @@ function Points({ navigation }) {
             <Text>User not found</Text>
           </View>
         )}
-      </View>
+      </View> */}
 
       <View>
         <PointsBar />
@@ -78,7 +80,7 @@ function Points({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#aaf",
+    backgroundColor: "#fff",
     height: "100%",
     width: "100%",
     paddingHorizontal: 40,
@@ -107,8 +109,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius:5,
     paddingHorizontal: 20,
-
   },
+  title :{
+    textAlign: 'center',
+    color : '#001F5B',
+    fontSize: 34,
+    paddingVertical: "8%"
+  }
 });
 
 const FETCH_USER_QUERY = gql`
