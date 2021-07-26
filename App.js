@@ -20,7 +20,7 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-  const [hasToken, retrieveToken] = useState(true);
+  const [hasToken, retrieveToken] = useState(false);
   const [userToken, getUserToken] = useState([]);
 
   const getData = async () => {
