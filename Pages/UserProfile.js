@@ -48,8 +48,10 @@ function UserProfile(){
       <EditProfileButton/>
       <View style={{height:'3%'}}></View>
 
-      <SmallCard2 label='Username' info={user.username}/>
-      <SmallCard2 label='Major' info={user.major}/>
+      {/* <SmallCard2 label='Username' info={user.username}/> */}
+      <SmallCard2 label='Username' info="dcamejo"/>
+      {/* <SmallCard2 label='Major' info={user.major}/> */}
+      <SmallCard2 label='Major' info="Computer Science"/>
       <SmallCard2 label='Year' info={user.year}/>
       <SmallCard2 label='Graduating' info={user.graduating}/>
       <SmallCard2 label='Country of Origin' info={user.country}/>
@@ -58,6 +60,7 @@ function UserProfile(){
       <SmallCard2 label='Member Since' info={user.createdAt}/>
 
       <LogoutButton/>
+      <View style={{paddingVertical:'10%'}}/>
     </ScrollView>
   )
 }

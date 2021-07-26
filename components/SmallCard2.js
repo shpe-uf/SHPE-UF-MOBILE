@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     infoText:{
         color : '#000',
-        fontSize : 19,
+        fontSize : 22,
         paddingVertical: '1%'
     }
 })

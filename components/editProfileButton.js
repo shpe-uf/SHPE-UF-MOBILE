@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         height: '5%',
-        
     },
     btnStyle: {
         borderRadius: 10,

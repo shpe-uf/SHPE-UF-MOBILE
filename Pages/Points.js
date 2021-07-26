@@ -12,6 +12,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
+import TasksTable from "../components/TasksTable";
 
 function Points({ navigation }) {
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
@@ -27,7 +28,7 @@ function Points({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>POINTS PROGRAM</Text>
+      
 
       {/* <View style={styles.page}>
         <View style={styles.button}>
@@ -54,25 +55,35 @@ function Points({ navigation }) {
           </View>
         )}
       </View> */}
+      
 
-      <View>
-        <PointsBar />
+      <Text style={styles.title}>POINTS PROGRAM</Text>
+
+      {/* IF THERE IS A USER */}
+
+
+
+      {/* ELSE */}
+
+      <PointsBar />
+      <View style={{paddingVertical: '5%'}} />
+      <TasksTable />
+      <View style={{paddingVertical: '5%'}} />
+      <UserEventsTable user={user}/>
+      <View style={{paddingVertical: '5%'}} />
+
+      <View style={styles.page}>
+
+        <View style={styles.button}>
+          <Button
+            accessibilityLabel="Button to redeem code."
+            title="Redeem Code"
+            onPress={() => navigation.navigate("Home")}
+            style={{color:'#fff'}}
+          />
+        </View>
+
       </View>
-
-
-      
-      
-      <View>
-      <Text>HERE</Text>
-      </View>
-
-
-
-
-      <UserEventsTable />
-
-      
-
 
     </ScrollView>
   );
@@ -91,8 +102,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   button: {
-    backgroundColor: "#1395b9",
-    color: "#fff",
+    backgroundColor: "#FD652F",
     margin: "2%",
     width: "60%",
   },
@@ -114,7 +124,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color : '#001F5B',
     fontSize: 34,
-    paddingVertical: "8%"
+    paddingVertical: "12%"
   }
 });
 
