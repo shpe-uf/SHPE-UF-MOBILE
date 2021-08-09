@@ -5,7 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
 
 import { gql, useMutation, useQuery } from "@apollo/client";
@@ -13,7 +13,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
 
-function Points() {
+function Points({ navigation }) {
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
       userId: "5f90e4d4920bab09f6df0106"
@@ -32,7 +32,7 @@ function Points() {
           <Button
             accessibilityLabel="Button to redeem code."
             title="Redeem Code"
-            onPress={() => Alert.alert("Redeem Code button pressed.")}
+            onPress={() => navigation.navigate("Home")}
           />
         </View>
         {loading ? (
@@ -60,25 +60,25 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     height: "100%",
-    width: "100%"
+    width: "100%",
   },
   page: {
     alignItems: "center",
     alignSelf: "center",
-    width: "80%"
+    width: "80%",
   },
   button: {
     backgroundColor: "#1395b9",
     color: "#fff",
     margin: "2%",
-    width: "60%"
+    width: "60%",
   },
   content: {
-    width: "100%"
+    width: "100%",
   },
   events: {
-    alignItems: "flex-start"
-  }
+    alignItems: "flex-start",
+  },
 });
 
 const FETCH_USER_QUERY = gql`

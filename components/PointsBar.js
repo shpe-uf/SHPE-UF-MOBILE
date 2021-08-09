@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import PointsBox from "./PointsBox";
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     justifyContent: "center",
-    width: "100%"
+    width: "100%",
   },
   pointsBox: {
     backgroundColor: "powderblue",
@@ -31,15 +31,15 @@ const styles = StyleSheet.create({
     paddingBottom: "2%",
     paddingTop: "2%",
     textAlign: "center",
-    width: "100%"
+    width: "100%",
   },
   bold: {
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   center: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default PointsBar;

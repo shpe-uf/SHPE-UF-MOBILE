@@ -1,57 +1,76 @@
-import  React from 'react';
-import { View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, SafeAreaView, Keyboard, TouchableOpacity, Alert, NativeModules, Image } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import { useMutation, gql } from "@apollo/client";
-import { useForm, getErrors } from "../util/hooks";
-import localStorage from 'react-native-sync-localstorage'
+import React from "react";
+import {
+  View,
+  TouchableWithoutFeedback,
+  TextInput,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Keyboard,
+  TouchableOpacity,
+  Alert,
+  NativeModules,
+  DevSettings,
+  Image,
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useRef, useEffect } from "react";
 
-function Login({navigation}) {
+import { useMutation, gql } from "@apollo/client";
+import { useForm, getErrors } from "../util/hooks";
 
-  /* const sign = require('jwt-encode');
-
-  function generateToken(values) {
-    return sign({
-      values,
-    },
-      SECRET,
-    {
-      alg: "HS256",
-    })
-  }  */
-
-  var userToken = [];
+function Login({ navigation }) {
+  let userToken = [];
 
   const { values } = useForm(loginUser, {
-        username: "",
-        password: "",
-        remember: "false"
-      });
+    username: "",
+    password: "",
+    remember: "false",
+  });
 
-    const [loginUser, {data}] = useMutation(LOGIN_USER, {
-      
-      onError(err) {
-        getErrors(err);
-      },
-      
-      onCompleted() {
-        Alert.alert("Login Successful!");
-        
-        NativeModules.DevSettings.reload();
-      },
-    
-      variables: values
+  const [loginUser, { data }] = useMutation(LOGIN_USER, {
+    onError(err) {
+      getErrors(err);
+    },
+
+    onCompleted() {
+      Alert.alert("Login Successful!");
+      NativeModules.DevSettings.reload();
+    },
+
+    variables: values,
+  });
+
+  const inputElementRef = useRef(null);
+  useEffect(() => {
+    inputElementRef.current.setNativeProps({
+      style: { fontFamily: "Roboto" },
     });
-    
-    if(data){
-      //console.log(data);
-      userToken = data.login.token;
-      //console.log(userToken);
-      localStorage.setItem('jwtToken', userToken);
-    }
+  }, []);
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("@storage_Key", jsonValue);
+      if (await AsyncStorage.getItem("@storage_Key")) {
+        try {
+          DevSettings.reload();
+        } catch (e) {
+          location.reload(); // For web local host
+        }
+      }
+    } catch (e) {}
+  };
+
+  if (data) {
+    userToken = data.login.token;
+    storeData(data);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -67,6 +86,7 @@ function Login({navigation}) {
             <TextInput
               style={styles.input}
               placeholder="Username"
+              placeholderTextColor="#a9a9a9"
               onChangeText={(value) => (values.username = value)}
               spellCheck={false}
               autoCorrect={false}
@@ -74,8 +94,10 @@ function Login({navigation}) {
             />
 
             <TextInput
+              ref={inputElementRef}
               style={styles.input}
               placeholder="Password"
+              placeholderTextColor="#a9a9a9"
               onChangeText={(value) => (values.password = value)}
               spellCheck={false}
               autoCorrect={false}
@@ -108,7 +130,7 @@ function Login({navigation}) {
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <Text style={{ fontSize: hp("2.3%"), color: "rgb(0,122,255)" }}>
                 {" "}
-                Register here
+                Register here!
               </Text>
             </TouchableOpacity>
           </View>
@@ -148,6 +170,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+    marginBottom: hp("3%"),
   },
   buttonContainer: {
     backgroundColor: "#001f5b",

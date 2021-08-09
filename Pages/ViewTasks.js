@@ -46,7 +46,7 @@ function ViewTasks() {
         <Card.Divider/>
         <Text>
           Points: {task.points}
-          <br /><br />
+          {"\n\n"}
           {task.description}
         </Text>
       </Card>
@@ -60,7 +60,7 @@ function ViewTasks() {
         <Card.Divider/>
         <Text>
           Points: {task.points}
-          <br /> <br />
+          {"\n\n"}
           {task.description}
         </Text>
       </Card>
@@ -95,8 +95,6 @@ query ($userId: ID!) {
     }
     bookmarkedTasks
   }
-
-
   getTasks {
     id
     name

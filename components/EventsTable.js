@@ -22,20 +22,19 @@ function EventsTable() {
     for (let i = 0; i < maxEvents; i++) {
       const event = events[i];
       if (event.semester == semester) {
-      const date = event.expiration.substring(0, 15);
+        const date = event.expiration.substring(0, 15);
         let row = [
           <DataTable.Row key={event.name}>
             <DataTable.Cell>{event.name}</DataTable.Cell>
             <DataTable.Cell>{event.category}</DataTable.Cell>
             <DataTable.Cell>{date}</DataTable.Cell>
             <DataTable.Cell numeric>{event.points}</DataTable.Cell>
-          </DataTable.Row>
+          </DataTable.Row>,
         ];
         tableContents.push(row);
       }
     }
   }
-
 
   return (
     <View style={styles.container}>
@@ -63,27 +62,27 @@ function EventsTable() {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%"
+    width: "100%",
   },
   title: {
     alignSelf: "center",
     fontSize: 23,
-    margin: 6
+    margin: 6,
   },
   header: {
     fontWeight: "bold",
     paddingBottom: "3%",
-    textAlign: "center"
+    textAlign: "center",
   },
   table: {
     backgroundColor: "powderblue",
     marginBottom: "2%",
     padding: "1.5%",
-    width: "100%"
+    width: "100%",
   },
   text: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default EventsTable;
