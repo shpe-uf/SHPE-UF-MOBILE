@@ -1,27 +1,38 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native'
 
 const SmallCard = ({label, info}) => {
     
     return (
-      <View>
-          <View style={styles.aBox}>
-            <Text style={{fontSize: 20, color: '#777'}}> {label}:   {info}</Text>  
-          </View>
-          <View style={{paddingVertical:10}}></View>
-      </View>
-    );
-  };
+        <View>
+            <View style={styles.aBox}>
+                <Text style = {styles.labelText}>{label}</Text>
+                <Text style = {styles.infoText}>{info}</Text>
+            </View>
+        </View>
 
-  const styles = StyleSheet.create({
-    aBox: {
+    )
+}
+
+const styles = StyleSheet.create({
+    aBox:{
         alignContent: 'center',
-        backgroundColor: '#eee',
-        paddingHorizontal: 20,
-        paddingVertical: 15,
-        borderRadius:10
+        paddingHorizontal: "8%",
+        paddingVertical : '1.5%'
     },
-    
-  });
-  
-  export default SmallCard;
+    labelText :{
+        color : '#001F5B',
+        fontWeight : 'bold',
+        fontSize: 21,
+        paddingVertical: '1%'
+    },
+    infoText:{
+        color : '#000',
+        fontSize : 22,
+        paddingVertical: '1%'
+    }
+})
+
+
+
+export default SmallCard;

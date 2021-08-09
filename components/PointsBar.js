@@ -9,7 +9,7 @@ const PointsBar = ({ user }) => {
   const summerProps = { user: user, semester: "Summer Semester" };
 
   return (
-    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+    <View style={styles.pointsBar}>
       <PointsBox props={fallProps} />
       <PointsBox props={springProps} />
       <PointsBox props={summerProps} />
@@ -19,26 +19,8 @@ const PointsBar = ({ user }) => {
 
 const styles = StyleSheet.create({
   pointsBar: {
-    alignItems: "center",
-    flex: 1,
+    flexDirection: "row",
     justifyContent: "center",
-    width: "100%",
-  },
-  pointsBox: {
-    backgroundColor: "powderblue",
-    borderColor: "gray",
-    margin: "2%",
-    paddingBottom: "2%",
-    paddingTop: "2%",
-    textAlign: "center",
-    width: "100%",
-  },
-  bold: {
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  center: {
-    textAlign: "center",
   },
 });
 

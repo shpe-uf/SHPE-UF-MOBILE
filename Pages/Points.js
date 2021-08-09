@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Button,
@@ -7,12 +7,12 @@ import {
   Text,
   View,
 } from "react-native";
-
 import { gql, useMutation, useQuery } from "@apollo/client";
 
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
 import TasksTable from "../components/TasksTable";
+import CodeButton from "../components/CodeButton";
 
 function Points({ navigation }) {
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
@@ -27,65 +27,18 @@ function Points({ navigation }) {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      
-
-      {/* <View style={styles.page}>
-        <View style={styles.button}>
-          <Button
-            accessibilityLabel="Button to redeem code."
-            title="Redeem Code"
-            onPress={() => navigation.navigate("Home")}
-          />
-        </View>
-        {loading ? (
-          <View>
-            <Text>Loading...</Text>
-          </View>
-        ) : user ? (
-          <View style={styles.content}>
-            <PointsBar user={user} />
-            <View style={styles.events}>
-              <UserEventsTable user={user} />
-            </View>
-          </View>
-        ) : (
-          <View>
-            <Text>User not found</Text>
-          </View>
-        )}
-      </View> */}
-      
-
-      <Text style={styles.title}>POINTS PROGRAM</Text>
-
-      {/* IF THERE IS A USER */}
-
-
-
-      {/* ELSE */}
-
-      <PointsBar />
-      <View style={{paddingVertical: '5%'}} />
-      <TasksTable />
-      <View style={{paddingVertical: '5%'}} />
-      <UserEventsTable user={user}/>
-      <View style={{paddingVertical: '5%'}} />
-
-      <View style={styles.page}>
-
-        <View style={styles.button}>
-          <Button
-            accessibilityLabel="Button to redeem code."
-            title="Redeem Code"
-            onPress={() => navigation.navigate("Home")}
-            style={{color:'#fff'}}
-          />
-        </View>
-
+    <View>
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>POINTS PROGRAM</Text>
+        <PointsBar />
+        <View style={{ paddingVertical: "5%" }} />
+        <TasksTable />
+        <UserEventsTable user={user} />
+      </ScrollView>
+      <View style={styles.circularBtn}>
+        <CodeButton />
       </View>
-
-    </ScrollView>
+    </View>
   );
 }
 
@@ -99,33 +52,23 @@ const styles = StyleSheet.create({
   page: {
     alignItems: "center",
     alignSelf: "center",
-    width: "80%",
-  },
-  button: {
-    backgroundColor: "#FD652F",
     margin: "2%",
-    width: "60%",
   },
-  content: {
-    width: "100%",
+  title: {
+    textAlign: "center",
+    color: "#001F5B",
+    fontSize: 35,
+    paddingVertical: "10%",
   },
-  events: {
-    alignItems: "flex-start",
+  circularBtn: {
+    borderWidth: 10,
+    borderRadius: 100,
+    borderColor: "#001F5B",
+    position: "absolute",
+    alignSelf: "flex-end",
+    bottom: 10,
+    right: 10,
   },
-  box: {
-    height: 130,
-    width: 110,
-    backgroundColor: '#ADE7F7',
-    alignItems: 'center',
-    borderRadius:5,
-    paddingHorizontal: 20,
-  },
-  title :{
-    textAlign: 'center',
-    color : '#001F5B',
-    fontSize: 34,
-    paddingVertical: "12%"
-  }
 });
 
 const FETCH_USER_QUERY = gql`
