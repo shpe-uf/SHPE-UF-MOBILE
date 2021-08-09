@@ -10,9 +10,9 @@ import {
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
 
-import SmallCard from "../components/SmallCard";
-import EditProfileButton from "../components/editProfileButton";
-import LogoutButton from "../components/LogoutButton";
+import SmallCard from ".././components/SmallCard";
+import EditProfileButton from ".././components/editProfileButton";
+import LogoutButton from ".././components/LogoutButton";
 
 function UserProfile() {
   const [user, setUser] = useState({});
@@ -44,7 +44,7 @@ function UserProfile() {
 
       <Text style={styles.email}>{user.email}</Text>
 
-      <EditProfileButton />
+      {props => <EditProfileButton {...props}/>}
       <View style={{ height: "3%" }}></View>
 
       <SmallCard label="Username" info={user.username} />
@@ -56,7 +56,7 @@ function UserProfile() {
       <SmallCard label="Sex" info={user.sex} />
       <SmallCard label="Member Since" info={user.createdAt} />
 
-      <LogoutButton/>
+      <LogoutButton />
       <View style={{ paddingVertical: "10%" }} />
     </ScrollView>
   );

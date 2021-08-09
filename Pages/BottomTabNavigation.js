@@ -7,7 +7,7 @@ import { Platform } from "react-native";
 
 import Home from "./Home";
 import Points from "./Points";
-import UserProfile from "./UserProfile";
+import Profile from "./Profile";
 import ViewTasks from "./ViewTasks";
 
 const Tab = createBottomTabNavigator();
@@ -55,7 +55,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Profile"
-        component={UserProfile}
+        component={Profile}
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => {

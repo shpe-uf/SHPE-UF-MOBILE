@@ -1,15 +1,21 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-const editProfileButton = () => {
+function editProfileButton({ navigation }) {
+  navigation.addListener("focus", () => {
+    refetch();
+  });
   return (
     <View style={styles.viewStyle}>
-      <TouchableOpacity style={styles.btnStyle}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("EditProfile")}
+        style={styles.btnStyle}
+      >
         <Text style={styles.textStyle}>Edit Profile</Text>
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   viewStyle: {

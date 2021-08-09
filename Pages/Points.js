@@ -11,8 +11,8 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
-import TasksTable from "../components/TasksTable";
-import CodeButton from "../components/CodeButton";
+import TasksTable from ".././components/TasksTable";
+import CodeButton from ".././components/CodeButton";
 
 function Points({ navigation }) {
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
