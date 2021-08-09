@@ -15,9 +15,10 @@ function LogoutButton() {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <View style={styles.button}>
         <Button
+          color="red"
           onPress={() => logoutUser()}
           title="Log Out"
           accessibilityLabel="This button logs out your user"
@@ -29,15 +30,11 @@ function LogoutButton() {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: "1%",
-    backgroundColor: "#001f5b",
-    borderRadius: 50,
-    marginLeft: "15%",
-    width: "70%",
-  },
-  container: {
-    flex: 1,
+    borderWidth: 5,
+    borderRadius: 6,
+    borderColor: "red",
     justifyContent: "center",
+    margin: "10%",
   },
 });
 

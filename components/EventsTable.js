@@ -65,9 +65,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   title: {
-    alignSelf: "center",
-    fontSize: 23,
+    alignSelf: "flex-start",
+    fontSize: 30,
     margin: 6,
+    fontWeight: "bold",
+    fontStyle: "italic",
+    color: "#FD652F",
   },
   header: {
     fontWeight: "bold",

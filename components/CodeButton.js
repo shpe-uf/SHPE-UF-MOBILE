@@ -1,23 +1,32 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
   StyleSheet,
   TextInput,
+  TouchableOpacity,
   Button,
   Alert,
   Modal,
 } from "react-native";
 import Constants from "expo-constants";
-
-import { useMutation, gql } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
-function CodeButton(props) {
+function CodeButton() {
   const [errors, setErrors] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
 
-  let user = props.user;
+  let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
+    variables: {
+      userId: "5fb2faa33945aa36700adfd0",
+    },
+  });
+  let user = null;
+
+  if (data) {
+    user = data.getUser;
+  }
 
   const { values } = useForm(redeemPoints, {
     code: "",
@@ -40,7 +49,7 @@ function CodeButton(props) {
   });
 
   return (
-    <View style={styles.container}>
+    <View>
       <Modal
         animationType="slide"
         transparent={true}
@@ -60,15 +69,15 @@ function CodeButton(props) {
             spellCheck={false}
             autoCorrect={false}
           />
-          <View style={styles.button}>
+          <View style={styles.buttonRow}>
             <Button
+              color="#001F5B"
               onPress={() => redeemPoints()}
               title="Submit"
               accessibilityLabel="Button to submit code request"
             />
-          </View>
-          <View style={styles.button}>
             <Button
+              color="#001F5B"
               onPress={() => {
                 setModalVisible(false);
               }}
@@ -78,12 +87,13 @@ function CodeButton(props) {
           </View>
         </View>
       </Modal>
-      <View style={styles.button}>
+      <View>
         <Button
+          color="#001F5B"
           onPress={() => {
             setModalVisible(true);
           }}
-          title="Redeem code"
+          title="Redeem Code"
           accessibilityLabel="Button to redeem code"
         />
       </View>
@@ -98,16 +108,18 @@ const styles = StyleSheet.create({
     marginLeft: 0,
   },
   header: {
-    color: "#ff5400",
+    alignSelf: "flex-start",
     fontSize: 30,
+    margin: 6,
     fontWeight: "bold",
     fontStyle: "italic",
-    margin: 10,
-    marginLeft: 0,
+    color: "#FD652F",
   },
   modalView: {
     margin: 20,
     backgroundColor: "white",
+    borderColor: "grey",
+    borderWidth: 1,
     borderRadius: 20,
     padding: 30,
     shadowColor: "#000",
@@ -118,19 +130,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
-  button: {
-    marginTop: "9%",
-    backgroundColor: "#42A5F5",
-    borderRadius: 50,
-    marginLeft: "15%",
-    width: "70%",
-  },
-  container: {
-    flex: 1,
+  buttonRow: {
+    flexDirection: "row",
     justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    padding: 8,
-    backgroundColor: "#004D73",
+    marginTop: "10%",
+  },
+  button: {
+    borderWidth: 10,
+    borderRadius: 20,
   },
   input: {
     backgroundColor: "white",
@@ -141,6 +148,34 @@ const styles = StyleSheet.create({
     borderColor: "#c8c8c8",
   },
 });
+
+const FETCH_USER_QUERY = gql`
+  query getUser($userId: ID!) {
+    getUser(userId: $userId) {
+      firstName
+      lastName
+      points
+      fallPoints
+      springPoints
+      summerPoints
+      fallPercentile
+      springPercentile
+      summerPercentile
+      events {
+        name
+        category
+        createdAt
+        points
+      }
+      tasks {
+        name
+        points
+        startDate
+      }
+      bookmarkedTasks
+    }
+  }
+`;
 
 const REDEEM_POINTS_MUTATION = gql`
   mutation redeemPoints($code: String!, $username: String!) {
