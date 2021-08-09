@@ -16,8 +16,8 @@ import UserEventsTable from ".././components/UserEventsTable";
 function Points({ navigation }) {
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
-      userId: "5f90e4d4920bab09f6df0106"
-    }
+      userId: "5f90e4d4920bab09f6df0106",
+    },
   });
   let user = null;
 
