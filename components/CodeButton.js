@@ -12,6 +12,11 @@ import {
 import Constants from "expo-constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/Ionicons";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
@@ -86,36 +91,32 @@ function CodeButton() {
             autoCorrect={false}
           />
           <View style={styles.buttonRow}>
-            <View style={styles.button}>
-              <Button
-                color="#001F5B"
-                onPress={() => {
-                  setModalVisible(false);
-                }}
-                title="Cancel"
-                accessibilityLabel="Button to cancel redeeming of code"
-              />
+            <View>
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Cancel</Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.button}>
-              <Button
-                color="#001F5B"
+            <View>
+              <TouchableOpacity
                 onPress={() => redeemPoints()}
-                title="Submit"
-                accessibilityLabel="Button to submit code request"
-              />
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Submit</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
       </Modal>
       <View>
-        <Button
-          color="#001F5B"
-          onPress={() => {
-            setModalVisible(true);
-          }}
-          title="Redeem Code"
-          accessibilityLabel="Button to redeem code"
-        />
+        <TouchableOpacity
+          onPress={() => setModalVisible(true)}
+          style={styles.buttonCircle}
+        >
+          <Text style={styles.buttonTextCircle}>+</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -139,11 +140,11 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    borderColor: "grey",
+    borderColor: "#626366",
     borderWidth: 1,
     borderRadius: 20,
     padding: 30,
-    shadowColor: "#000",
+    shadowColor: "#626366",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -154,13 +155,37 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: "10%",
   },
   button: {
-    borderWidth: 5,
-    borderRadius: 10,
+    alignSelf: "center",
+    backgroundColor: "#001F5B",
     borderColor: "#001F5B",
-    marginHorizontal: "20%",
+    borderRadius: 6,
+    height: hp("6%"),
+    justifyContent: "center",
+    marginTop: hp("5%"),
+    marginHorizontal: hp("8.5%"),
+    width: wp("20%"),
+  },
+  buttonCircle: {
+    alignSelf: "center",
+    backgroundColor: "#001F5B",
+    borderColor: "#001F5B",
+    borderRadius: 100,
+    height: hp("10%"),
+    justifyContent: "center",
+    width: wp("20%"),
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: hp("2.5%"),
+    textAlign: "center",
+  },
+  buttonTextCircle: {
+    color: "#fff",
+    fontSize: hp("10%"),
+    textAlign: "center",
+    paddingBottom: "10%",
   },
   input: {
     backgroundColor: "white",
@@ -168,7 +193,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: "#c8c8c8",
+    borderColor: "#CCC",
     fontSize: 16,
   },
 });
