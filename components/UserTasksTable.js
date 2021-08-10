@@ -8,7 +8,6 @@ import Table from "./Table";
 function UserTasksTable({ user }) {
   let tableContents = [];
   if (user && user.tasks) {
-    console.log(user);
     for (let i = 0; i < user.tasks.length; i++) {
       const event = user.events[i];
       const createdAt = new Date(event.createdAt);

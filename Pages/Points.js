@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
@@ -15,9 +16,22 @@ import UserTasksTable from "../components/UserTasksTable";
 import CodeButton from "../components/CodeButton";
 
 function Points() {
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
+      }
+    } catch (e) {
+      alert("Failed to fetch the data from storage");
+    }
+  };
+  readData();
+  
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
-      userId: "6033086fcd985a567ced8ae8",
+      userId: id,
     },
   });
   let user = null;
@@ -36,9 +50,6 @@ function Points() {
         <UserTasksTable user={user} />
         <UserEventsTable user={user} />
       </ScrollView>
-      <View style={styles.circularBtn}>
-        <CodeButton />
-      </View>
     </View>
   );
 }

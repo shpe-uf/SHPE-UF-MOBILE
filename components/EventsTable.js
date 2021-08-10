@@ -42,7 +42,6 @@ function EventsTable() {
       }
 
       if (now < Date.parse(event.expiration)) {
-        console.log(event);
         let row = [
           <DataTable.Row key={event.name} style={rowStyle}>
             <DataTable.Cell>{event.name}</DataTable.Cell>
