@@ -10,23 +10,16 @@ import {
   Modal,
 } from "react-native";
 import Constants from "expo-constants";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
-function CodeButton() {
+const CodeButton = (props) => {
+  console.log(props);
   const [errors, setErrors] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
 
-  let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
-    variables: {
-      userId: "5fb2faa33945aa36700adfd0",
-    },
-  });
-  let user = null;
-
-  if (data) {
-    user = data.getUser;
-  }
+  let user = props.user;
+  console.log(user);
 
   const { values } = useForm(redeemPoints, {
     code: "",
@@ -148,34 +141,6 @@ const styles = StyleSheet.create({
     borderColor: "#c8c8c8",
   },
 });
-
-const FETCH_USER_QUERY = gql`
-  query getUser($userId: ID!) {
-    getUser(userId: $userId) {
-      firstName
-      lastName
-      points
-      fallPoints
-      springPoints
-      summerPoints
-      fallPercentile
-      springPercentile
-      summerPercentile
-      events {
-        name
-        category
-        createdAt
-        points
-      }
-      tasks {
-        name
-        points
-        startDate
-      }
-      bookmarkedTasks
-    }
-  }
-`;
 
 const REDEEM_POINTS_MUTATION = gql`
   mutation redeemPoints($code: String!, $username: String!) {

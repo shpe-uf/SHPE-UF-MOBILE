@@ -11,19 +11,20 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 
 import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
-import TasksTable from "../components/TasksTable";
+import UserTasksTable from "../components/UserTasksTable";
 import CodeButton from "../components/CodeButton";
 
-function Points({ navigation }) {
+function Points() {
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
-      userId: "5fb2faa33945aa36700adfd0",
+      userId: "6033086fcd985a567ced8ae8",
     },
   });
   let user = null;
 
   if (data) {
     user = data.getUser;
+    console.log(user);
   }
 
   return (
@@ -32,7 +33,7 @@ function Points({ navigation }) {
         <Text style={styles.title}>POINTS PROGRAM</Text>
         <PointsBar />
         <View style={{ paddingVertical: "5%" }} />
-        <TasksTable />
+        <UserTasksTable user={user} />
         <UserEventsTable user={user} />
       </ScrollView>
       <View style={styles.circularBtn}>
@@ -76,6 +77,7 @@ const FETCH_USER_QUERY = gql`
     getUser(userId: $userId) {
       firstName
       lastName
+      username
       points
       fallPoints
       springPoints
