@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import SmallCard from "../components/SmallCard";
 import EditProfileButton from "../components/editProfileButton";
@@ -16,12 +17,24 @@ import LogoutButton from "../components/LogoutButton";
 
 function UserProfile() {
   const [user, setUser] = useState({});
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
+      }
+    } catch (e) {
+      return [];
+    }
+  };
+  readData();
   const { data } = useQuery(FETCH_USER_QUERY, {
     onError(err) {
       console.log(err);
     },
     variables: {
-      userId: "5f90e4d4920bab09f6df0106",
+      userId: id,
     },
   });
 

@@ -24,11 +24,11 @@ function Points() {
         setId(JSON.parse(storedId).login.id);
       }
     } catch (e) {
-      alert("Failed to fetch the data from storage");
+      return [];
     }
   };
   readData();
-  
+
   let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
       userId: id,
@@ -38,7 +38,6 @@ function Points() {
 
   if (data) {
     user = data.getUser;
-    console.log(user);
   }
 
   return (

@@ -2,14 +2,26 @@ import  React, {useState} from 'react';
 import { TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert, Text, View} from 'react-native';
 import { Card, ListItem, Icon } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function ViewTasks() {
-
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
+      }
+    } catch (e) {
+      return [];
+    }
+  };
+  readData();
   const { loading, data, error } = useQuery(FETCH_USER_QUERY, {
     variables: {
-      userId: "5f90e4d4920bab09f6df0106", // dummy user for now
+      userId: id,
     },
   });
 
