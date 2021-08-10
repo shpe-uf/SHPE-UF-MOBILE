@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     height: "80%",
-    width: "30%",
+    width: "35%",
   },
   textStyle: {
     fontSize: 20,

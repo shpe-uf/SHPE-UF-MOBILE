@@ -69,29 +69,17 @@ function UserProfile() {
       <SmallCard label="Sex" info={user.sex} />
       <SmallCard label="Member Since" info={user.createdAt} />
 
-      <LogoutButton/>
+      <LogoutButton />
       <View style={{ paddingVertical: "10%" }} />
     </ScrollView>
   );
 }
 const styles = StyleSheet.create({
-  btn: {
-    borderRadius: 10,
-    paddingVertical: 14,
-    paddingHorizontal: 10,
-    backgroundColor: "#FD652F",
-    alignItems: "center",
-    width: 119,
-    height: 50,
-  },
-  btnText: {
-    fontSize: 20,
-    color: "#fff",
-  },
   container: {
     alignItems: "center",
     marginTop: 10,
     backgroundColor: "#fff",
+    marginTop: "15%",
   },
   profilePic: {
     width: 175,
@@ -132,10 +120,6 @@ const FETCH_USER_QUERY = gql`
       ethnicity
       sex
       createdAt
-      permission
-      classes
-      internships
-      socialMedia
     }
   }
 `;

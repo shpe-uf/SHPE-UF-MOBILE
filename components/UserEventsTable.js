@@ -6,6 +6,8 @@ import { DataTable } from "react-native-paper";
 import Table from "./Table";
 
 function UserEventsTable({ user }) {
+  console.log("uwu");
+  console.log(user);
   let tableContents = [];
   if (user && user.events) {
     for (let i = 0; i < user.events.length; i++) {

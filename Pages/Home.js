@@ -5,7 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -33,8 +33,8 @@ function Home() {
       console.log(err);
     },
     variables: {
-      userId: id
-    }
+      userId: id,
+    },
   });
 
   if (data && data.getUser != user) {
@@ -70,19 +70,20 @@ function Home() {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    width: "100%"
+    width: "100%",
+    marginTop: "10%",
   },
   page: {
     alignItems: "center",
     alignSelf: "center",
-    width: "80%"
+    width: "80%",
   },
   content: {
-    width: "100%"
+    width: "100%",
   },
   events: {
-    alignItems: "flex-start"
-  }
+    alignItems: "flex-start",
+  },
 });
 
 const FETCH_USER_QUERY = gql`

@@ -49,6 +49,9 @@ function Points() {
         <UserTasksTable user={user} />
         <UserEventsTable user={user} />
       </ScrollView>
+      <View style={styles.circularBtn}>
+        <CodeButton />
+      </View>
     </View>
   );
 }
@@ -70,6 +73,7 @@ const styles = StyleSheet.create({
     color: "#001F5B",
     fontSize: 35,
     paddingVertical: "10%",
+    marginTop: "10%",
   },
   circularBtn: {
     borderWidth: 10,
