@@ -10,6 +10,7 @@ import {
 import { gql, useMutation, useQuery } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import allStyles from ".././allStyles.js";
 import PointsBox from ".././components/PointsBox";
 import TasksTable from ".././components/TasksTable";
 import EventsTable from ".././components/EventsTable";
@@ -47,16 +48,16 @@ function Home() {
   const props = { user: user, semester: monthOptions[month].value };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.page}>
+    <ScrollView style={allStyles.container}>
+      <View style={allStyles.page}>
         {user ? (
-          <View style={styles.content}>
+          <View style={allStyles.content}>
             <PointsBox props={props} />
             <TasksTable />
             <EventsTable />
           </View>
         ) : (
-          <View style={styles.content}>
+          <View style={allStyles.content}>
             <Text>User not found</Text>
             <TasksTable />
             <EventsTable />
@@ -66,25 +67,6 @@ function Home() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%",
-    marginTop: "10%",
-  },
-  page: {
-    alignItems: "center",
-    alignSelf: "center",
-    width: "80%",
-  },
-  content: {
-    width: "100%",
-  },
-  events: {
-    alignItems: "flex-start",
-  },
-});
 
 const FETCH_USER_QUERY = gql`
   query getUser($userId: ID!) {

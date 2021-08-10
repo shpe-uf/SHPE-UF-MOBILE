@@ -1,6 +1,16 @@
 import React from "react";
-import { Button, DevSettings, StyleSheet, View } from "react-native";
+import {
+  DevSettings,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 function LogoutButton() {
   const logoutUser = async () => {
@@ -16,25 +26,28 @@ function LogoutButton() {
 
   return (
     <View>
-      <View style={styles.button}>
-        <Button
-          color="red"
-          onPress={() => logoutUser()}
-          title="Log Out"
-          accessibilityLabel="This button logs out your user"
-        />
-      </View>
+      <TouchableOpacity onPress={() => logoutUser()} style={styles.button}>
+        <Text style={styles.buttonText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    borderWidth: 5,
+    alignSelf: "center",
+    backgroundColor: "#D33A02",
+    borderColor: "#D33A02",
     borderRadius: 6,
-    borderColor: "red",
+    height: hp("8.5%"),
     justifyContent: "center",
-    margin: "10%",
+    margin: hp("1%"),
+    width: wp("75%"),
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: hp("2.5%"),
+    textAlign: "center",
   },
 });
 

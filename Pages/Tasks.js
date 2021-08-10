@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Keyboard, Text, View } from "react-native";
 import { ScrollView, Card } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
@@ -10,10 +11,23 @@ import allStyles from ".././allStyles.js";
 import TaskCard from ".././components/TaskCard";
 
 function Tasks() {
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
+      }
+    } catch (e) {
+      return [];
+    }
+  };
+  readData();
+
   const { loading, data, error } = useQuery(FETCH_USER_QUERY, {
     variables: {
-      userId: "5f90e4d4920bab09f6df0106" // dummy user for now
-    }
+      userId: id,
+    },
   });
 
   let bookTasks = [];
@@ -27,7 +41,6 @@ function Tasks() {
   const semester = monthOptions[month].value;
 
   if (data && data.getUser && data.getTasks) {
-    console.log(data);
     const user = data.getUser;
     const allTasks = data.getTasks;
 
@@ -42,7 +55,7 @@ function Tasks() {
     }
     bookProps = {
       user: user,
-      tasks: bookTasks
+      tasks: bookTasks,
     };
 
     for (let i = 0; i < allTasks.length; i++) {
@@ -56,7 +69,7 @@ function Tasks() {
     }
     restProps = {
       user: user,
-      tasks: restTasks
+      tasks: restTasks,
     };
   }
 
@@ -71,7 +84,7 @@ function Tasks() {
           <>
             <View style={allStyles.content}>
               <View>
-                <Text style={allStyles.h1}>BOOKMARKED TASKS</Text>
+                <Text style={allStyles.h2}>BOOKMARKED TASKS</Text>
                 {bookTasks.length == 0 ? (
                   <Card>
                     <Text>No tasks have been bookmarked yet.</Text>
@@ -81,7 +94,7 @@ function Tasks() {
                 )}
               </View>
               <View>
-                <Text style={allStyles.h1}>UNBOOKMARKED TASKS</Text>
+                <Text style={allStyles.h2}>UNBOOKMARKED TASKS</Text>
                 {restTasks.length == 0 ? (
                   <Card>
                     <Text>There are no tasks yet.</Text>

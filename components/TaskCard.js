@@ -10,17 +10,14 @@ function TaskCard({ props }) {
 
   return (
     <>
-      {tasks.map(task => (
+      {tasks.map((task) => (
         <Card key={task.name} style={styles.card}>
-          <Text style={allStyles.h2}>{task.name}</Text>
-          <Text>
-            <b>Points: {task.points}</b>
-          </Text>
+          <Text style={allStyles.h3}>{task.name}</Text>
+          <Text>{"Points: " + task.points}</Text>
           <Text style={styles.date}>
             {task.startDate + " - " + task.endDate}
           </Text>
           <Text>{task.description}</Text>
-          {}
           <TaskButton username={user.username} taskName={task.name} />
         </Card>
       ))}
@@ -30,14 +27,13 @@ function TaskCard({ props }) {
 
 const styles = StyleSheet.create({
   card: {
-    margin: 0,
-    borderRadius: 10
+    borderRadius: 10,
   },
   date: {
     color: "#72A9BE",
+    marginBottom: 8,
     marginTop: 8,
-    marginBottom: 8
-  }
+  },
 });
 
 export default TaskCard;

@@ -58,15 +58,9 @@ function Points() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     height: "100%",
     width: "100%",
     paddingHorizontal: 40,
-  },
-  page: {
-    alignItems: "center",
-    alignSelf: "center",
-    margin: "2%",
   },
   title: {
     textAlign: "center",
@@ -76,9 +70,6 @@ const styles = StyleSheet.create({
     marginTop: "10%",
   },
   circularBtn: {
-    borderWidth: 10,
-    borderRadius: 100,
-    borderColor: "#001F5B",
     position: "absolute",
     alignSelf: "flex-end",
     bottom: 10,

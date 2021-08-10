@@ -3,11 +3,10 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { DataTable } from "react-native-paper";
 
+import allStyles from ".././allStyles.js";
 import Table from "./Table";
 
 function UserEventsTable({ user }) {
-  console.log("uwu");
-  console.log(user);
   let tableContents = [];
   if (user && user.events) {
     for (let i = 0; i < user.events.length; i++) {
@@ -20,7 +19,7 @@ function UserEventsTable({ user }) {
         "/" +
         createdAt.getFullYear();
 
-      let rowStyle = styles.tableRow1;
+      let rowStyle = allStyles.tableRow1;
       let iAsString = i.toString();
       const iLen = iAsString.length;
       if (
@@ -29,7 +28,7 @@ function UserEventsTable({ user }) {
         iAsString[iLen - 1] == "6" ||
         iAsString[iLen - 1] == "8"
       ) {
-        rowStyle = styles.tableRow2;
+        rowStyle = allStyles.tableRow2;
       }
 
       let row = [
@@ -44,24 +43,24 @@ function UserEventsTable({ user }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Events</Text>
+    <View style={allStyles.outerTableContainer}>
+      <Text style={allStyles.h1}>Events</Text>
       {user === null || user.events.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
-          <Text style={styles.noContentText}>No events on record.</Text>
+          <Text style={allStyles.noContentText}>No events on record.</Text>
         </View>
       ) : (
-        <View className="table-responsive" style={styles.tableContainer}>
+        <View className="table-responsive" style={allStyles.tableContainer}>
           <DataTable>
-            <DataTable.Header style={styles.headerContainer}>
+            <DataTable.Header style={allStyles.headerContainer}>
               <DataTable.Title>
-                <Text style={styles.headerTextStyle}>EVENT</Text>
+                <Text style={allStyles.headerTextStyle}>EVENT</Text>
               </DataTable.Title>
               <DataTable.Title>
-                <Text style={styles.headerTextStyle}>DATE</Text>
+                <Text style={allStyles.headerTextStyle}>DATE</Text>
               </DataTable.Title>
               <DataTable.Title>
-                <Text style={styles.headerTextStyle}> POINTS</Text>
+                <Text style={allStyles.headerTextStyle}> POINTS</Text>
               </DataTable.Title>
             </DataTable.Header>
             {tableContents}
@@ -71,54 +70,5 @@ function UserEventsTable({ user }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  tableContainer: {
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#C1C1C1",
-  },
-  headerContainer: {
-    backgroundColor: "#F6F6F6",
-    color: "#0070C0",
-    fontSize: 22,
-  },
-  headerTextStyle: {
-    color: "#0070C0",
-    fontSize: 20,
-    textDecorationColor: "#0070C0",
-  },
-  tableRow1: {
-    backgroundColor: "#FFF",
-  },
-  tableRow2: {
-    backgroundColor: "#F6F6F6",
-  },
-  container: {
-    width: "100%",
-  },
-  title: {
-    alignSelf: "flex-start",
-    fontSize: 30,
-    margin: 6,
-    fontWeight: "bold",
-    fontStyle: "italic",
-    color: "#FD652F",
-  },
-  noContentText: {
-    fontSize: 16,
-    backgroundColor: "#EEE",
-    height: 55,
-    textAlign: "center",
-    alignContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    borderColor: "black",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
-  },
-});
 
 export default UserEventsTable;

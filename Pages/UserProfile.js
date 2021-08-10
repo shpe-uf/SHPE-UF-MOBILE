@@ -45,7 +45,7 @@ function UserProfile() {
   let fullName = user.firstName + " " + user.lastName;
 
   return (
-    <ScrollView style={{ backgroundColor: "#fff" }}>
+    <ScrollView>
       <View style={styles.container}>
         {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
         <Image
@@ -77,31 +77,26 @@ function UserProfile() {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginTop: 10,
-    backgroundColor: "#fff",
     marginTop: "15%",
   },
   profilePic: {
-    width: 175,
-    height: 175,
-    borderRadius: 100,
-    backgroundColor: "#4e5252",
-    marginTop: 0,
-    justifyContent: "center",
     alignItems: "center",
+    borderRadius: 100,
+    height: 175,
+    justifyContent: "center",
+    width: 175,
   },
   nameStyling: {
-    textAlign: "center",
-    backgroundColor: "#fff",
-    fontSize: 28,
     fontFamily: "Archivo Narrow",
+    fontSize: 30,
     paddingVertical: "1%",
+    textAlign: "center",
   },
   email: {
-    textAlign: "center",
-    fontSize: 19,
-    paddingBottom: "2%",
     color: "#0070C0",
+    fontSize: 20,
+    paddingBottom: "2%",
+    textAlign: "center",
   },
 });
 
