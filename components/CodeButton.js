@@ -1,23 +1,48 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
   StyleSheet,
   TextInput,
+  TouchableOpacity,
   Button,
   Alert,
   Modal,
 } from "react-native";
 import Constants from "expo-constants";
-
-import { useMutation, gql } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Icon from "react-native-vector-icons/Ionicons";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
-function CodeButton(props) {
+function CodeButton() {
   const [errors, setErrors] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
+  const [user, setUser] = useState({});
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
+      }
+    } catch (e) {
+      return [];
+    }
+  };
+  readData();
+  const { data } = useQuery(FETCH_USER_QUERY, {
+    onError(err) {
+      console.log(err);
+    },
+    variables: {
+      userId: id,
+    },
+  });
 
-  let user = props.user;
+  if (data && data.getUser != user) {
+    setUser(data.getUser);
+  }
 
   const { values } = useForm(redeemPoints, {
     code: "",
@@ -40,7 +65,7 @@ function CodeButton(props) {
   });
 
   return (
-    <View style={styles.container}>
+    <View>
       <Modal
         animationType="slide"
         transparent={true}
@@ -60,30 +85,35 @@ function CodeButton(props) {
             spellCheck={false}
             autoCorrect={false}
           />
-          <View style={styles.button}>
-            <Button
-              onPress={() => redeemPoints()}
-              title="Submit"
-              accessibilityLabel="Button to submit code request"
-            />
-          </View>
-          <View style={styles.button}>
-            <Button
-              onPress={() => {
-                setModalVisible(false);
-              }}
-              title="Cancel"
-              accessibilityLabel="Button to cancel redeeming of code"
-            />
+          <View style={styles.buttonRow}>
+            <View style={styles.button}>
+              <Button
+                color="#001F5B"
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+                title="Cancel"
+                accessibilityLabel="Button to cancel redeeming of code"
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                color="#001F5B"
+                onPress={() => redeemPoints()}
+                title="Submit"
+                accessibilityLabel="Button to submit code request"
+              />
+            </View>
           </View>
         </View>
       </Modal>
-      <View style={styles.button}>
+      <View>
         <Button
+          color="#001F5B"
           onPress={() => {
             setModalVisible(true);
           }}
-          title="Redeem code"
+          title="Redeem Code"
           accessibilityLabel="Button to redeem code"
         />
       </View>
@@ -96,18 +126,21 @@ const styles = StyleSheet.create({
     color: "black",
     margin: 10,
     marginLeft: 0,
+    fontSize: 16,
   },
   header: {
-    color: "#ff5400",
+    alignSelf: "flex-start",
     fontSize: 30,
+    margin: 6,
     fontWeight: "bold",
     fontStyle: "italic",
-    margin: 10,
-    marginLeft: 0,
+    color: "#FD652F",
   },
   modalView: {
     margin: 20,
     backgroundColor: "white",
+    borderColor: "grey",
+    borderWidth: 1,
     borderRadius: 20,
     padding: 30,
     shadowColor: "#000",
@@ -118,19 +151,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
-  button: {
-    marginTop: "9%",
-    backgroundColor: "#42A5F5",
-    borderRadius: 50,
-    marginLeft: "15%",
-    width: "70%",
-  },
-  container: {
-    flex: 1,
+  buttonRow: {
+    flexDirection: "row",
     justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    padding: 8,
-    backgroundColor: "#004D73",
+    marginTop: "10%",
+  },
+  button: {
+    borderWidth: 5,
+    borderRadius: 10,
+    borderColor: "#001F5B",
+    marginHorizontal: "20%",
   },
   input: {
     backgroundColor: "white",
@@ -139,8 +169,37 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderColor: "#c8c8c8",
+    fontSize: 16,
   },
 });
+
+const FETCH_USER_QUERY = gql`
+  query getUser($userId: ID!) {
+    getUser(userId: $userId) {
+      firstName
+      lastName
+      points
+      fallPoints
+      springPoints
+      summerPoints
+      fallPercentile
+      springPercentile
+      summerPercentile
+      events {
+        name
+        category
+        createdAt
+        points
+      }
+      tasks {
+        name
+        points
+        startDate
+      }
+      bookmarkedTasks
+    }
+  }
+`;
 
 const REDEEM_POINTS_MUTATION = gql`
   mutation redeemPoints($code: String!, $username: String!) {

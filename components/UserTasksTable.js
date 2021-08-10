@@ -5,12 +5,10 @@ import { DataTable } from "react-native-paper";
 
 import Table from "./Table";
 
-function UserEventsTable({ user }) {
-  console.log("uwu");
-  console.log(user);
+function UserTasksTable({ user }) {
   let tableContents = [];
-  if (user && user.events) {
-    for (let i = 0; i < user.events.length; i++) {
+  if (user && user.tasks) {
+    for (let i = 0; i < user.tasks.length; i++) {
       const event = user.events[i];
       const createdAt = new Date(event.createdAt);
       const date =
@@ -33,10 +31,10 @@ function UserEventsTable({ user }) {
       }
 
       let row = [
-        <DataTable.Row key={event.name} style={rowStyle}>
-          <DataTable.Cell>{event.name}</DataTable.Cell>
+        <DataTable.Row key={task.name} style={rowStyle}>
+          <DataTable.Cell>{task.name}</DataTable.Cell>
           <DataTable.Cell>{date}</DataTable.Cell>
-          <DataTable.Cell numeric>{event.points}</DataTable.Cell>
+          <DataTable.Cell numeric>{task.points}</DataTable.Cell>
         </DataTable.Row>,
       ];
       tableContents.push(row);
@@ -45,8 +43,8 @@ function UserEventsTable({ user }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Events</Text>
-      {user === null || user.events.length === 0 ? (
+      <Text style={styles.title}>Tasks</Text>
+      {user === null || user.tasks.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
           <Text style={styles.noContentText}>No events on record.</Text>
         </View>
@@ -55,7 +53,7 @@ function UserEventsTable({ user }) {
           <DataTable>
             <DataTable.Header style={styles.headerContainer}>
               <DataTable.Title>
-                <Text style={styles.headerTextStyle}>EVENT</Text>
+                <Text style={styles.headerTextStyle}>TASK</Text>
               </DataTable.Title>
               <DataTable.Title>
                 <Text style={styles.headerTextStyle}>DATE</Text>
@@ -121,4 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserEventsTable;
+export default UserTasksTable;

@@ -1,158 +1,109 @@
-import React, {useState} from 'react';
-import { StyleSheet, TouchableOpacity, Text, View, ScrollView, ImageBackground, Dimensions, FlatList, Image} from 'react-native';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+  ScrollView,
+  Image,
+} from "react-native";
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function UserProfile(){
-  const [user, setUser] = useState({})
-  const {data} = useQuery(FETCH_USER_QUERY, {
-      onError(err){
-          console.log(err);
-      },
-      variables: {
-          userId: "5f90e4d4920bab09f6df0106"
+import SmallCard from "../components/SmallCard";
+import EditProfileButton from "../components/editProfileButton";
+import LogoutButton from "../components/LogoutButton";
+
+function UserProfile() {
+  const [user, setUser] = useState({});
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
       }
+    } catch (e) {
+      return [];
+    }
+  };
+  readData();
+  const { data } = useQuery(FETCH_USER_QUERY, {
+    onError(err) {
+      console.log(err);
+    },
+    variables: {
+      userId: id,
+    },
   });
 
-  if(data && data.getUser != user){
-    console.log(data.getUser.firstName);
+  if (data && data.getUser != user) {
     setUser(data.getUser);
   }
 
-  const dataList = [
-    {key: 'Name '}, {key: user.firstName + " "+  user.lastName},
-    {key: 'Username'}, {key: user.username},
-    {key: 'Email'}, {key: user.email},
-    {key: 'Major'}, {key: user.major},
-    {key: 'Country'}, {key: user.country},
-    {key: 'Ethnicity'}, {key: user.ethnicity},
-    {key: 'Sex'}, {key: user.sex},
-    {key: 'Member since'}, {key: user.createdAt},
-  ]
+  let fullName = user.firstName + " " + user.lastName;
 
-  let _renderItem = ({item, index}) =>{
-    let {itemStyle, itemText, itemStyle2, itemText2} = styles
-    return(
-      <View style={itemStyle}>
-        <Text style={itemText}>{item.key} </Text>
+  return (
+    <ScrollView style={{ backgroundColor: "#fff" }}>
+      <View style={styles.container}>
+        {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
+        <Image
+          source={require("../assets/images/SHPE_UF_LOGO.jpg")}
+          style={styles.profilePic}
+        />
+        <Text style={styles.nameStyling}>{fullName}</Text>
       </View>
-    )
-  }
 
-  const getHeader = () => {
-    return <View style= {styles.view}>
-            <View>
-            <Text style={styles.title}> My<Text style={{color: '#3571f2',}}> Profile </Text></Text>
-        </View>
-        <View style={styles.line} ></View>
+      <Text style={styles.email}>{user.email}</Text>
 
-        <View style={styles.container}>
-              {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
-              <Image source ={require('../assets/images/SHPE_UF_LOGO.jpg')} style={styles.profilePic}/>
-        </View>
-        {/*  Add functionality to change profile picture   */}
-        <View style={styles.container}>
-          <TouchableOpacity>
-            <Text style={styles.opacityBtn}>
-                {"\n\n\n"}Change Profile Photo{"\n\n\n"}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.line} ></View>
-        </View>;
-};
+      <EditProfileButton />
+      <View style={{ height: "3%" }}></View>
 
-  const getFooter = () => {
-      return <View style= {styles.view}>
-              <View style={styles.line} ></View>
-              <View style={styles.container, {alignItems: 'flex-start'}}>
-                <TouchableOpacity>
-                  <Text style={styles.opacityBtn2}>
-                    {"\n\n\n"}Edit Profile{"\n\n\n"}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>;
-  };
+      <SmallCard label="Username" info={user.username} />
+      <SmallCard label="Major" info={user.major} />
+      <SmallCard label="Year" info={user.year} />
+      <SmallCard label="Graduating" info={user.graduating} />
+      <SmallCard label="Country of Origin" info={user.country} />
+      <SmallCard label="Ethnicity" info={user.ethnicity} />
+      <SmallCard label="Sex" info={user.sex} />
+      <SmallCard label="Member Since" info={user.createdAt} />
 
-  const numColumns=2
-    return (
-        <FlatList
-          data={dataList}
-          renderItem={_renderItem}
-          keyExtractor={(item, index) => index.toString()}
-          numColumns={numColumns}
-          ListHeaderComponent={getHeader}
-          ListFooterComponent={getFooter}
-       />
-  )
+      <LogoutButton />
+      <View style={{ paddingVertical: "10%" }} />
+    </ScrollView>
+  );
 }
 const styles = StyleSheet.create({
-  title:{
-    textAlignVertical: 'top',
-    paddingVertical: 10,
-    color: '#ff800a',
-    textAlign: "center",
-    fontSize: 25,
-    marginTop: 0,
-    fontWeight: "bold",
-  },
-  itemStyle:{
-    backgroundColor: "#f0f0f0",
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    flex: 1,
-    marginHorizontal: 0,
-    marginVertical: 0,
-    paddingHorizontal:13,
-  },
-  itemText: {
-    color: '#1c1c1e',
-    fontSize: 18,
-    paddingHorizontal:10,
-    lineHeight: 38,
-    textAlign: 'right',
-  },
-  opacityBtn: {
-    flexDirection: 'row',
-    color: '#0a84ff',
-    fontSize: 16,
-    lineHeight: 7,
-    justifyContent: 'space-between',
-  },
-  opacityBtn2: {
-    flexDirection: 'row',
-    color: '#0a84ff',
-    fontSize: 18,
-    lineHeight: 10,
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingHorizontal: 23,
-    paddingVertical: 10,
-  },
   container: {
-    backgroundColor: "#f2f2f7",
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
+    backgroundColor: "#fff",
+    marginTop: "15%",
   },
-  view: {
-    backgroundColor: "#f2f2f7",
-  },
-  profilePic:{
-    width: 150,
-    height: 150,
-    borderRadius:75,
-    backgroundColor: '#4e5252',
+  profilePic: {
+    width: 175,
+    height: 175,
+    borderRadius: 100,
+    backgroundColor: "#4e5252",
     marginTop: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
-  line:{
-    width: 2000,
-    height: 0.3,
-    backgroundColor: '#48484a',
-  }
-})
+  nameStyling: {
+    textAlign: "center",
+    backgroundColor: "#fff",
+    fontSize: 28,
+    fontFamily: "Archivo Narrow",
+    paddingVertical: "1%",
+  },
+  email: {
+    textAlign: "center",
+    fontSize: 19,
+    paddingBottom: "2%",
+    color: "#0070C0",
+  },
+});
 
 const FETCH_USER_QUERY = gql`
   query getUser($userId: ID!) {
@@ -169,10 +120,6 @@ const FETCH_USER_QUERY = gql`
       ethnicity
       sex
       createdAt
-      permission
-      classes
-      internships
-      socialMedia
     }
   }
 `;
