@@ -1,53 +1,56 @@
 import React, { useState, useContext } from "react";
-import { Text, View, StyleSheet, Button, Alert } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Constants from "expo-constants";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function TaskButton(props) {
-  let taskName = props.task;
-  let user = props.user;
-
   const [redeemTasksPoints] = useMutation(REDEEM_TASK_POINTS_MUTATION, {
     update(_, { data: { redeemTasksPoints: userData } }) {},
-
     onError(err) {
       getErrors(err);
+    },
+    onCompleted() {
+      Alert.alert("Request Successful!");
     },
   });
 
   return (
-    <View style={styles.container}>
-      <View style={styles.button}>
-        <Button
-          onPress={() => {
-            redeemTasksPoints({
-              variables: { name: taskName, username: user.username },
-            });
-          }}
-          title="Request"
-          accessibilityLabel="Button to request task points"
-        />
-      </View>
+    <View>
+      <TouchableOpacity
+        onPress={() => {
+          redeemTasksPoints({
+            variables: { name: props.taskName, username: props.username },
+          });
+        }}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Request</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: "9%",
-    backgroundColor: "#42A5F5",
-    borderRadius: 50,
-    marginLeft: "15%",
-    width: "70%",
-  },
-  container: {
-    flex: 1,
+    alignSelf: "center",
+    backgroundColor: "#72A9BE",
+    borderColor: "#72A9BE",
+    borderRadius: 6,
+    height: hp("7%"),
     justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    padding: 8,
-    backgroundColor: "#004D73",
+    marginTop: hp("1.5%"),
+    width: wp("60%"),
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: hp("2.5%"),
+    textAlign: "center",
   },
 });
 

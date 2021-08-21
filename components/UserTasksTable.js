@@ -5,18 +5,18 @@ import { DataTable } from "react-native-paper";
 
 import allStyles from ".././allStyles.js";
 
-function UserEventsTable({ user }) {
+function UserTasksTable({ user }) {
   let tableContents = [];
-  if (user && user.events) {
-    for (let i = 0; i < user.events.length; i++) {
-      const event = user.events[i];
-      const createdAt = new Date(event.createdAt);
+  if (user && user.tasks) {
+    for (let i = 0; i < user.tasks.length; i++) {
+      const task = user.tasks[i];
+      const endDate = new Date(task.endDate);
       const date =
-        createdAt.getMonth() +
+        endDate.getMonth() +
         "/" +
-        createdAt.getDate() +
+        endDate.getDate() +
         "/" +
-        createdAt.getFullYear();
+        endDate.getFullYear();
 
       let rowStyle = allStyles.tableRow1;
       let iAsString = i.toString();
@@ -31,10 +31,10 @@ function UserEventsTable({ user }) {
       }
 
       let row = [
-        <DataTable.Row key={event.name} style={rowStyle}>
-          <DataTable.Cell>{event.name}</DataTable.Cell>
-          <DataTable.Cell>{date}</DataTable.Cell>
-          <DataTable.Cell numeric>{event.points}</DataTable.Cell>
+        <DataTable.Row key={task.name} style={rowStyle}>
+          <DataTable.Cell>{task.name}</DataTable.Cell>
+          <DataTable.Cell>{task.startDate}</DataTable.Cell>
+          <DataTable.Cell numeric>{task.points}</DataTable.Cell>
         </DataTable.Row>,
       ];
       tableContents.push(row);
@@ -43,8 +43,8 @@ function UserEventsTable({ user }) {
 
   return (
     <View style={allStyles.outerTableContainer}>
-      <Text style={allStyles.h1}>Events</Text>
-      {user === null || user.events.length === 0 ? (
+      <Text style={allStyles.h1}>Tasks</Text>
+      {user === null || user.tasks.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
           <Text style={allStyles.noContentText}>No events on record.</Text>
         </View>
@@ -53,7 +53,7 @@ function UserEventsTable({ user }) {
           <DataTable>
             <DataTable.Header style={allStyles.headerContainer}>
               <DataTable.Title>
-                <Text style={allStyles.headerTextStyle}>EVENT</Text>
+                <Text style={allStyles.headerTextStyle}>TASK</Text>
               </DataTable.Title>
               <DataTable.Title>
                 <Text style={allStyles.headerTextStyle}>DATE</Text>
@@ -70,4 +70,4 @@ function UserEventsTable({ user }) {
   );
 }
 
-export default UserEventsTable;
+export default UserTasksTable;

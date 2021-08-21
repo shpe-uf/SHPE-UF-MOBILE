@@ -8,6 +8,10 @@
     "value": "Female"
   },
   {
+    "label": "Non-Binary",
+    "value": "Non-Binary"
+  },
+  {
     "label": "Other",
     "value": "Other"
   },

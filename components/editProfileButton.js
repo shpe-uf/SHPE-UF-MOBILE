@@ -19,24 +19,20 @@ function editProfileButton({ navigation }) {
 
 const styles = StyleSheet.create({
   viewStyle: {
-    backgroundColor: "#fff",
     alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
     height: "5%",
+    justifyContent: "center",
   },
   btnStyle: {
-    borderRadius: 10,
     backgroundColor: "#FD652F",
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
+    borderRadius: 10,
     height: "80%",
-    width: "30%",
+    justifyContent: "center",
+    width: "35%",
   },
   textStyle: {
+    color: "#FFF",
     fontSize: 20,
-    color: "#fff",
     textAlign: "center",
   },
 });

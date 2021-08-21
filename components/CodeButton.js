@@ -10,22 +10,43 @@ import {
   Modal,
 } from "react-native";
 import Constants from "expo-constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { FAB } from "react-native-paper";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
 function CodeButton() {
   const [errors, setErrors] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
-
-  let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
+  const [user, setUser] = useState({});
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
+      }
+    } catch (e) {
+      return [];
+    }
+  };
+  readData();
+  const { data } = useQuery(FETCH_USER_QUERY, {
+    onError(err) {
+      console.log(err);
+    },
     variables: {
-      userId: "5fb2faa33945aa36700adfd0",
+      userId: id,
     },
   });
-  let user = null;
 
-  if (data) {
-    user = data.getUser;
+  if (data && data.getUser != user) {
+    setUser(data.getUser);
   }
 
   const { values } = useForm(redeemPoints, {
@@ -70,31 +91,32 @@ function CodeButton() {
             autoCorrect={false}
           />
           <View style={styles.buttonRow}>
-            <Button
-              color="#001F5B"
-              onPress={() => redeemPoints()}
-              title="Submit"
-              accessibilityLabel="Button to submit code request"
-            />
-            <Button
-              color="#001F5B"
-              onPress={() => {
-                setModalVisible(false);
-              }}
-              title="Cancel"
-              accessibilityLabel="Button to cancel redeeming of code"
-            />
+            <View>
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity
+                onPress={() => redeemPoints()}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Submit</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
       <View>
-        <Button
-          color="#001F5B"
-          onPress={() => {
-            setModalVisible(true);
-          }}
-          title="Redeem Code"
-          accessibilityLabel="Button to redeem code"
+        <FAB
+          style={styles.fab}
+          color="#fff"
+          icon="plus"
+          accessibilityLabel="redeem points button"
+          onPress={() => setModalVisible(true)}
         />
       </View>
     </View>
@@ -102,10 +124,18 @@ function CodeButton() {
 }
 
 const styles = StyleSheet.create({
+  fab: {
+    backgroundColor: "#001F5B",
+    bottom: 0,
+    margin: 16,
+    position: "absolute",
+    right: 0,
+  },
   label: {
     color: "black",
     margin: 10,
     marginLeft: 0,
+    fontSize: 16,
   },
   header: {
     alignSelf: "flex-start",
@@ -118,11 +148,11 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    borderColor: "grey",
+    borderColor: "#626366",
     borderWidth: 1,
     borderRadius: 20,
     padding: 30,
-    shadowColor: "#000",
+    shadowColor: "#626366",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -133,11 +163,22 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: "10%",
   },
   button: {
-    borderWidth: 10,
-    borderRadius: 20,
+    alignSelf: "center",
+    backgroundColor: "#001F5B",
+    borderColor: "#001F5B",
+    borderRadius: 6,
+    height: hp("6%"),
+    justifyContent: "center",
+    marginTop: hp("5%"),
+    marginHorizontal: hp("8.5%"),
+    width: wp("20%"),
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: hp("2.5%"),
+    textAlign: "center",
   },
   input: {
     backgroundColor: "white",
@@ -145,7 +186,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: "#c8c8c8",
+    borderColor: "#CCC",
+    fontSize: 16,
   },
 });
 

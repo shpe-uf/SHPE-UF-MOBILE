@@ -5,24 +5,37 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
-
 import { gql, useMutation, useQuery } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import allStyles from ".././allStyles.js";
 import PointsBox from ".././components/PointsBox";
 import TasksTable from ".././components/TasksTable";
 import EventsTable from ".././components/EventsTable";
 
 function Home() {
   const [user, setUser] = useState({});
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
+      }
+    } catch (e) {
+      return [];
+    }
+  };
+  readData();
   const { data } = useQuery(FETCH_USER_QUERY, {
     onError(err) {
       console.log(err);
     },
     variables: {
-      userId: "5f90e4d4920bab09f6df0106"
-    }
+      userId: id,
+    },
   });
 
   if (data && data.getUser != user) {
@@ -35,16 +48,16 @@ function Home() {
   const props = { user: user, semester: monthOptions[month].value };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.page}>
+    <ScrollView style={allStyles.container}>
+      <View style={allStyles.page}>
         {user ? (
-          <View style={styles.content}>
+          <View style={allStyles.content}>
             <PointsBox props={props} />
             <TasksTable />
             <EventsTable />
           </View>
         ) : (
-          <View style={styles.content}>
+          <View style={allStyles.content}>
             <Text>User not found</Text>
             <TasksTable />
             <EventsTable />
@@ -54,24 +67,6 @@ function Home() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%"
-  },
-  page: {
-    alignItems: "center",
-    alignSelf: "center",
-    width: "80%"
-  },
-  content: {
-    width: "100%"
-  },
-  events: {
-    alignItems: "flex-start"
-  }
-});
 
 const FETCH_USER_QUERY = gql`
   query getUser($userId: ID!) {

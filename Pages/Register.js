@@ -258,7 +258,7 @@ function Register({ navigation }) {
             <RNPickerSelect
               useNativeAndroidPickerStyle={false}
               placeholder={{
-                label: "Sex",
+                label: "Gender",
                 value: null,
                 color: "#9EA0A4",
               }}
