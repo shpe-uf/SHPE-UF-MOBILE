@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Icon from "react-native-vector-icons/Ionicons";
+import { FAB } from "react-native-paper";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -111,18 +111,26 @@ function CodeButton() {
         </View>
       </Modal>
       <View>
-        <TouchableOpacity
+        <FAB
+          style={styles.fab}
+          color="#fff"
+          icon="plus"
+          accessibilityLabel="redeem points button"
           onPress={() => setModalVisible(true)}
-          style={styles.buttonCircle}
-        >
-          <Text style={styles.buttonTextCircle}>+</Text>
-        </TouchableOpacity>
+        />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  fab: {
+    backgroundColor: "#001F5B",
+    bottom: 0,
+    margin: 16,
+    position: "absolute",
+    right: 0,
+  },
   label: {
     color: "black",
     margin: 10,
@@ -167,25 +175,10 @@ const styles = StyleSheet.create({
     marginHorizontal: hp("8.5%"),
     width: wp("20%"),
   },
-  buttonCircle: {
-    alignSelf: "center",
-    backgroundColor: "#001F5B",
-    borderColor: "#001F5B",
-    borderRadius: 100,
-    height: hp("10%"),
-    justifyContent: "center",
-    width: wp("20%"),
-  },
   buttonText: {
     color: "#fff",
     fontSize: hp("2.5%"),
     textAlign: "center",
-  },
-  buttonTextCircle: {
-    color: "#fff",
-    fontSize: hp("10%"),
-    textAlign: "center",
-    paddingBottom: "10%",
   },
   input: {
     backgroundColor: "white",

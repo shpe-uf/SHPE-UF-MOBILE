@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { DataTable } from "react-native-paper";
 
 import allStyles from ".././allStyles.js";
-import Table from "./Table";
 
 function UserEventsTable({ user }) {
   let tableContents = [];
