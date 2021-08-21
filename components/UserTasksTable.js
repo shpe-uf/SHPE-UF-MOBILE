@@ -4,20 +4,19 @@ import { StyleSheet, Text, View } from "react-native";
 import { DataTable } from "react-native-paper";
 
 import allStyles from ".././allStyles.js";
-import Table from "./Table";
 
 function UserTasksTable({ user }) {
   let tableContents = [];
   if (user && user.tasks) {
     for (let i = 0; i < user.tasks.length; i++) {
-      const event = user.events[i];
-      const createdAt = new Date(event.createdAt);
+      const task = user.tasks[i];
+      const endDate = new Date(task.endDate);
       const date =
-        createdAt.getMonth() +
+        endDate.getMonth() +
         "/" +
-        createdAt.getDate() +
+        endDate.getDate() +
         "/" +
-        createdAt.getFullYear();
+        endDate.getFullYear();
 
       let rowStyle = allStyles.tableRow1;
       let iAsString = i.toString();
@@ -34,7 +33,7 @@ function UserTasksTable({ user }) {
       let row = [
         <DataTable.Row key={task.name} style={rowStyle}>
           <DataTable.Cell>{task.name}</DataTable.Cell>
-          <DataTable.Cell>{date}</DataTable.Cell>
+          <DataTable.Cell>{task.startDate}</DataTable.Cell>
           <DataTable.Cell numeric>{task.points}</DataTable.Cell>
         </DataTable.Row>,
       ];
