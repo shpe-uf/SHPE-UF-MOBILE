@@ -12,10 +12,9 @@ import { useQuery, gql } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import SmallCard from ".././components/SmallCard";
-import EditProfileButton from ".././components/editProfileButton";
 import LogoutButton from ".././components/LogoutButton";
 
-function UserProfile() {
+function UserProfile({ navigation }) {
   const [user, setUser] = useState({});
   const [id, setId] = useState("");
   const readData = async () => {
@@ -57,8 +56,14 @@ function UserProfile() {
 
       <Text style={styles.email}>{user.email}</Text>
 
-      {props => <EditProfileButton {...props}/>}
-      <View style={{ height: "3%" }}></View>
+      <View style={styles.viewStyle}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Edit Profile")}
+          style={styles.btnStyle}
+        >
+          <Text style={styles.textStyle}>Edit Profile</Text>
+        </TouchableOpacity>
+      </View>
 
       <SmallCard label="Username" info={user.username} />
       <SmallCard label="Major" info={user.major} />
@@ -96,6 +101,23 @@ const styles = StyleSheet.create({
     color: "#0070C0",
     fontSize: 20,
     paddingBottom: "2%",
+    textAlign: "center",
+  },
+  viewStyle: {
+    alignItems: "center",
+    height: "5%",
+    justifyContent: "center",
+  },
+  btnStyle: {
+    backgroundColor: "#FD652F",
+    borderRadius: 10,
+    height: "80%",
+    justifyContent: "center",
+    width: "35%",
+  },
+  textStyle: {
+    color: "#FFF",
+    fontSize: 20,
     textAlign: "center",
   },
 });

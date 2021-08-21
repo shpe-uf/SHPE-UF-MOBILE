@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { useMutation, useQuery, gql } from "@apollo/client";
-import { useForm, getErrors } from "../util/hooks";
 import {
   View,
   TouchableWithoutFeedback,
-  TextInput,
   StyleSheet,
   SafeAreaView,
   Keyboard,
-  Button,
+  TouchableOpacity,
   Alert,
+  Text,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import { TextInput } from "react-native-paper";
+import { Icon } from "native-base";
 import RNPickerSelect from "react-native-picker-select";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import { useMutation, useQuery, gql } from "@apollo/client";
+
+import { useForm, getErrors } from "../util/hooks";
 
 import majorOptions from "../assets/options/major.json";
 import yearOptions from "../assets/options/year.json";
@@ -23,12 +31,24 @@ import sexOptions from "../assets/options/sex.json";
 
 function EditProfile({ navigation }) {
   const [user, setUser] = useState({});
+  const [id, setId] = useState("");
+  const readData = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem("@storage_Key");
+      if (storedId !== null) {
+        setId(JSON.parse(storedId).login.id);
+      }
+    } catch (e) {
+      return [];
+    }
+  };
+  readData();
   const { data } = useQuery(FETCH_USER_QUERY, {
     onError(err) {
       console.log(err);
     },
     variables: {
-      userId: "5f90e4d4920bab09f6df0106",
+      userId: id,
     },
   });
 
@@ -66,169 +86,280 @@ function EditProfile({ navigation }) {
     variables: values,
   });
 
+  majorOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const majorChoices = majorOptions;
+
+  yearOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const yearChoices = yearOptions;
+
+  graduatingOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const graduatingChoices = graduatingOptions;
+
+  countryOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const countryChoices = countryOptions;
+
+  ethnicityOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const ethnicityChoices = ethnicityOptions;
+
+  sexOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const sexChoices = sexOptions;
+
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAwareScrollView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAwareScrollView>
+        <View>
           <TextInput
-            style={styles.input}
+            flat
+            label="First Name"
             placeholder={user.firstName}
+            underlineColor="black"
+            selectionColor="black"
+            style={styles.input}
             onChangeText={(text) => {
               values.firstName = text;
             }}
-            spellCheck={false}
-            autoCorrect={false}
           />
           <TextInput
-            style={styles.input}
+            flat
+            label="Last Name"
             placeholder={user.lastName}
+            underlineColor="black"
+            selectionColor="black"
+            style={styles.input}
             onChangeText={(text) => {
               values.lastName = text;
             }}
-            spellCheck={false}
-            autoCorrect={false}
           />
           <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
             placeholder={{
-              label: user.major,
-              value: user.major,
+              label: "Major",
+              value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input }}
+            style={{
+              inputIOS: styles.input,
+              inputAndroid: styles.input,
+              iconContainer: { right: wp("18%"), top: hp("1.7%") },
+              placeholder: { color: "#a9a9a9" },
+            }}
             onValueChange={(value) => (values.major = value)}
-            items={majorOptions}
+            items={majorChoices}
+            Icon={() => {
+              return (
+                <Icon
+                  type="FontAwesome"
+                  name="sort-down"
+                  style={{ color: "#9EA0A4" }}
+                />
+              );
+            }}
           />
           <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
             placeholder={{
-              label: user.year,
-              value: user.year,
+              label: "Year",
+              value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input }}
+            style={{
+              inputIOS: styles.input,
+              inputAndroid: styles.input,
+              iconContainer: { right: wp("18%"), top: hp("1.7%") },
+              placeholder: { color: "#a9a9a9" },
+            }}
             onValueChange={(value) => (values.year = value)}
-            items={yearOptions}
+            items={yearChoices}
+            Icon={() => {
+              return (
+                <Icon
+                  type="FontAwesome"
+                  name="sort-down"
+                  style={{ color: "#9EA0A4" }}
+                />
+              );
+            }}
           />
           <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
             placeholder={{
-              label: user.graduating,
-              value: user.graduating,
+              label: "Graduating this year?",
+              value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input }}
+            style={{
+              inputIOS: styles.input,
+              inputAndroid: styles.input,
+              iconContainer: { right: wp("18%"), top: hp("1.7%") },
+              placeholder: { color: "#a9a9a9" },
+            }}
             onValueChange={(value) => (values.graduating = value)}
-            items={graduatingOptions}
+            items={graduatingChoices}
+            Icon={() => {
+              return (
+                <Icon
+                  type="FontAwesome"
+                  name="sort-down"
+                  style={{ color: "#9EA0A4" }}
+                />
+              );
+            }}
           />
           <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
             placeholder={{
-              label: user.country,
-              value: user.country,
+              label: "Country of Origin",
+              value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input }}
+            style={{
+              inputIOS: styles.input,
+              inputAndroid: styles.input,
+              iconContainer: { right: wp("18%"), top: hp("1.7%") },
+              placeholder: { color: "#a9a9a9" },
+            }}
             onValueChange={(value) => (values.country = value)}
-            items={countryOptions}
+            items={countryChoices}
+            Icon={() => {
+              return (
+                <Icon
+                  type="FontAwesome"
+                  name="sort-down"
+                  style={{ color: "#9EA0A4" }}
+                />
+              );
+            }}
           />
           <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
             placeholder={{
-              label: user.ethnicity,
-              value: user.ethnicity,
+              label: "Ethnicity",
+              value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input }}
+            style={{
+              inputIOS: styles.input,
+              inputAndroid: styles.input,
+              iconContainer: { right: wp("18%"), top: hp("1.7%") },
+              placeholder: { color: "#a9a9a9" },
+            }}
             onValueChange={(value) => (values.ethnicity = value)}
-            items={ethnicityOptions}
+            items={ethnicityChoices}
+            Icon={() => {
+              return (
+                <Icon
+                  type="FontAwesome"
+                  name="sort-down"
+                  style={{ color: "#9EA0A4" }}
+                />
+              );
+            }}
           />
           <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
             placeholder={{
-              label: user.sex,
-              value: user.sex,
+              label: "Gender",
+              value: null,
               color: "#9EA0A4",
             }}
-            style={{ inputIOS: styles.input }}
+            style={{
+              inputIOS: styles.input,
+              inputAndroid: styles.input,
+              iconContainer: { right: wp("18%"), top: hp("1.7%") },
+              placeholder: { color: "#a9a9a9" },
+            }}
             onValueChange={(value) => (values.sex = value)}
-            items={sexOptions}
+            items={sexChoices}
+            Icon={() => {
+              return (
+                <Icon
+                  type="FontAwesome"
+                  name="sort-down"
+                  style={{ color: "#9EA0A4" }}
+                />
+              );
+            }}
           />
+          <TouchableOpacity
+            onPress={() => {
+              if (values.firstName === "") {
+                values.firstName = user.firstName;
+              }
+              if (values.lastName === "") {
+                values.lastName = user.lastName;
+              }
+              if (values.major === "") {
+                values.major = user.major;
+              }
+              if (values.year === "") {
+                values.year = user.year;
+              }
+              if (values.graduating === "") {
+                values.graduating = user.graduating;
+              }
+              if (values.country === "") {
+                values.country = user.country;
+              }
+              if (values.ethnicity === "") {
+                values.ethnicity = user.ethnicity;
+              }
+              if (values.sex === "") {
+                values.sex = user.sex;
+              }
 
-          <View>
-            <Button
-              title="Edit Profile"
-              onPress={() => {
-                if (values.firstName === "") {
-                  values.firstName = user.firstName;
-                }
-                if (values.lastName === "") {
-                  values.lastName = user.lastName;
-                }
-                if (values.major === "") {
-                  values.major = user.major;
-                }
-                if (values.year === "") {
-                  values.year = user.year;
-                }
-                if (values.graduating === "") {
-                  values.graduating = user.graduating;
-                }
-                if (values.country === "") {
-                  values.country = user.country;
-                }
-                if (values.ethnicity === "") {
-                  values.ethnicity = user.ethnicity;
-                }
-                if (values.sex === "") {
-                  values.sex = user.sex;
-                }
-
-                values.email = user.email;
-                values.photo = user.photo;
-                values.classes = user.classes;
-                values.internships = user.internships;
-                values.socialMedia = user.socialMedia;
-                console.log(values);
-                editUser();
-              }}
-            />
-          </View>
-          <View style={{ flex: 1 }} />
-        </KeyboardAwareScrollView>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
+              values.email = user.email;
+              values.photo = user.photo;
+              values.classes = user.classes;
+              values.internships = user.internships;
+              values.socialMedia = user.socialMedia;
+              editUser();
+            }}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Edit Profile</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAwareScrollView>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
-    width: 350,
-    height: 55,
-    backgroundColor: "white",
-    margin: 10,
-    padding: 8,
-    color: "black",
-    borderRadius: 14,
-    fontSize: 18,
-    fontWeight: "500",
-  },
-  container: {
-    flex: 1,
+  button: {
+    backgroundColor: "#FD652F",
+    borderRadius: 6,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#42A5F5",
+    alignSelf: "center",
+    width: wp("75%"),
+    height: hp("7.2%"),
   },
-});
-
-const pickerStyles = StyleSheet.create({
-  inputIOS: {
-    width: 350,
-    height: 55,
-    backgroundColor: "white",
-    margin: 10,
-    padding: 8,
+  buttonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: hp("2.5%"),
+  },
+  input: {
+    backgroundColor: "#f0f0f0",
     color: "black",
-    borderRadius: 14,
-    fontSize: 18,
-    fontWeight: "500",
-  },
-  inputAndroid: {
-    color: "white",
+    borderRadius: 6,
+    padding: wp("1%"),
+    margin: hp("1%"),
+    width: wp("75%"),
+    height: hp("7.5%"),
+    fontSize: hp("2.3%"),
+    alignSelf: "center",
   },
 });
 

@@ -7,7 +7,7 @@ import { Platform } from "react-native";
 
 import Home from "./Home";
 import Points from "./Points";
-import UserProfile from "./UserProfile";
+import Profile from "./Profile";
 import Tasks from "./Tasks";
 
 const Tab = createBottomTabNavigator();
