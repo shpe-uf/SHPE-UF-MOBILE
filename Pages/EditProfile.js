@@ -8,10 +8,12 @@ import {
   TouchableOpacity,
   Alert,
   Text,
+  TextInput,
+  Image,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
-import { TextInput } from "react-native-paper";
 import { Icon } from "native-base";
 import RNPickerSelect from "react-native-picker-select";
 import {
@@ -32,6 +34,8 @@ import sexOptions from "../assets/options/sex.json";
 function EditProfile({ navigation }) {
   const [user, setUser] = useState({});
   const [id, setId] = useState("");
+  const [image, setImage] = useState(null);
+
   const readData = async () => {
     try {
       const storedId = await AsyncStorage.getItem("@storage_Key");
@@ -54,7 +58,9 @@ function EditProfile({ navigation }) {
 
   if (data && data.getUser != user) {
     setUser(data.getUser);
-    console.log(data);
+    if (user.photo !== "") {
+      setImage(user.photo);
+    }
   }
 
   const { values } = useForm(editUser, {
@@ -77,14 +83,33 @@ function EditProfile({ navigation }) {
     onError(err) {
       getErrors(err);
     },
-
     onCompleted() {
       Alert.alert("Edit Successful!");
-      navigation.navigate("UserProfile");
+      NativeModules.DevSettings.reload();
+      navigation.navigate("Profile");
     },
-
     variables: values,
   });
+
+  let pickImage = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+      base64: true,
+    });
+    //console.log(result);
+    //console.log('data:image/jpeg;base64,' + result);
+    if (!result.cancelled) {
+      setImage(result);
+    }
+  };
 
   majorOptions.map((option) => {
     option["color"] = "black";
@@ -120,33 +145,42 @@ function EditProfile({ navigation }) {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAwareScrollView>
         <View>
+          <View style={styles.container}>
+            {user && (user.photo !== "" || image !== undefined) ? (
+              <Image source={image} style={styles.profilePic} />
+            ) : (
+              <Image
+                source={require("../assets/images/SHPE_UF_LOGO.jpg")}
+                style={styles.profilePic}
+              />
+            )}
+            <TouchableOpacity onPress={pickImage}>
+              <Text style={styles.photoText}>Change profile photo</Text>
+            </TouchableOpacity>
+          </View>
           <TextInput
-            flat
-            label="First Name"
-            placeholder={user.firstName}
-            underlineColor="black"
-            selectionColor="black"
             style={styles.input}
-            onChangeText={(text) => {
-              values.firstName = text;
-            }}
+            placeholder="First Name"
+            placeholderTextColor="#a9a9a9"
+            onChangeText={(value) => (values.firstName = value)}
+            spellCheck={false}
+            autoCorrect={false}
+            autoCapitalize="none"
           />
           <TextInput
-            flat
-            label="Last Name"
-            placeholder={user.lastName}
-            underlineColor="black"
-            selectionColor="black"
             style={styles.input}
-            onChangeText={(text) => {
-              values.lastName = text;
-            }}
+            placeholder="Last Name"
+            placeholderTextColor="#a9a9a9"
+            onChangeText={(value) => (values.lastName = value)}
+            spellCheck={false}
+            autoCorrect={false}
+            autoCapitalize="none"
           />
           <RNPickerSelect
             useNativeAndroidPickerStyle={false}
             placeholder={{
               label: "Major",
-              value: null,
+              value: user.major,
               color: "#9EA0A4",
             }}
             style={{
@@ -318,9 +352,10 @@ function EditProfile({ navigation }) {
               if (values.sex === "") {
                 values.sex = user.sex;
               }
-
+              values.photo = 'data:image/jpeg;base64,' + image;
+              //console.log("exit val " + values.photo);
+              console.log(image.base64);
               values.email = user.email;
-              values.photo = user.photo;
               values.classes = user.classes;
               values.internships = user.internships;
               values.socialMedia = user.socialMedia;
@@ -349,6 +384,23 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: hp("2.5%"),
+  },
+  container: {
+    alignItems: "center",
+    marginTop: "10%",
+  },
+  profilePic: {
+    alignItems: "center",
+    borderRadius: 100,
+    height: 175,
+    justifyContent: "center",
+    width: 175,
+  },
+  photoText: {
+    color: "#0070C0",
+    textAlign: "center",
+    fontSize: hp("2.5%"),
+    padding: wp("3%"),
   },
   input: {
     backgroundColor: "#f0f0f0",

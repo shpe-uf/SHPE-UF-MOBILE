@@ -46,11 +46,14 @@ function UserProfile({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
-        <Image
-          source={require("../assets/images/SHPE_UF_LOGO.jpg")}
-          style={styles.profilePic}
-        />
+        {user && user.photo !== "" ? (
+          <Image source={user.photo} style={styles.profilePic} />
+        ) : (
+          <Image
+            source={require("../assets/images/SHPE_UF_LOGO.jpg")}
+            style={styles.profilePic}
+          />
+        )}
         <Text style={styles.nameStyling}>{fullName}</Text>
       </View>
 
