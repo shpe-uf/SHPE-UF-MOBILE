@@ -8,6 +8,7 @@ import {
   Button,
   Alert,
   View,
+  Text,
   TouchableOpacity
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
@@ -39,7 +40,9 @@ function ResetPassword({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-    <Text style={styles.title}>POINTS PROGRAM</Text>
+      <View>
+        <Text style={styles.title}>RESET PASSWORD</Text>
+      </View>
       <View onPress={Keyboard.dismiss}>
         <KeyboardAwareScrollView>
           <TextInput
@@ -56,6 +59,13 @@ function ResetPassword({ navigation }) {
           />
         </KeyboardAwareScrollView>
         <View style={styles.registerView}>
+          <Text style={{ fontSize: hp("2.3%") }}>New to SHPE UF?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text style={{ fontSize: hp("2.3%"), color: "rgb(0,122,255)" }}>
+              {" "}
+              Register here!
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
