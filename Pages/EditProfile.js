@@ -104,10 +104,12 @@ function EditProfile({ navigation }) {
       quality: 1,
       base64: true,
     });
-    //console.log(result);
-    //console.log('data:image/jpeg;base64,' + result);
+
     if (!result.cancelled) {
       setImage(result);
+      console.log({
+        uri: `data:image/jpg;base64,${image.base64}`.slice(0, 100),
+      });
     }
   };
 
@@ -352,9 +354,7 @@ function EditProfile({ navigation }) {
               if (values.sex === "") {
                 values.sex = user.sex;
               }
-              values.photo = 'data:image/jpeg;base64,' + image;
-              //console.log("exit val " + values.photo);
-              console.log(image.base64);
+              values.photo = "data:image/jpg;base64," + image.base64;
               values.email = user.email;
               values.classes = user.classes;
               values.internships = user.internships;
