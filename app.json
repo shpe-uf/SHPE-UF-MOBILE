@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "SHPEMobile",
+    "name": "SHPE UF",
     "slug": "SHPEMobile",
+    "privacy": "public",
+    "description": "App for SHPE UF members to redeem points",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
