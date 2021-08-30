@@ -14,6 +14,7 @@ import PointsBar from ".././components/PointsBar";
 import UserEventsTable from ".././components/UserEventsTable";
 import UserTasksTable from "../components/UserTasksTable";
 import CodeButton from "../components/CodeButton";
+import allStyles from ".././allStyles.js";
 
 function Points() {
   const [id, setId] = useState("");
@@ -43,7 +44,7 @@ function Points() {
   return (
     <View>
       <ScrollView style={styles.container}>
-        <Text style={styles.title}>POINTS PROGRAM</Text>
+        <Text style={allStyles.title}>POINTS PROGRAM</Text>
         <PointsBar />
         <View style={{ paddingVertical: "5%" }} />
         <UserTasksTable user={user} />
@@ -61,13 +62,6 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     paddingHorizontal: 40,
-  },
-  title: {
-    textAlign: "center",
-    color: "#001F5B",
-    fontSize: 35,
-    paddingVertical: "10%",
-    marginTop: "10%",
   },
 });
 

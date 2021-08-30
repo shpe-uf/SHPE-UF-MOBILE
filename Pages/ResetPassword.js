@@ -19,6 +19,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
+import allStyles from ".././allStyles.js";
+
 
 function ResetPassword({ navigation }) {
   const { values } = useForm(resetPassword, {
@@ -41,7 +43,7 @@ function ResetPassword({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text style={styles.title}>RESET PASSWORD</Text>
+        <Text style={allStyles.title}>RESET PASSWORD</Text>
       </View>
       <View onPress={Keyboard.dismiss}>
         <KeyboardAwareScrollView>
@@ -78,13 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     justifyContent: "center"
-  },
-  title: {
-    textAlign: "center",
-    color: "#001F5B",
-    fontSize: 35,
-    paddingVertical: "10%",
-    marginTop: "10%"
   },
   input: {
     backgroundColor: "#f0f0f0",

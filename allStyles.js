@@ -14,6 +14,13 @@ export default StyleSheet.create({
   content: {
     width: "100%",
   },
+  title: {
+    textAlign: "center",
+    color: "#001F5B",
+    fontSize: 28,
+    paddingVertical: "8%",
+    marginTop: "10%"
+  },
   h1: {
     alignSelf: "flex-start",
     color: "#FD652F",
