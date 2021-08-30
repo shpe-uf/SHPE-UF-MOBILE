@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   Image,
+  RefreshControl,
 } from "react-native";
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
@@ -28,7 +29,7 @@ function UserProfile({ navigation }) {
     }
   };
   readData();
-  const { data } = useQuery(FETCH_USER_QUERY, {
+  const { data, refetch } = useQuery(FETCH_USER_QUERY, {
     onError(err) {
       console.log(err);
     },
@@ -42,9 +43,20 @@ function UserProfile({ navigation }) {
   }
 
   let fullName = user.firstName + " " + user.lastName;
+  const [refreshing, setRefreshing] = React.useState(false);
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={styles.scrollView}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <View style={styles.container}>
         {user && user.photo !== "" ? (
           <Image source={user.photo} style={styles.profilePic} />

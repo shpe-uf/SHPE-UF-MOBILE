@@ -76,10 +76,10 @@ function EventsTable() {
                 <Text style={allStyles.headerTextStyle}>NAME</Text>
               </DataTable.Title>
               <DataTable.Title>
-                <Text style={allStyles.headerTextStyle}>CATEGORY</Text>
+                <Text style={allStyles.headerTextStyle}>TYPE</Text>
               </DataTable.Title>
               <DataTable.Title>
-                <Text style={allStyles.headerTextStyle}>END DATE</Text>
+                <Text style={allStyles.headerTextStyle}>DATE</Text>
               </DataTable.Title>
               <DataTable.Title>
                 <Text style={allStyles.headerTextStyle}>POINTS</Text>

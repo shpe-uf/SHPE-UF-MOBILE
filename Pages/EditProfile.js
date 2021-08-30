@@ -85,7 +85,6 @@ function EditProfile({ navigation }) {
     },
     onCompleted() {
       Alert.alert("Edit Successful!");
-      NativeModules.DevSettings.reload();
       navigation.navigate("Profile");
     },
     variables: values,
@@ -162,7 +161,7 @@ function EditProfile({ navigation }) {
           </View>
           <TextInput
             style={styles.input}
-            placeholder="First Name"
+            placeholder={user.firstName}
             placeholderTextColor="#a9a9a9"
             onChangeText={(value) => (values.firstName = value)}
             spellCheck={false}
@@ -171,7 +170,7 @@ function EditProfile({ navigation }) {
           />
           <TextInput
             style={styles.input}
-            placeholder="Last Name"
+            placeholder={user.lastName}
             placeholderTextColor="#a9a9a9"
             onChangeText={(value) => (values.lastName = value)}
             spellCheck={false}
@@ -354,7 +353,7 @@ function EditProfile({ navigation }) {
               if (values.sex === "") {
                 values.sex = user.sex;
               }
-              values.photo = "data:image/jpg;base64," + image.base64;
+              values.photo = user.photo;
               values.email = user.email;
               values.classes = user.classes;
               values.internships = user.internships;
@@ -363,7 +362,7 @@ function EditProfile({ navigation }) {
             }}
             style={styles.button}
           >
-            <Text style={styles.buttonText}>Edit Profile</Text>
+            <Text style={styles.buttonText}>Save Changes</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>

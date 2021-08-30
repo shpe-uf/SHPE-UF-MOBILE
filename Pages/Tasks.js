@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Keyboard, Text, View } from "react-native";
+import { Keyboard, Text, View, StyleSheet } from "react-native";
 import { ScrollView, Card } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -84,11 +84,12 @@ function Tasks() {
           <>
             <View style={allStyles.content}>
               <View>
+                <Text style={allStyles.title}>TASKS</Text>
                 <Text style={allStyles.h2}>BOOKMARKED TASKS</Text>
                 {bookTasks.length == 0 ? (
-                  <Card>
-                    <Text>No tasks have been bookmarked yet.</Text>
-                  </Card>
+                  <View style={{ paddingBottom: 16, paddingTop: 10 }}>
+                    <Text style={allStyles.noContentText}>No tasks have been bookmarked yet.</Text>
+                  </View>
                 ) : (
                   <TaskCard props={bookProps} />
                 )}
@@ -110,6 +111,16 @@ function Tasks() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  title: {
+    textAlign: "center",
+    color: "#001F5B",
+    fontSize: 28,
+    paddingVertical: "1%",
+    marginTop: "5%",
+  },
+});
 
 const FETCH_USER_QUERY = gql`
   query($userId: ID!) {

@@ -37,6 +37,20 @@ export default StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 6,
   },
+  title: {
+    textAlign: "center",
+    color: "#001F5B",
+    fontSize: 28,
+    paddingVertical: "1%",
+    marginTop: "5%",
+  },
+  title2: {
+    textAlign: "center",
+    color: "#001F5B",
+    fontSize: 28,
+    paddingVertical: "8%",
+    marginTop: "10%",
+  },
   outerTableContainer: {
     width: "100%",
   },
@@ -52,7 +66,7 @@ export default StyleSheet.create({
   },
   headerTextStyle: {
     color: "#0070C0",
-    fontSize: 20,
+    fontSize: 17,
     textDecorationColor: "#0070C0",
   },
   tableRow1: {

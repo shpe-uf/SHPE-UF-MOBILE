@@ -39,8 +39,8 @@ function TaskButton(props) {
 const styles = StyleSheet.create({
   button: {
     alignSelf: "center",
-    backgroundColor: "#72A9BE",
-    borderColor: "#72A9BE",
+    backgroundColor: "#0070C0",
+    borderColor: "#0070C0",
     borderRadius: 6,
     height: hp("7%"),
     justifyContent: "center",
