@@ -1,4 +1,8 @@
 import { StyleSheet } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 export default StyleSheet.create({
   container: {
@@ -75,6 +79,17 @@ export default StyleSheet.create({
   tableRow2: {
     backgroundColor: "#F6F6F6",
   },
+  input: {
+    backgroundColor: "#f0f0f0",
+    color: "black",
+    borderRadius: 6,
+    padding: wp("5%"),
+    margin: hp("1%"),
+    width: wp("75%"),
+    height: hp("8.5%"),
+    fontSize: hp("2.5%"),
+    alignSelf: "center",
+  },
   noContentText: {
     borderColor: "#CCC",
     borderRadius: 10,
@@ -83,5 +98,10 @@ export default StyleSheet.create({
     height: 55,
     paddingTop: "5%",
     textAlign: "center",
+  },
+  submitButtonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: hp("2.5%"),
   },
 });

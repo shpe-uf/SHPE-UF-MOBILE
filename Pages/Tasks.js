@@ -24,7 +24,7 @@ function Tasks() {
   };
   readData();
 
-  const { loading, data, error } = useQuery(FETCH_USER_QUERY, {
+  const { loading, data, error, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
       userId: id,
     },

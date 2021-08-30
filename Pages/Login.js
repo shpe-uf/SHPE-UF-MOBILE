@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     height: hp("40%"),
     resizeMode: "contain",
     alignSelf: "center",
-    marginTop: hp("3%"),
+    marginTop: hp("10%"),
   },
   registerView: {
     flex: 1,

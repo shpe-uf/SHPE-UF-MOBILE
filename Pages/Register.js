@@ -383,11 +383,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   image: {
-    width: wp("17.5%"),
-    height: hp("7%"),
+    width: wp("40%"),
+    height: hp("20%"),
     resizeMode: "contain",
     alignSelf: "center",
-    marginTop: hp("2%"),
+    marginTop: hp("10%"),
+    marginBottom: hp("5%"),
   },
   buttonContainer: {
     backgroundColor: "#001f5b",
