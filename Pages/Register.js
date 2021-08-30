@@ -26,6 +26,7 @@ import graduatingOptions from "../assets/options/graduating.json";
 import countryOptions from "../assets/options/country.json";
 import ethnicityOptions from "../assets/options/ethnicity.json";
 import sexOptions from "../assets/options/sex.json";
+import allStyles from ".././allStyles.js";
 
 function Register({ navigation }) {
   const { values } = useForm(addUser, {
@@ -111,7 +112,7 @@ function Register({ navigation }) {
               style={styles.image}
             />
             <TextInput
-              style={styles.input}
+              style={allStyles.input}
               placeholder="First Name"
               onChangeText={(text) => {
                 values.firstName = text;
@@ -121,7 +122,7 @@ function Register({ navigation }) {
               placeholderTextColor="#a9a9a9"
             />
             <TextInput
-              style={styles.input}
+              style={allStyles.input}
               placeholder="Last Name"
               onChangeText={(text) => {
                 values.lastName = text;
@@ -281,7 +282,7 @@ function Register({ navigation }) {
               }}
             />
             <TextInput
-              style={styles.input}
+              style={allStyles.input}
               placeholder="Username"
               onChangeText={(text) => {
                 values.username = text;
@@ -292,7 +293,7 @@ function Register({ navigation }) {
               placeholderTextColor="#a9a9a9"
             />
             <TextInput
-              style={styles.input}
+              style={allStyles.input}
               placeholder="UF/SF Email"
               onChangeText={(text) => {
                 values.email = text;
@@ -304,7 +305,7 @@ function Register({ navigation }) {
             />
             <TextInput
               ref={inputElementRef}
-              style={styles.input}
+              style={allStyles.input}
               placeholder="Password"
               onChangeText={(text) => {
                 values.password = text;
@@ -317,7 +318,7 @@ function Register({ navigation }) {
             />
             <TextInput
               ref={inputElementRef2}
-              style={styles.input}
+              style={allStyles.input}
               placeholder="Confirm Password"
               onChangeText={(text) => {
                 values.confirmPassword = text;
@@ -344,7 +345,7 @@ function Register({ navigation }) {
               onPress={() => addUser()}
               style={styles.submitContainer}
             >
-              <Text style={styles.submitText}>Register</Text>
+              <Text style={allStyles.submitButtonText}>Register</Text>
             </TouchableOpacity>
             <View style={styles.loginView}>
               <Text style={{ fontSize: hp("2.3%") }}>Already Registered?</Text>
@@ -409,11 +410,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: wp("75%"),
     height: hp("7.2%"),
-  },
-  submitText: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: hp("2.5%"),
   },
   loginView: {
     flex: 0,
