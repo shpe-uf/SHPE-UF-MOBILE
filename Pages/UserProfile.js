@@ -66,7 +66,7 @@ function UserProfile() {
       <SmallCard label="Graduating" info={user.graduating} />
       <SmallCard label="Country of Origin" info={user.country} />
       <SmallCard label="Ethnicity" info={user.ethnicity} />
-      <SmallCard label="Sex" info={user.sex} />
+      <SmallCard label="Gender" info={user.sex} />
       <SmallCard label="Member Since" info={user.createdAt} />
 
       <LogoutButton />

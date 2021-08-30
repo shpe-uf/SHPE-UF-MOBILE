@@ -35,7 +35,7 @@ function ResetPassword({ navigation }) {
       navigation.navigate("Login");
     },
 
-    variables: values
+    variables: values,
   });
 
   return (
