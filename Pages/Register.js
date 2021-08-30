@@ -1,264 +1,436 @@
-import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery, gql } from "@apollo/client";
-import { useForm } from "react-hook-form";
-import { View, TouchableWithoutFeedback, TextInput, StyleSheet, SafeAreaView, Keyboard, Button, Alert } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import RNPickerSelect from 'react-native-picker-select';
-
+import React, { useEffect, useRef } from "react";
+import { useMutation, gql } from "@apollo/client";
+import { useForm, getErrors } from "../util/hooks";
+import {
+  View,
+  TouchableWithoutFeedback,
+  TextInput,
+  StyleSheet,
+  SafeAreaView,
+  Keyboard,
+  Alert,
+  Image,
+  TouchableOpacity,
+  Text,
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import RNPickerSelect from "react-native-picker-select";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import { Icon } from "native-base";
 import majorOptions from "../assets/options/major.json";
 import yearOptions from "../assets/options/year.json";
 import graduatingOptions from "../assets/options/graduating.json";
 import countryOptions from "../assets/options/country.json";
 import ethnicityOptions from "../assets/options/ethnicity.json";
 import sexOptions from "../assets/options/sex.json";
+import allStyles from ".././allStyles.js";
 
-function Register() {
+function Register({ navigation }) {
+  const { values } = useForm(addUser, {
+    firstName: "",
+    lastName: "",
+    major: "",
+    ethnicity: "",
+    graduating: "",
+    country: "",
+    year: "",
+    sex: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    listServ: "false",
+  });
 
-    function onSubmit(data){
-        //console.log(data);
-        addUser({
-            variables: {
-                firstName: data.firstName,
-                lastName: data.lastName,
-                major: data.major,
-                ethnicity: data.ethnicity,
-                graduating: data.graduating,
-                country: data.country,
-                year: data.year,
-                sex: data.sex,
-                username: data.username,
-                email: data.email,
-                password: data.password,
-                confirmPassword: data.confirmPassword,
-                listServ: "false"
-            }
-        }).catch((err) => {return err.graphQLErrors[0].extensions.exception.errors;}).then((errors) => {
-            if (errors && !errors.data){
-                var errorString = "";
-                
-                const errorArray = Object.values(errors);
+  const [addUser] = useMutation(REGISTER_USER, {
+    onError(err) {
+      getErrors(err);
+    },
 
-                errorArray.map(error => {
-                    errorString += (error);
+    onCompleted() {
+      Alert.alert("Registration Successful!");
+      navigation.navigate("Login");
+    },
 
-                    if (error != errorArray[errorArray.length - 1]){
-                        errorString += "\n";
-                    }
-                })
+    variables: values,
+  });
 
-                Alert.alert(errorString);
-            } else {
-                Alert.alert("Thank you for registering " + data.firstName + "!");
-            }
-        })
-    }
+  const inputElementRef = useRef(null);
+  useEffect(() => {
+    inputElementRef.current.setNativeProps({
+      style: { fontFamily: "Roboto" },
+    });
+  }, []);
 
-    const { register, handleSubmit, setValue } = useForm();
+  const inputElementRef2 = useRef(null);
+  useEffect(() => {
+    inputElementRef2.current.setNativeProps({
+      style: { fontFamily: "Roboto" },
+    });
+  }, []);
 
-    useEffect(() => {
-        register('firstName');
-        setValue('firstName', "");
-        register('lastName');
-        setValue('lastName', "");
-        register('major');
-        setValue('major', "");
-        register('year');
-        setValue('year', "");
-        register('graduating');
-        setValue('graduating', "");
-        register('country');
-        setValue('country', "");
-        register('ethnicity');
-        setValue('ethnicity', "");
-        register('sex');
-        setValue('sex', "");
-        register('username');
-        setValue('username', "");
-        register('email');
-        setValue('email', "");
-        register('password');
-        setValue('password', "");
-        register('confirmPassword');
-        setValue('confirmPassword', "");
-    }, [register]);
+  majorOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const majorChoices = majorOptions;
 
-    const [addUser, { loading }] = useMutation(REGISTER_USER);
+  yearOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const yearChoices = yearOptions;
 
-    return (
-        <SafeAreaView 
-            style={styles.container}
-        >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <KeyboardAwareScrollView>
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='First Name'
-                        onChangeText={text => {
-                            setValue('firstName', text)
-                        }}
-                        spellCheck={false}
-                        autoCorrect={false}
-                    />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Last Name'
-                        onChangeText={text => {
-                            setValue('lastName', text)
-                        }}
-                        spellCheck={false}
-                        autoCorrect={false}
-                    />
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Major',
-                            value: null,
-                            color: '#9EA0A4',
-                        }}
-                        style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('major', value)}
-                        items={majorOptions}
-                    />
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Year',
-                            value: null,
-                            color: '#9EA0A4',
-                        }}
-                        style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('year', value)}
-                        items={yearOptions}
-                    />
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Graduating this year?',
-                            value: null,
-                            color: '#9EA0A4',
-                        }}
-                        style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('graduating', value)}
-                        items={graduatingOptions}
-                    />
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Country of Origin',
-                            value: null,
-                            color: '#9EA0A4',
-                        }}
-                        style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('country', value)}
-                        items={countryOptions}
-                    />
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Ethnicity',
-                            value: null,
-                            color: '#9EA0A4',
-                        }}
-                        style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('ethnicity', value)}
-                        items={ethnicityOptions}
-                    />
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Sex',
-                            value: null,
-                            color: '#9EA0A4',
-                        }}
-                        style={{inputIOS: styles.input}}
-                        onValueChange={(value) => setValue('sex', value)}
-                        items={sexOptions}
-                    />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Username'
-                        onChangeText={text => {
-                            setValue('username', text)
-                        }}
-                        spellCheck={false}
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                    />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='UF/SF Email'
-                        onChangeText={text => {
-                            setValue('email', text)
-                        }}
-                        spellCheck={false}
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                    />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Password'
-                        onChangeText={text => {
-                            setValue('password', text)
-                        }}
-                        spellCheck={false}
-                        autoCorrect={false}
-                        secureTextEntry={true}
-                        autoCapitalize='none'
-                    />
-                    <TextInput 
-                        style={styles.input}
-                        placeholder='Confirm Password'
-                        onChangeText={text => {
-                            setValue('confirmPassword', text)
-                        }}
-                        spellCheck={false}
-                        autoCorrect={false}
-                        secureTextEntry={true}
-                        autoCapitalize='none'
-                    />
+  graduatingOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const graduatingChoices = graduatingOptions;
 
-                    <View>
-                        <Button 
-                            title='Submit'
-                            onPress={handleSubmit(onSubmit)}
-                        />
-                    </View>
-                    <View style={{ flex : 1 }} />
-                </KeyboardAwareScrollView>
-            </TouchableWithoutFeedback>
-        </SafeAreaView>
-    )
+  countryOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const countryChoices = countryOptions;
+
+  ethnicityOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const ethnicityChoices = ethnicityOptions;
+
+  sexOptions.map((option) => {
+    option["color"] = "black";
+  });
+  const sexChoices = sexOptions;
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAwareScrollView>
+          <View>
+            <Image
+              source={require("../assets/images/SHPE_UF_LOGO_APP.png")}
+              style={styles.image}
+            />
+            <TextInput
+              style={allStyles.input}
+              placeholder="First Name"
+              onChangeText={(text) => {
+                values.firstName = text;
+              }}
+              spellCheck={false}
+              autoCorrect={false}
+              placeholderTextColor="#a9a9a9"
+            />
+            <TextInput
+              style={allStyles.input}
+              placeholder="Last Name"
+              onChangeText={(text) => {
+                values.lastName = text;
+              }}
+              spellCheck={false}
+              autoCorrect={false}
+              placeholderTextColor="#a9a9a9"
+            />
+            <RNPickerSelect
+              useNativeAndroidPickerStyle={false}
+              placeholder={{
+                label: "Major",
+                value: null,
+                color: "#9EA0A4",
+              }}
+              style={{
+                inputIOS: styles.input,
+                inputAndroid: styles.input,
+                iconContainer: { right: wp("18%"), top: hp("1.7%") },
+                placeholder: { color: "#a9a9a9" },
+              }}
+              onValueChange={(value) => (values.major = value)}
+              items={majorChoices}
+              Icon={() => {
+                return (
+                  <Icon
+                    type="FontAwesome"
+                    name="sort-down"
+                    style={{ color: "#9EA0A4" }}
+                  />
+                );
+              }}
+            />
+            <RNPickerSelect
+              useNativeAndroidPickerStyle={false}
+              placeholder={{
+                label: "Year",
+                value: null,
+                color: "#9EA0A4",
+              }}
+              style={{
+                inputIOS: styles.input,
+                inputAndroid: styles.input,
+                iconContainer: { right: wp("18%"), top: hp("1.7%") },
+                placeholder: { color: "#a9a9a9" },
+              }}
+              onValueChange={(value) => (values.year = value)}
+              items={yearChoices}
+              Icon={() => {
+                return (
+                  <Icon
+                    type="FontAwesome"
+                    name="sort-down"
+                    style={{ color: "#9EA0A4" }}
+                  />
+                );
+              }}
+            />
+            <RNPickerSelect
+              useNativeAndroidPickerStyle={false}
+              placeholder={{
+                label: "Graduating this year?",
+                value: null,
+                color: "#9EA0A4",
+              }}
+              style={{
+                inputIOS: styles.input,
+                inputAndroid: styles.input,
+                iconContainer: { right: wp("18%"), top: hp("1.7%") },
+                placeholder: { color: "#a9a9a9" },
+              }}
+              onValueChange={(value) => (values.graduating = value)}
+              items={graduatingChoices}
+              Icon={() => {
+                return (
+                  <Icon
+                    type="FontAwesome"
+                    name="sort-down"
+                    style={{ color: "#9EA0A4" }}
+                  />
+                );
+              }}
+            />
+            <RNPickerSelect
+              useNativeAndroidPickerStyle={false}
+              placeholder={{
+                label: "Country of Origin",
+                value: null,
+                color: "#9EA0A4",
+              }}
+              style={{
+                inputIOS: styles.input,
+                inputAndroid: styles.input,
+                iconContainer: { right: wp("18%"), top: hp("1.7%") },
+                placeholder: { color: "#a9a9a9" },
+              }}
+              onValueChange={(value) => (values.country = value)}
+              items={countryChoices}
+              Icon={() => {
+                return (
+                  <Icon
+                    type="FontAwesome"
+                    name="sort-down"
+                    style={{ color: "#9EA0A4" }}
+                  />
+                );
+              }}
+            />
+            <RNPickerSelect
+              useNativeAndroidPickerStyle={false}
+              placeholder={{
+                label: "Ethnicity",
+                value: null,
+                color: "#9EA0A4",
+              }}
+              style={{
+                inputIOS: styles.input,
+                inputAndroid: styles.input,
+                iconContainer: { right: wp("18%"), top: hp("1.7%") },
+                placeholder: { color: "#a9a9a9" },
+              }}
+              onValueChange={(value) => (values.ethnicity = value)}
+              items={ethnicityChoices}
+              Icon={() => {
+                return (
+                  <Icon
+                    type="FontAwesome"
+                    name="sort-down"
+                    style={{ color: "#9EA0A4" }}
+                  />
+                );
+              }}
+            />
+            <RNPickerSelect
+              useNativeAndroidPickerStyle={false}
+              placeholder={{
+                label: "Gender",
+                value: null,
+                color: "#9EA0A4",
+              }}
+              style={{
+                inputIOS: styles.input,
+                inputAndroid: styles.input,
+                iconContainer: { right: wp("18%"), top: hp("1.7%") },
+                placeholder: { color: "#a9a9a9" },
+              }}
+              onValueChange={(value) => (values.sex = value)}
+              items={sexChoices}
+              Icon={() => {
+                return (
+                  <Icon
+                    type="FontAwesome"
+                    name="sort-down"
+                    style={{ color: "#9EA0A4" }}
+                  />
+                );
+              }}
+            />
+            <TextInput
+              style={allStyles.input}
+              placeholder="Username"
+              onChangeText={(text) => {
+                values.username = text;
+              }}
+              spellCheck={false}
+              autoCorrect={false}
+              autoCapitalize="none"
+              placeholderTextColor="#a9a9a9"
+            />
+            <TextInput
+              style={allStyles.input}
+              placeholder="UF/SF Email"
+              onChangeText={(text) => {
+                values.email = text;
+              }}
+              spellCheck={false}
+              autoCorrect={false}
+              autoCapitalize="none"
+              placeholderTextColor="#a9a9a9"
+            />
+            <TextInput
+              ref={inputElementRef}
+              style={allStyles.input}
+              placeholder="Password"
+              onChangeText={(text) => {
+                values.password = text;
+              }}
+              spellCheck={false}
+              autoCorrect={false}
+              secureTextEntry={true}
+              autoCapitalize="none"
+              placeholderTextColor="#a9a9a9"
+            />
+            <TextInput
+              ref={inputElementRef2}
+              style={allStyles.input}
+              placeholder="Confirm Password"
+              onChangeText={(text) => {
+                values.confirmPassword = text;
+              }}
+              spellCheck={false}
+              autoCorrect={false}
+              secureTextEntry={true}
+              autoCapitalize="none"
+              placeholderTextColor="#a9a9a9"
+            />
+            <Text
+              style={{
+                marginHorizontal: wp("12.5%"),
+                color: "red",
+                marginBottom: hp("4%"),
+                fontSize: hp("1.8%"),
+              }}
+            >
+              Password must be at least 8 characters. It must contain at least
+              one lowercase character, one uppercase character, one number, and
+              one special character.
+            </Text>
+            <TouchableOpacity
+              onPress={() => addUser()}
+              style={styles.submitContainer}
+            >
+              <Text style={allStyles.submitButtonText}>Register</Text>
+            </TouchableOpacity>
+            <View style={styles.loginView}>
+              <Text style={{ fontSize: hp("2.3%") }}>Already Registered?</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={{ fontSize: hp("2.3%"), color: "#0070C0" }}>
+                  {" "}
+                  Login
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAwareScrollView>
+      </TouchableWithoutFeedback>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    input: {
-        width: 350,
-        height: 55,
-        backgroundColor: 'white',
-        margin: 10,
-        padding: 8,
-        color: 'black',
-        borderRadius: 14,
-        fontSize: 18,
-        fontWeight: '500',
-      },
-      container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#42A5F5',
-      }
-  });
-
-const pickerStyles = StyleSheet.create({
-    inputIOS: {
-        width: 350,
-        height: 55,
-        backgroundColor: 'white',
-        margin: 10,
-        padding: 8,
-        color: 'black',
-        borderRadius: 14,
-        fontSize: 18,
-        fontWeight: '500',
-    },
-    inputAndroid: {
-        color: 'white'
-    }
+  container: {
+    flex: 1,
+    flexShrink: 0,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    backgroundColor: "#f0f0f0",
+    color: "black",
+    borderRadius: 6,
+    padding: wp("4%"),
+    margin: hp("1%"),
+    width: wp("75%"),
+    height: hp("7.2%"),
+    fontSize: hp("2.3%"),
+    alignSelf: "center",
+  },
+  image: {
+    width: wp("40%"),
+    height: hp("20%"),
+    resizeMode: "contain",
+    alignSelf: "center",
+    marginTop: hp("10%"),
+    marginBottom: hp("5%"),
+  },
+  buttonContainer: {
+    backgroundColor: "#001f5b",
+    borderRadius: 6,
+    justifyContent: "center",
+    alignSelf: "center",
+    margin: hp("1%"),
+    width: wp("75%"),
+    height: hp("7.2%"),
+  },
+  buttonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: hp("2.5%"),
+  },
+  submitContainer: {
+    backgroundColor: "#FD652F",
+    borderRadius: 6,
+    justifyContent: "center",
+    alignSelf: "center",
+    width: wp("75%"),
+    height: hp("7.2%"),
+  },
+  loginView: {
+    flex: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: hp("1%"),
+    marginBottom: hp("2%"),
+  },
+  androidPicker: {
+    backgroundColor: "#f0f0f0",
+    color: "black",
+    borderRadius: 6,
+    padding: wp("4%"),
+    margin: hp("1%"),
+    width: wp("75%"),
+    height: hp("7.2%"),
+    alignSelf: "center",
+    fontFamily: "Roboto-Regular",
+  },
 });
 
 const REGISTER_USER = gql`
