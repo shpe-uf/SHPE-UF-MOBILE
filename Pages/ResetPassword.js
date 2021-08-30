@@ -47,7 +47,7 @@ function ResetPassword({ navigation }) {
       <View onPress={Keyboard.dismiss}>
         <KeyboardAwareScrollView>
           <TextInput
-            style={styles.input}
+            style={allStyles.input}
             placeholder="Email"
             onChangeText={text => (values.email = text)}
             spellCheck={false}
@@ -80,17 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     justifyContent: "center"
-  },
-  input: {
-    backgroundColor: "#f0f0f0",
-    color: "black",
-    borderRadius: 6,
-    margin: hp("1%"),
-    padding: wp("4%"),
-    width: wp("75%"),
-    height: hp("7.2%"),
-    fontSize: hp("2.3%"),
-    alignSelf: "center"
   },
   registerView: {
     flex: 1,
