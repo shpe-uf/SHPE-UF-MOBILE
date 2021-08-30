@@ -125,7 +125,7 @@ function CodeButton() {
 
 const styles = StyleSheet.create({
   fab: {
-    backgroundColor: "#001F5B",
+    backgroundColor: "#0070C0",
     bottom: 0,
     margin: 16,
     position: "absolute",
@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: "center",
-    backgroundColor: "#001F5B",
-    borderColor: "#001F5B",
+    backgroundColor: "#0070C0",
+    borderColor: "#0070C0",
     borderRadius: 6,
     height: hp("6%"),
     justifyContent: "center",

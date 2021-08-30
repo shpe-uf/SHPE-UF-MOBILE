@@ -52,6 +52,7 @@ function Home() {
       <View style={allStyles.page}>
         {user ? (
           <View style={allStyles.content}>
+            <Text style={allStyles.title}>SHPE UF</Text>
             <PointsBox props={props} />
             <TasksTable />
             <EventsTable />

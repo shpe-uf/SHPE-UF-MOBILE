@@ -6,16 +6,16 @@ import {
   View,
   ScrollView,
   Image,
+  RefreshControl,
 } from "react-native";
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import SmallCard from "../components/SmallCard";
-import EditProfileButton from "../components/editProfileButton";
-import LogoutButton from "../components/LogoutButton";
+import SmallCard from ".././components/SmallCard";
+import LogoutButton from ".././components/LogoutButton";
 
-function UserProfile() {
+function UserProfile({ navigation }) {
   const [user, setUser] = useState({});
   const [id, setId] = useState("");
   const readData = async () => {
@@ -29,7 +29,7 @@ function UserProfile() {
     }
   };
   readData();
-  const { data } = useQuery(FETCH_USER_QUERY, {
+  const { data, refetch } = useQuery(FETCH_USER_QUERY, {
     onError(err) {
       console.log(err);
     },
@@ -43,22 +43,42 @@ function UserProfile() {
   }
 
   let fullName = user.firstName + " " + user.lastName;
+  const [refreshing, setRefreshing] = React.useState(false);
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={styles.scrollView}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <View style={styles.container}>
-        {/*Image only for proof of concept, NOT PULLING FROM DATABASE*/}
-        <Image
-          source={require("../assets/images/SHPE_UF_LOGO.jpg")}
-          style={styles.profilePic}
-        />
+        {user && user.photo !== "" ? (
+          <Image source={user.photo} style={styles.profilePic} />
+        ) : (
+          <Image
+            source={require("../assets/images/pic.jpg")}
+            style={styles.profilePic}
+          />
+        )}
         <Text style={styles.nameStyling}>{fullName}</Text>
       </View>
 
       <Text style={styles.email}>{user.email}</Text>
 
-      <EditProfileButton />
-      <View style={{ height: "3%" }}></View>
+      <View style={styles.viewStyle}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Edit Profile")}
+          style={styles.btnStyle}
+        >
+          <Text style={styles.textStyle}>Edit Profile</Text>
+        </TouchableOpacity>
+      </View>
 
       <SmallCard label="Username" info={user.username} />
       <SmallCard label="Major" info={user.major} />
@@ -96,6 +116,23 @@ const styles = StyleSheet.create({
     color: "#0070C0",
     fontSize: 20,
     paddingBottom: "2%",
+    textAlign: "center",
+  },
+  viewStyle: {
+    alignItems: "center",
+    height: "5%",
+    justifyContent: "center",
+  },
+  btnStyle: {
+    backgroundColor: "#FD652F",
+    borderRadius: 10,
+    height: "80%",
+    justifyContent: "center",
+    width: "35%",
+  },
+  textStyle: {
+    color: "#FFF",
+    fontSize: 20,
     textAlign: "center",
   },
 });

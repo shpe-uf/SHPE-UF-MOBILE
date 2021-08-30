@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   View,
+  RefreshControl,
 } from "react-native";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -41,10 +42,23 @@ function Points() {
     user = data.getUser;
   }
 
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
+
   return (
     <View>
-      <ScrollView style={styles.container}>
-        <Text style={allStyles.title}>POINTS PROGRAM</Text>
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Text style={allStyles.title2}>POINTS PROGRAM</Text>
         <PointsBar />
         <View style={{ paddingVertical: "5%" }} />
         <UserTasksTable user={user} />

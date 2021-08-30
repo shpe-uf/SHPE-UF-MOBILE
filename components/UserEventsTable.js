@@ -59,7 +59,7 @@ function UserEventsTable({ user }) {
                 <Text style={allStyles.headerTextStyle}>DATE</Text>
               </DataTable.Title>
               <DataTable.Title>
-                <Text style={allStyles.headerTextStyle}> POINTS</Text>
+                <Text style={allStyles.headerTextStyle}>POINTS</Text>
               </DataTable.Title>
             </DataTable.Header>
             {tableContents}

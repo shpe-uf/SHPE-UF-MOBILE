@@ -350,7 +350,7 @@ function Register({ navigation }) {
             <View style={styles.loginView}>
               <Text style={{ fontSize: hp("2.3%") }}>Already Registered?</Text>
               <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <Text style={{ fontSize: hp("2.3%"), color: "rgb(0,122,255)" }}>
+                <Text style={{ fontSize: hp("2.3%"), color: "#0070C0" }}>
                   {" "}
                   Login
                 </Text>
@@ -383,11 +383,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   image: {
-    width: wp("17.5%"),
-    height: hp("7%"),
+    width: wp("40%"),
+    height: hp("20%"),
     resizeMode: "contain",
     alignSelf: "center",
-    marginTop: hp("2%"),
+    marginTop: hp("10%"),
+    marginBottom: hp("5%"),
   },
   buttonContainer: {
     backgroundColor: "#001f5b",
