@@ -151,13 +151,13 @@ function EditProfile({ navigation }) {
               <Image source={image} style={styles.profilePic} />
             ) : (
               <Image
-                source={require("../assets/images/placeholder.png")}
+                source={require("../assets/images/pic.jpg")}
                 style={styles.profilePic}
               />
             )}
-            <TouchableOpacity onPress={pickImage}>
+            {/*<TouchableOpacity onPress={pickImage}>
               <Text style={styles.photoText}>Change profile photo</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>*/}
           </View>
           <TextInput
             style={styles.input}

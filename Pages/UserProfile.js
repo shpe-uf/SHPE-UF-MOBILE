@@ -62,7 +62,7 @@ function UserProfile({ navigation }) {
           <Image source={user.photo} style={styles.profilePic} />
         ) : (
           <Image
-            source={require("../assets/images/placeholder.png")}
+            source={require("../assets/images/pic.jpg")}
             style={styles.profilePic}
           />
         )}
