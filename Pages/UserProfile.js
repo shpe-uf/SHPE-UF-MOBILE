@@ -62,7 +62,7 @@ function UserProfile({ navigation }) {
           <Image source={user.photo} style={styles.profilePic} />
         ) : (
           <Image
-            source={require("../assets/images/SHPE_UF_LOGO.jpg")}
+            source={require("../assets/images/placeholder.png")}
             style={styles.profilePic}
           />
         )}

@@ -117,7 +117,7 @@ function Login({ navigation }) {
               <Text
                 style={{
                   alignSelf: "flex-end",
-                  color: "rgb(0,122,255)",
+                  color: "#0070C0",
                   fontSize: hp("2.2%"),
                 }}
               >
@@ -128,7 +128,7 @@ function Login({ navigation }) {
           <View style={styles.registerView}>
             <Text style={{ fontSize: hp("2.3%") }}>New to SHPE UF?</Text>
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <Text style={{ fontSize: hp("2.3%"), color: "rgb(0,122,255)" }}>
+              <Text style={{ fontSize: hp("2.3%"), color: "#0070C0" }}>
                 {" "}
                 Register here!
               </Text>

@@ -349,7 +349,7 @@ function Register({ navigation }) {
             <View style={styles.loginView}>
               <Text style={{ fontSize: hp("2.3%") }}>Already Registered?</Text>
               <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <Text style={{ fontSize: hp("2.3%"), color: "rgb(0,122,255)" }}>
+                <Text style={{ fontSize: hp("2.3%"), color: "#0070C0" }}>
                   {" "}
                   Login
                 </Text>
