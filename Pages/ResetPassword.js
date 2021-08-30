@@ -9,7 +9,7 @@ import {
   Alert,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
@@ -17,13 +17,13 @@ import { useMutation, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp
+  heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import allStyles from ".././allStyles.js";
 
 function ResetPassword({ navigation }) {
   const { values } = useForm(resetPassword, {
-    email: ""
+    email: "",
   });
 
   const [resetPassword] = useMutation(FORGOT_PASSWORD, {
@@ -36,20 +36,20 @@ function ResetPassword({ navigation }) {
       navigation.navigate("Login");
     },
 
-    variables: values
+    variables: values,
   });
 
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text style={allStyles.title}>RESET PASSWORD</Text>
+        <Text style={styles.title}>RESET PASSWORD</Text>
       </View>
       <View onPress={Keyboard.dismiss}>
         <KeyboardAwareScrollView>
           <TextInput
             style={allStyles.input}
             placeholder="Email"
-            onChangeText={text => (values.email = text)}
+            onChangeText={(text) => (values.email = text)}
             spellCheck={false}
             autoCorrect={false}
           />
@@ -79,14 +79,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
+  },
+  title: {
+    textAlign: "center",
+    color: "#001F5B",
+    fontSize: 28,
+    paddingVertical: "8%",
+    marginTop: "50%",
   },
   registerView: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    marginBottom: hp("3%")
+    marginBottom: hp("5%"),
   },
   buttonContainer: {
     backgroundColor: "#FD652F",
@@ -95,13 +102,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: hp("1%"),
     width: wp("75%"),
-    height: hp("8.5%")
+    height: hp("8.5%"),
   },
   buttonText: {
     color: "#fff",
     textAlign: "center",
-    fontSize: hp("2.5%")
-  }
+    fontSize: hp("2.5%"),
+  },
 });
 
 const FORGOT_PASSWORD = gql`
