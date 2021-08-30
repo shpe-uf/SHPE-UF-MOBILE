@@ -21,7 +21,6 @@ import {
 } from "react-native-responsive-screen";
 import allStyles from ".././allStyles.js";
 
-
 function ResetPassword({ navigation }) {
   const { values } = useForm(resetPassword, {
     email: ""
@@ -37,7 +36,7 @@ function ResetPassword({ navigation }) {
       navigation.navigate("Login");
     },
 
-    variables: values,
+    variables: values
   });
 
   return (
@@ -54,11 +53,12 @@ function ResetPassword({ navigation }) {
             spellCheck={false}
             autoCorrect={false}
           />
-          <Button
-            style={styles.buttonContainer}
-            title="Reset Password"
+          <TouchableOpacity
             onPress={() => resetPassword()}
-          />
+            style={styles.buttonContainer}
+          >
+            <Text style={styles.buttonText}>Reset Password</Text>
+          </TouchableOpacity>
         </KeyboardAwareScrollView>
         <View style={styles.registerView}>
           <Text style={{ fontSize: hp("2.3%") }}>New to SHPE UF?</Text>

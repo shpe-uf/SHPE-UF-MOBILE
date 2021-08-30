@@ -110,21 +110,21 @@ function Login({ navigation }) {
             >
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ResetPassword")}
+              style={{ marginRight: wp("1.8%") }}
+            >
+              <Text
+                style={{
+                  alignSelf: "flex-end",
+                  color: "rgb(0,122,255)",
+                  fontSize: hp("2.2%"),
+                }}
+              >
+                Forgot Password?
+              </Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-          onPress={() => navigation.navigate("ResetPassword")}
-          style={{ marginRight: wp("1.8%") }}
-          >
-          <Text
-          style={{
-            alignSelf: "flex-end",
-            color: "rgb(0,122,255)",
-            fontSize: hp("2.2%"),
-          }}
-          >
-          Forgot Password?
-          </Text>
-          </TouchableOpacity>
           <View style={styles.registerView}>
             <Text style={{ fontSize: hp("2.3%") }}>New to SHPE UF?</Text>
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
