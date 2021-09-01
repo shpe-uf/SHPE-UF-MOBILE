@@ -46,7 +46,7 @@ function UserTasksTable({ user }) {
       <Text style={allStyles.h1}>Tasks</Text>
       {user === null || user.tasks.length === 0 ? (
         <View style={{ paddingBottom: 16 }}>
-          <Text style={allStyles.noContentText}>No events on record.</Text>
+          <Text style={allStyles.noContentText}>No tasks on record.</Text>
         </View>
       ) : (
         <View className="table-responsive" style={allStyles.tableContainer}>

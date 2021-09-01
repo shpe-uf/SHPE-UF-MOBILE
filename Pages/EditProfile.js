@@ -148,7 +148,7 @@ function EditProfile({ navigation }) {
         <View>
           <View style={styles.container}>
             {user && (user.photo !== "" || image !== undefined) ? (
-              <Image source={image} style={styles.profilePic} />
+              <Image source={{uri: user.photo}} style={styles.profilePic} />
             ) : (
               <Image
                 source={require("../assets/images/pic.jpg")}

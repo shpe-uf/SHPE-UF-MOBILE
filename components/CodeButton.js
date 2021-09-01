@@ -18,41 +18,15 @@ import {
 } from "react-native-responsive-screen";
 
 import allStyles from ".././allStyles.js";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
-function CodeButton() {
+const CodeButton = ({ username }) => {
   const [errors, setErrors] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
-  const [user, setUser] = useState({});
-  const [id, setId] = useState("");
-  const readData = async () => {
-    try {
-      const storedId = await AsyncStorage.getItem("@storage_Key");
-      if (storedId !== null) {
-        setId(JSON.parse(storedId).login.id);
-      }
-    } catch (e) {
-      return [];
-    }
-  };
-  readData();
-  const { data } = useQuery(FETCH_USER_QUERY, {
-    onError(err) {
-      console.log(err);
-    },
-    variables: {
-      userId: id,
-    },
-  });
-
-  if (data && data.getUser != user) {
-    setUser(data.getUser);
-  }
-
   const { values } = useForm(redeemPoints, {
     code: "",
-    username: user.username,
+    username: username,
   });
 
   const [redeemPoints] = useMutation(REDEEM_POINTS_MUTATION, {
@@ -62,12 +36,13 @@ function CodeButton() {
       setModalVisible(false);
       updateGetUser(userData);
     },
-
     onError(err) {
       getErrors(err);
     },
-
     variables: values,
+    onCompleted() {
+      Alert.alert("Redeem Successful!");
+    },
   });
 
   return (
@@ -183,34 +158,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-const FETCH_USER_QUERY = gql`
-  query getUser($userId: ID!) {
-    getUser(userId: $userId) {
-      firstName
-      lastName
-      points
-      fallPoints
-      springPoints
-      summerPoints
-      fallPercentile
-      springPercentile
-      summerPercentile
-      events {
-        name
-        category
-        createdAt
-        points
-      }
-      tasks {
-        name
-        points
-        startDate
-      }
-      bookmarkedTasks
-    }
-  }
-`;
 
 const REDEEM_POINTS_MUTATION = gql`
   mutation redeemPoints($code: String!, $username: String!) {

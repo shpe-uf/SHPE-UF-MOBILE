@@ -15,7 +15,7 @@ import ResetPassword from "./Pages/ResetPassword";
 const Stack = createStackNavigator();
 
 const client = new ApolloClient({
-  uri: `http://${settings.internalIP}:5000`,
+  uri: "https://shpe-uf.herokuapp.com/",
   cache: new InMemoryCache({
     typePolicies: {
       User: {

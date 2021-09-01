@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import * as Font from "expo-font";
 import { useFonts } from "@use-expo/font";
-import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -70,7 +69,7 @@ function UserProfile({ navigation }) {
     >
       <View style={styles.container}>
         {user && user.photo !== "" ? (
-          <Image source={user.photo} style={styles.profilePic} />
+          <Image source={{uri: user.photo}} style={styles.profilePic} />
         ) : (
           <Image
             source={require("../assets/images/pic.jpg")}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Keyboard, Text, View, StyleSheet } from "react-native";
-import { ScrollView, Card } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -97,9 +96,9 @@ function Tasks() {
               <View>
                 <Text style={allStyles.h2}>UNBOOKMARKED TASKS</Text>
                 {restTasks.length == 0 ? (
-                  <Card>
-                    <Text>There are no tasks yet.</Text>
-                  </Card>
+                  <View style={{ paddingBottom: 16, paddingTop: 10 }}>
+                    <Text style={allStyles.noContentText}>There are no tasks yet.</Text>
+                  </View>
                 ) : (
                   <TaskCard props={restProps} />
                 )}

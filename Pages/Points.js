@@ -18,6 +18,7 @@ import CodeButton from "../components/CodeButton";
 import allStyles from ".././allStyles.js";
 
 function Points() {
+  const [user, setUser] = useState({});
   const [id, setId] = useState("");
   const readData = async () => {
     try {
@@ -31,15 +32,17 @@ function Points() {
   };
   readData();
 
-  let { data, error, loading, refetch } = useQuery(FETCH_USER_QUERY, {
+  const { loading, data, error, refetch } = useQuery(FETCH_USER_QUERY, {
+    onError(err) {
+      console.log(err);
+    },
     variables: {
       userId: id,
     },
   });
-  let user = null;
 
-  if (data) {
-    user = data.getUser;
+  if (data && data.getUser != user) {
+    setUser(data.getUser);
   }
 
   const [refreshing, setRefreshing] = React.useState(false);
@@ -49,7 +52,6 @@ function Points() {
     refetch();
     setRefreshing(false);
   }, []);
-
   return (
     <View>
       <ScrollView
@@ -59,13 +61,27 @@ function Points() {
         }
       >
         <Text style={allStyles.title2}>POINTS PROGRAM</Text>
-        <PointsBar user={user}/>
-        <View style={{ paddingVertical: "5%" }} />
-        <UserTasksTable user={user} />
-        <UserEventsTable user={user} />
+        {loading ? (
+          <Text>loading data</Text>
+        ) : error ? (
+          <Text>there was a problem</Text>
+        ) : (
+          <>
+            <PointsBar user={user} />
+            <View style={{ paddingVertical: "5%" }} />
+            <UserTasksTable user={user} />
+            <UserEventsTable user={user} />
+          </>
+        )}
       </ScrollView>
       <View>
-        <CodeButton />
+        {loading ? (
+          <Text>loading data</Text>
+        ) : error ? (
+          <Text>there was a problem</Text>
+        ) : (
+          <CodeButton username={user.username} />
+        )}
       </View>
     </View>
   );
