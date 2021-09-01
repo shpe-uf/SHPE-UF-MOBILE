@@ -17,6 +17,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
+import allStyles from ".././allStyles.js";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 
@@ -81,7 +82,7 @@ function CodeButton() {
         }}
       >
         <View style={styles.modalView}>
-          <Text style={styles.header}>Redeem Points</Text>
+          <Text style={allStyles.h1}>Redeem Points</Text>
           <Text style={styles.label}>Enter code:</Text>
           <TextInput
             style={styles.input}
@@ -133,17 +134,9 @@ const styles = StyleSheet.create({
   },
   label: {
     color: "black",
-    margin: 10,
+    marginBottom: 10,
     marginLeft: 0,
     fontSize: 16,
-  },
-  header: {
-    alignSelf: "flex-start",
-    fontSize: 30,
-    margin: 6,
-    fontWeight: "bold",
-    fontStyle: "italic",
-    color: "#FD652F",
   },
   modalView: {
     margin: 20,

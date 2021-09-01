@@ -128,6 +128,7 @@ const FETCH_USER_QUERY = gql`
       firstName
       lastName
       username
+      email
       points
       fallPoints
       springPoints
