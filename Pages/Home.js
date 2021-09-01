@@ -74,6 +74,8 @@ const FETCH_USER_QUERY = gql`
     getUser(userId: $userId) {
       firstName
       lastName
+      username
+      email
       points
       fallPoints
       springPoints

@@ -8,6 +8,8 @@ import {
   Image,
   RefreshControl,
 } from "react-native";
+import * as Font from "expo-font";
+import { useFonts } from "@use-expo/font";
 import { useForm, getErrors } from "../util/hooks";
 import { useQuery, gql } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -50,6 +52,15 @@ function UserProfile({ navigation }) {
     refetch();
     setRefreshing(false);
   }, []);
+
+  const [fontLoaded, setFontLoaded] = useState(false);
+  const loadFont = async () => {
+    await Font.loadAsync({
+      nameFont: require("../assets/fonts/OpenSans-ExtraBold.ttf"),
+    });
+    setFontLoaded(true);
+  };
+  loadFont();
   return (
     <ScrollView
       contentContainerStyle={styles.scrollView}
@@ -66,7 +77,11 @@ function UserProfile({ navigation }) {
             style={styles.profilePic}
           />
         )}
-        <Text style={styles.nameStyling}>{fullName}</Text>
+        {fontLoaded ? (
+          <Text style={styles.nameStylingCustom}>{fullName}</Text>
+        ) : (
+          <Text style={styles.nameStyling}>{fullName}</Text>
+        )}
       </View>
 
       <Text style={styles.email}>{user.email}</Text>
@@ -106,8 +121,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 175,
   },
+  nameStylingCustom: {
+    fontFamily: "nameFont",
+    fontSize: 30,
+    textAlign: "center",
+    color: "#001F5B",
+  },
   nameStyling: {
-    fontFamily: "Archivo Narrow",
     fontSize: 30,
     paddingVertical: "1%",
     textAlign: "center",

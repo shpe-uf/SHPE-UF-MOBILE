@@ -46,6 +46,7 @@ export default StyleSheet.create({
     color: "#001F5B",
     fontSize: 28,
     paddingVertical: "1%",
+    fontWeight: "bold",
     marginTop: "5%",
   },
   title2: {
@@ -53,6 +54,7 @@ export default StyleSheet.create({
     color: "#001F5B",
     fontSize: 28,
     paddingVertical: "8%",
+    fontWeight: "bold",
     marginTop: "10%",
   },
   outerTableContainer: {

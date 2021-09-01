@@ -9,6 +9,7 @@ import {
   Keyboard,
   TouchableOpacity,
   Alert,
+  Button,
   NativeModules,
   DevSettings,
   Image,

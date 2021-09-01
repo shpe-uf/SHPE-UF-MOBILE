@@ -59,7 +59,7 @@ function Points() {
         }
       >
         <Text style={allStyles.title2}>POINTS PROGRAM</Text>
-        <PointsBar />
+        <PointsBar user={user}/>
         <View style={{ paddingVertical: "5%" }} />
         <UserTasksTable user={user} />
         <UserEventsTable user={user} />
@@ -85,6 +85,7 @@ const FETCH_USER_QUERY = gql`
       firstName
       lastName
       username
+      email
       points
       fallPoints
       springPoints

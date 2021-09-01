@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 
 import PointsBox from "./PointsBox";
 
-const PointsBar = ({ user }) => {
+function PointsBar({ user }) {
   const fallProps = { user: user, semester: "Fall Semester" };
   const springProps = { user: user, semester: "Spring Semester" };
   const summerProps = { user: user, semester: "Summer Semester" };

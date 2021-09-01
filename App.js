@@ -16,7 +16,15 @@ const Stack = createStackNavigator();
 
 const client = new ApolloClient({
   uri: `http://${settings.internalIP}:5000`,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      User: {
+        merge(existing, incoming) {
+          return incoming;
+        }
+      }
+    }
+  }),
 });
 
 export default function App() {
