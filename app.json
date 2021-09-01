@@ -25,9 +25,12 @@
       "favicon": "./assets/images/favicon.png",
       "build": {
         "babel": {
-          "include": ["@codler/react-native-keyboard-aware-scroll-view"]
+          "include": [
+            "@codler/react-native-keyboard-aware-scroll-view"
+          ]
         }
       }
-    }
+    },
+    "githubUrl": "https://github.com/shpe-uf/SHPE-UF-MOBILE"
   }
 }
