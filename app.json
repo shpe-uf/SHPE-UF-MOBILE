@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "SHPEMobile",
+    "name": "SHPE UF",
     "slug": "SHPEMobile",
+    "privacy": "public",
+    "description": "App for SHPE UF members to redeem points",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -23,9 +25,12 @@
       "favicon": "./assets/images/favicon.png",
       "build": {
         "babel": {
-          "include": ["@codler/react-native-keyboard-aware-scroll-view"]
+          "include": [
+            "@codler/react-native-keyboard-aware-scroll-view"
+          ]
         }
       }
-    }
+    },
+    "githubUrl": "https://github.com/shpe-uf/SHPE-UF-MOBILE"
   }
 }
