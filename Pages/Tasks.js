@@ -8,8 +8,6 @@ import { useForm, getErrors } from "../util/hooks";
 import allStyles from ".././allStyles.js";
 
 import { TaskCard, BookMarkedTaskCard } from "../components/TaskCard";
-//import { bookMarkedTaskCard } from "../components/TaskCard";
-//import BookmarkedTaskCard from "../../SHPE-UF-CLIENT/src/components/BookmarkedTaskCard";
 
 function Tasks() {
   const [id, setId] = useState("");
