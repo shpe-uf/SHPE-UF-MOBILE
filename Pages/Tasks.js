@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Keyboard, Text, View, StyleSheet } from "react-native";
+import { Keyboard, Text, View, StyleSheet, RefreshControl, ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -7,7 +7,7 @@ import { useMutation, useQuery, gql } from "@apollo/client";
 import { useForm, getErrors } from "../util/hooks";
 import allStyles from ".././allStyles.js";
 
-import TaskCard from ".././components/TaskCard";
+import { TaskCard, BookMarkedTaskCard } from "../components/TaskCard";
 
 function Tasks() {
   const [id, setId] = useState("");
@@ -22,6 +22,14 @@ function Tasks() {
     }
   };
   readData();
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
 
   const { loading, data, error, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
@@ -38,7 +46,7 @@ function Tasks() {
   const now = new Date();
   const month = now.getMonth();
   const semester = monthOptions[month].value;
-
+ 
   if (data && data.getUser && data.getTasks) {
     const user = data.getUser;
     const allTasks = data.getTasks;
@@ -73,6 +81,11 @@ function Tasks() {
   }
 
   return (
+    <ScrollView
+    refreshControl={
+    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+    }
+    >
     <View style={allStyles.container}>
       <View style={allStyles.page}>
         {loading ? (
@@ -90,7 +103,7 @@ function Tasks() {
                     <Text style={allStyles.noContentText}>No tasks have been bookmarked yet.</Text>
                   </View>
                 ) : (
-                  <TaskCard props={bookProps} />
+                  <BookMarkedTaskCard props={bookProps}/>
                 )}
               </View>
               <View>
@@ -100,7 +113,7 @@ function Tasks() {
                     <Text style={allStyles.noContentText}>There are no tasks yet.</Text>
                   </View>
                 ) : (
-                  <TaskCard props={restProps} />
+                  <TaskCard props={restProps}/>
                 )}
               </View>
             </View>
@@ -108,6 +121,7 @@ function Tasks() {
         )}
       </View>
     </View>
+    </ScrollView>
   );
 }
 
