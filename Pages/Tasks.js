@@ -31,7 +31,7 @@ function Tasks() {
     setRefreshing(false);
   }, []);
 
-  let { loading, data, error, refetch } = useQuery(FETCH_USER_QUERY, {
+  const { loading, data, error, refetch } = useQuery(FETCH_USER_QUERY, {
     variables: {
       userId: id,
     },
@@ -91,7 +91,7 @@ function Tasks() {
         {loading ? (
           <Text>loading data</Text>
         ) : error ? (
-          <Text>there was a problem{console.log(error)}</Text>
+          <Text>there was a problem</Text>
         ) : (
           <>
             <View style={allStyles.content}>
